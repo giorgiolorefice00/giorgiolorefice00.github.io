@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import PressSlider from "./PressSlider.tsx";
+
+const rawPress = await getCollection("press");
+const quotes = rawPress
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map((e) => ({
+    text: e.body!.trim(),
+    pub: e.data.publication,
+    attr: `${e.data.author} · ${e.data.date}`,
+  }));
+---
+
+<PressSlider client:visible quotes={quotes} />

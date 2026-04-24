@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+
+const photos = (await getCollection("photos"))
+  .filter((p) => p.data.category === "live")
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+const gradients = [
+  "linear-gradient(135deg,#0a0002 0%,#1a0008 60%,#050000 100%)",
+  "linear-gradient(160deg,#050000 0%,#0d0003 50%,#1a0008 100%)",
+  "linear-gradient(120deg,#1a0008 0%,#050000 40%,#0a0002 100%)",
+  "linear-gradient(145deg,#0d0003 0%,#1a0008 55%,#050000 100%)",
+];
+---
+
+<section style="background:#0a0a0a;overflow:hidden;">
+  <div style="padding:80px 72px 32px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+      <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+      B — live performances
+    </div>
+  </div>
+
+  <!-- SCROLL-SNAP CONTAINER -->
+  <div
+    style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 72px 64px;"
+  >
+    {photos.map((p, i) => {
+      const bg = gradients[i % gradients.length];
+      return (
+        <div style="min-width:75vw;height:520px;flex-shrink:0;scroll-snap-align:start;margin-right:16px;position:relative;overflow:hidden;">
+          <!-- PLACEHOLDER BG -->
+          <div style={`position:absolute;inset:0;background:${bg};`}></div>
+          <!-- RED OVERLAY -->
+          <div style="position:absolute;inset:0;background:#c8102e;mix-blend-mode:multiply;opacity:0.3;pointer-events:none;"></div>
+          <!-- CAPTION -->
+          <div style="position:absolute;bottom:28px;left:28px;z-index:2;">
+            <div style="font-family:'Anton',sans-serif;font-size:clamp(20px,2.5vw,32px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;">{p.data.venue ?? "live"}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-top:4px;">{p.data.city} · {p.data.date}</div>
+          </div>
+          <!-- COUNTER -->
+          <div style="position:absolute;top:24px;right:24px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.1em;">{String(i + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}</div>
+        </div>
+      );
+    })}
+  </div>
+</section>

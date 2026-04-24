@@ -1,0 +1,55 @@
+---
+const cols = [
+  { label: "— sitemap", links: ["home", "about", "music", "events", "media", "contact"] },
+  { label: "— listen",  links: ["Spotify", "SoundCloud", "Apple Music", "Bandcamp", "Mixcloud"] },
+  { label: "— follow",  links: ["Instagram", "Resident Advisor", "Telegram", "email"] },
+];
+
+const metaLinks = ["privacy", "terms", "press kit"];
+---
+
+<footer style="background:#000;border-top:1px solid #c8102e;padding:64px 72px 0;">
+
+  <!-- TOP ROW -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:64px;">
+    <img
+      src={`${import.meta.env.BASE_URL}/logo.png`}
+      alt="Giorgio Lorefice"
+      style="width:64px;height:64px;object-fit:cover;filter:invert(1) contrast(2);mix-blend-mode:screen;"
+    />
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3vw,48px);color:#c8102e;letter-spacing:0.04em;text-align:right;line-height:1.1;">
+      BOOK. PLAY.<br />DISAPPEAR.
+    </div>
+  </div>
+
+  <!-- MIDDLE — 3 COLS -->
+  <div class="footer-cols" style="display:flex;gap:80px;margin-bottom:48px;">
+    {cols.map((col) => (
+      <div style="flex:1;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">
+          {col.label}
+        </div>
+        {col.links.map((l) => (
+          <a href="#" class="footer-link">{l.toLowerCase()}</a>
+        ))}
+      </div>
+    ))}
+  </div>
+
+  <!-- BOTTOM META -->
+  <div style="border-top:1px solid #1a1a1a;padding:16px 0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.06em;">
+      © 2026 giorgio lorefice — all rights reserved
+    </span>
+    <div style="display:flex;gap:24px;">
+      {metaLinks.map((l) => (
+        <a
+          href="#"
+          style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;text-decoration:none;letter-spacing:0.06em;transition:color 0.15s;"
+          onmouseover="this.style.color='#e8e8e8'"
+          onmouseout="this.style.color='#6b6b6b'"
+        >{l}</a>
+      ))}
+    </div>
+  </div>
+</footer>

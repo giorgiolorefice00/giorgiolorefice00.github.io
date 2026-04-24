@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+
+const releases = (await getCollection("releases")).sort((a, b) =>
+  b.data.releaseDate.localeCompare(a.data.releaseDate)
+);
+---
+
+<section style="background:#000;padding:100px 72px;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:48px;display:flex;align-items:center;gap:12px;">
+    <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+    D — discography
+  </div>
+
+  <!-- TABLE HEADER -->
+  <div style="display:flex;gap:24px;padding:0 0 12px;border-bottom:1px solid #c8102e;margin-bottom:0;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:48px;flex-shrink:0;">YEAR</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;flex:1;">TITLE</div>
+    <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:80px;text-align:center;">FORMAT</div>
+    <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:120px;">LABEL</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:80px;text-align:right;">STREAMS</div>
+  </div>
+
+  {releases.map((r, i) => (
+    <div
+      style={`display:flex;gap:24px;align-items:center;padding:20px 0;${i < releases.length - 1 ? 'border-bottom:1px solid #111;' : ''}cursor:pointer;transition:background 0.15s;`}
+      onmouseover="this.style.background='#070707'" onmouseout="this.style.background=''"
+    >
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.14em;width:48px;flex-shrink:0;">{r.data.releaseDate.slice(0,4)}</div>
+      <div style="flex:1;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e8e8;letter-spacing:0.06em;">{r.data.title}</div>
+      </div>
+      <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.1em;width:80px;text-align:center;">{r.data.format}</div>
+      <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.08em;width:120px;">{r.data.label}</div>
+      <div style="width:80px;text-align:right;">
+        {r.data.spotifyUrl || r.data.appleMusicUrl || r.data.bandcampUrl
+          ? <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.1em;">▶ STREAMS</span>
+          : <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.1em;">—</span>
+        }
+      </div>
+    </div>
+  ))}
+</section>

@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+
+const allEvents = await getCollection("events");
+const past = allEvents
+  .filter((e) => e.data.isPast)
+  .sort((a, b) => b.id.localeCompare(a.id));
+
+const years = ["2026", "2025", "2024", "2023", "2022", "all"];
+---
+
+<section style="background:#000;padding:100px 72px;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:48px;display:flex;align-items:center;gap:12px;">
+    <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+    C — the archive
+  </div>
+
+  <div style="line-height:0.92;margin-bottom:48px;">
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(36px,4vw,60px);color:#e8e8e8;letter-spacing:0.01em;">PAST</div>
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(36px,4vw,60px);color:#c8102e;letter-spacing:0.01em;">PERFORMANCES.</div>
+  </div>
+
+  <!-- YEAR FILTER CHIPS -->
+  <div id="archive-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;">
+    {years.map((y) => (
+      <button
+        class={`filter-chip${y === "all" ? " active" : ""}`}
+        data-year={y}
+        onclick="
+          document.querySelectorAll('#archive-filters .filter-chip').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const yr = this.dataset.year;
+          document.querySelectorAll('.archive-card').forEach(c => {
+            c.style.display = (yr === 'all' || c.dataset.year === yr) ? '' : 'none';
+          });
+        "
+      >{y}</button>
+    ))}
+  </div>
+
+  <!-- ARCHIVE GRID -->
+  <div class="archive-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+    {past.map((ev) => (
+      <div
+        class="archive-card"
+        data-year={ev.data.year}
+        style="border:1px solid #1a1a1a;padding:24px 20px;cursor:pointer;transition:border-color 0.2s;"
+        onmouseover="this.style.borderColor='#c8102e'" onmouseout="this.style.borderColor='#1a1a1a'"
+      >
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.18em;margin-bottom:12px;">{ev.data.month} {ev.data.year}</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(18px,2vw,26px);color:#e8e8e8;line-height:1;margin-bottom:8px;">{ev.data.venue}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.12em;margin-bottom:10px;">{ev.data.city}</div>
+        {ev.data.tag && (
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;line-height:1.5;">{ev.data.tag}</div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

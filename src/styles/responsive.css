@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — all breakpoint overrides (imported after global.css)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── HAMBURGER + MOBILE NAV ─────────────────────────────────────────────── */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.hamburger-btn .h-line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #e8e8e8;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+body[data-menu-open] .hamburger-btn .h-line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+body[data-menu-open] .hamburger-btn .h-line:nth-child(2) {
+  opacity: 0;
+}
+body[data-menu-open] .hamburger-btn .h-line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+body[data-menu-open] { overflow: hidden; }
+
+.mobile-nav {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 40px 56px;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+body[data-menu-open] .mobile-nav {
+  transform: translateX(0);
+}
+
+.mobile-nav-link {
+  display: block;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(36px, 10vw, 60px);
+  color: #e8e8e8;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  padding: 20px 0;
+  border-bottom: 1px solid #c8102e;
+  transition: color 0.15s;
+  line-height: 1;
+  min-height: 44px;
+}
+.mobile-nav-link.active { color: #c8102e; }
+.mobile-nav-link:hover  { color: #c8102e; }
+
+.mobile-nav-socials {
+  display: flex;
+  gap: 20px;
+  padding-top: 32px;
+}
+
+/* ── ≤ 768px — main mobile layout ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hamburger-btn  { display: flex !important; }
+  .header-nav     { display: none !important; }
+  .header-socials { display: none !important; }
+  .header-book-btn{ display: none !important; }
+
+  /* section horizontal padding */
+  section { padding-left: 24px !important; padding-right: 24px !important; }
+
+  /* page header band */
+  .page-header-band { padding: 100px 24px 40px !important; }
+
+  /* hero: photo on top via column-reverse */
+  .hero-split { flex-direction: column-reverse !important; }
+  .hero-photo-col {
+    width: 100% !important;
+    height: 56vw !important;
+    min-height: 240px !important;
+    border-left: none !important;
+    border-top: 1px solid #c8102e !important;
+  }
+  .hero-type-col {
+    width: 100% !important;
+    padding: 40px 24px 36px !important;
+  }
+  .hero-ctas { flex-direction: column !important; gap: 12px !important; }
+  .hero-ctas button,
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-secondary {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* footer */
+  .footer-cols { flex-direction: column !important; gap: 32px !important; }
+
+  /* homepage events carousel */
+  .events-row {
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 12px !important;
+    gap: 12px !important;
+  }
+  .event-card {
+    min-width: 82vw !important;
+    scroll-snap-align: start !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* homepage about snippet */
+  .about-cols  { flex-direction: column !important; }
+  .about-right { width: 100% !important; }
+  .about-stats {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+  }
+
+  /* homepage mix player */
+  .mix-inner { flex-direction: column !important; }
+  .mix-side-ctas {
+    flex-direction: row !important;
+    width: 100% !important;
+    padding: 0 !important;
+    border-left: none !important;
+    border-top: 1px solid #1a1a1a !important;
+    padding-top: 20px !important;
+  }
+  .info-strip { flex-wrap: wrap !important; }
+
+  /* press slider */
+  .quote-mark { font-size: 100px !important; top: -8px !important; }
+  .quote-text  { font-size: 18px !important; }
+
+  /* about — biography */
+  .bio-cols { flex-direction: column !important; gap: 48px !important; }
+  .bio-cols > div { flex: none !important; width: 100% !important; }
+  .bio-right { position: static !important; top: auto !important; }
+
+  /* about — achievements + residencies */
+  .ach-cols { flex-direction: column !important; }
+  .residency-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* about — press cards grid */
+  .press-grid { grid-template-columns: 1fr !important; }
+
+  /* music — featured release */
+  .release-cols { flex-direction: column !important; }
+  .release-artwork {
+    width: 100% !important;
+    max-width: 360px !important;
+    flex: none !important;
+  }
+
+  /* music — streaming embeds */
+  .streaming-cols { flex-direction: column !important; }
+
+  /* music — mixes 2-col on tablet, 1 col at 480 (see below) */
+  .mix-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* music — discography hide columns */
+  .disc-row-meta { display: none !important; }
+
+  /* events — tour list: stacked card */
+  .tour-row-inner {
+    flex-direction: column !important;
+    gap: 6px !important;
+    align-items: flex-start !important;
+  }
+  .tour-date-num { font-size: clamp(32px, 8vw, 52px) !important; }
+
+  /* events — archive: 2 columns */
+  .archive-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* media — masonry: 2 columns */
+  .media-masonry { columns: 2 !important; column-gap: 8px !important; }
+
+  /* media — video tabs: horizontal scroll */
+  #video-tabs {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    flex-wrap: nowrap !important;
+    gap: 20px !important;
+  }
+  #video-tabs button { white-space: nowrap !important; flex-shrink: 0 !important; }
+
+  /* media — video grid: 1 col */
+  .video-grid { grid-template-columns: 1fr !important; }
+
+  /* contact — booking form grid */
+  .booking-form-grid { grid-template-columns: 1fr !important; }
+
+  /* contact — direct contact */
+  .contact-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── ≤ 480px — small phones ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  section { padding-left: 20px !important; padding-right: 20px !important; }
+  .page-header-band { padding: 96px 20px 36px !important; }
+
+  .hero-photo-col { height: 52vw !important; min-height: 200px !important; }
+  .hero-type-col  { padding: 28px 20px 28px !important; }
+
+  .mix-grid       { grid-template-columns: 1fr !important; }
+  .residency-grid { grid-template-columns: 1fr !important; }
+  .archive-grid   { grid-template-columns: 1fr !important; }
+  .media-masonry  { columns: 1 !important; }
+  .event-card     { min-width: 90vw !important; }
+}
+
+/* ── ≥ 769px — restore desktop (never show mobile nav) ──────────────────── */
+@media (min-width: 769px) {
+  .mobile-nav    { display: none !important; }
+  .hamburger-btn { display: none !important; }
+}
+
+/* ── GLOBAL SAFETY ──────────────────────────────────────────────────────── */
+img { max-width: 100%; }
+
+/* tap targets */
+@media (max-width: 768px) {
+  .nav-link, .footer-link, .about-link, .event-ticket {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .filter-chip { min-height: 44px; padding: 8px 16px; }
+  .social-btn  { min-width: 44px; min-height: 44px; }
+  .btn-book    { min-height: 44px; padding: 10px 18px; }
+  .btn-primary, .btn-secondary { min-height: 48px; }
+  /* prevent iOS input zoom */
+  .booking-field { font-size: 16px !important; }
+}

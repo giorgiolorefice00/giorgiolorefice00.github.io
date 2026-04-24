@@ -1,0 +1,40 @@
+---
+const contacts = [
+  {
+    role: "management",
+    name: "— placeholder",
+    email: "management@placeholder.com",
+    phone: "+39 00 000 0000",
+  },
+  {
+    role: "booking agency",
+    name: "— placeholder",
+    email: "booking@placeholder.com",
+    phone: "+49 00 000 0000",
+  },
+  {
+    role: "press",
+    name: "— placeholder",
+    email: "press@placeholder.com",
+    phone: "+44 00 000 0000",
+  },
+];
+---
+
+<section style="background:#000;padding:100px 72px;border-top:1px solid #c8102e;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:48px;display:flex;align-items:center;gap:12px;">
+    <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+    B — management &amp; booking
+  </div>
+
+  <div class="contact-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    {contacts.map((c) => (
+      <div style="border:1px solid #1a1a1a;padding:32px 28px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.22em;margin-bottom:20px;text-transform:uppercase;">{c.role}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e8e8;letter-spacing:0.06em;margin-bottom:12px;">{c.name}</div>
+        <a href={`mailto:${c.email}`} style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.08em;text-decoration:none;margin-bottom:6px;transition:color 0.15s;" onmouseover="this.style.color='#c8102e'" onmouseout="this.style.color='#6b6b6b'">{c.email}</a>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.08em;">{c.phone}</div>
+      </div>
+    ))}
+  </div>
+</section>

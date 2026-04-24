@@ -1,0 +1,110 @@
+---
+const PLAYHEAD = 28; // percent played (static)
+const bars = Array.from({ length: 120 }, (_, i) => {
+  const h = 10 + Math.abs(Math.sin(i * 0.18 + 1.2) * 36) + Math.abs(Math.sin(i * 0.07) * 20);
+  return Math.min(h, 60);
+});
+
+const infoStrip = [
+  { label: "BPM",       value: "132 – 148" },
+  { label: "GENRE",     value: "industrial techno / acid" },
+  { label: "TRACKLIST", value: "47 tracks →", isLink: true },
+];
+
+const sideCtas = [
+  { label: "listen on spotify" },
+  { label: "listen on soundcloud" },
+  { label: "listen on bandcamp" },
+];
+---
+
+<section style="background:#0a0a0a;padding:120px 72px;">
+
+  <!-- TOP BAR -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:56px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;display:flex;align-items:center;gap:12px;">
+      <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+      [ 002 / listen ]
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="live-dot"></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;">LATEST DROP —— 2026.04.19</span>
+    </div>
+  </div>
+
+  <!-- TRACK TITLE -->
+  <div style="margin-bottom:8px;">
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,56px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;">
+      WAREHOUSE RITUAL — VOL. 04
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-top:10px;">
+      6h 12m · recorded live at tresor · berlin · 03.2026
+    </div>
+  </div>
+
+  <!-- MAIN ROW -->
+  <div class="mix-inner" style="display:flex;gap:0;margin-top:32px;">
+
+    <!-- PLAYER -->
+    <div style="flex:1;">
+      <div class="player-frame">
+        <!-- WAVEFORM (static) -->
+        <div class="waveform-wrap">
+          {bars.map((h, i) => (
+            <div
+              class={`waveform-bar${(i / bars.length * 100) < PLAYHEAD ? " played" : ""}`}
+              style={`height:${h}px;`}
+            ></div>
+          ))}
+        </div>
+
+        <!-- TRANSPORT ROW -->
+        <div style="display:flex;align-items:center;gap:20px;margin-top:16px;">
+          <button style="background:#c8102e;border:none;color:#000;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.1em;flex-shrink:0;">
+            01:44 / 6:12:00
+          </div>
+          <div style="flex:1;height:1px;background:#1a1a1a;"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">soundcloud</div>
+        </div>
+      </div>
+
+      <!-- INFO STRIP -->
+      <div class="info-strip" style="display:flex;border-top:1px solid #1a1a1a;margin-top:0;">
+        {infoStrip.map((item, i) => (
+          <div style={`flex:1;padding:20px 24px;${i < 2 ? 'border-right:1px solid #1a1a1a;' : ''}`}>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;margin-bottom:6px;">{item.label}</div>
+            <div style={`font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;${item.isLink ? 'color:#c8102e;cursor:pointer;' : 'color:#e8e8e8;'}`}>{item.value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- SIDE CTAs -->
+    <div class="mix-side-ctas" style="width:200px;flex-shrink:0;border-left:1px solid #1a1a1a;padding:0 0 0 32px;display:flex;flex-direction:column;justify-content:center;">
+      <!-- Spotify -->
+      <a href="#" class="mix-cta-link">
+        <span style="color:#c8102e;flex-shrink:0;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </span>
+        listen on spotify
+      </a>
+      <!-- SoundCloud -->
+      <a href="#" class="mix-cta-link">
+        <span style="color:#c8102e;flex-shrink:0;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.056 0-.094.037-.1.094l-.233 2.154.233 2.105c.006.06.044.094.1.094s.094-.037.1-.094l.255-2.105-.27-2.154c-.006-.057-.045-.094-.1-.094m1.655-.557c-.068 0-.116.05-.122.116l-.2 2.711.2 2.568c.006.067.054.117.122.117s.116-.05.122-.117l.227-2.568-.227-2.71c-.006-.067-.054-.117-.122-.117m1.7-.265c-.08 0-.137.058-.143.138l-.17 2.976.17 2.568c.006.08.063.138.143.138s.136-.058.143-.138l.193-2.568-.193-2.976c-.007-.08-.063-.138-.143-.138m1.68-.157c-.09 0-.155.065-.16.155l-.143 3.133.143 2.496c.005.09.07.155.16.155s.155-.065.16-.155l.163-2.496-.163-3.133c-.005-.09-.07-.155-.16-.155m1.667-.06c-.1 0-.172.072-.177.17l-.117 3.193.117 2.43c.005.098.077.17.177.17s.172-.072.177-.17l.133-2.43-.133-3.193c-.005-.098-.077-.17-.177-.17m3.358-.75c-.05-.023-.1-.034-.15-.034-.086 0-.17.024-.24.07-.067-1.29-1.134-2.31-2.443-2.31-.357 0-.7.08-1.003.225-.12.053-.15.107-.152.16v8.66c.003.057.048.103.105.107h4.78c.056-.004.1-.05.104-.107l.002-5.82c-.004-.566-.236-1.076-.612-1.45-.07-.07-.146-.133-.228-.19-.014-.008-.028-.015-.04-.024-.024-.016-.047-.033-.074-.045-.017-.01-.033-.02-.05-.03M18.63 9.19c-.224 0-.434.048-.626.132C17.697 7.494 16.18 6.25 14.375 6.25c-.47 0-.92.093-1.33.262-.148.06-.187.12-.19.178v8.548c.004.06.05.108.11.112H18.63c.622 0 1.127-.504 1.127-1.126V10.316c0-.622-.505-1.127-1.127-1.127"/></svg>
+        </span>
+        listen on soundcloud
+      </a>
+      <!-- Bandcamp -->
+      <a href="#" class="mix-cta-link">
+        <span style="color:#c8102e;flex-shrink:0;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+        </span>
+        listen on bandcamp
+      </a>
+    </div>
+  </div>
+</section>

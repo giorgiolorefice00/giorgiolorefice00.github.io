@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+
+const photos = (await getCollection("photos"))
+  .filter((p) => p.data.category === "press")
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+// Gradient backgrounds per photo to stand in for real images
+const gradients = [
+  "linear-gradient(135deg,#1a0008 0%,#050000 50%,#0d0003 100%)",
+  "linear-gradient(152deg,#0d0003 0%,#1a0008 60%,#050000 100%)",
+  "linear-gradient(118deg,#050000 0%,#0d0003 50%,#1a0008 100%)",
+  "linear-gradient(169deg,#1a0008 0%,#0d0003 40%,#050000 100%)",
+  "linear-gradient(135deg,#080001 0%,#1a0008 50%,#050000 100%)",
+  "linear-gradient(110deg,#050000 0%,#1a0008 60%,#0d0003 100%)",
+  "linear-gradient(145deg,#0d0003 0%,#050000 50%,#1a0008 100%)",
+  "linear-gradient(135deg,#1a0008 0%,#050000 50%,#0d0003 100%)",
+];
+---
+
+<style>
+  .press-photo { position: relative; break-inside: avoid; margin-bottom: 12px; overflow: hidden; cursor: pointer; }
+  .press-photo-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .press-photo:hover .press-photo-overlay { opacity: 1; }
+</style>
+
+<section style="background:#000;padding:100px 72px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;">
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+        <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+        A — press photos
+      </div>
+      <div style="line-height:0.92;">
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(40px,4.5vw,72px);color:#e8e8e8;letter-spacing:0.01em;">PRESS</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(40px,4.5vw,72px);color:#c8102e;letter-spacing:0.01em;">PHOTOS.</div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.16em;margin-top:12px;">high-res, ready to print. credit required.</div>
+    </div>
+    <button class="btn-secondary" style="padding:10px 20px;font-size:10px;letter-spacing:0.14em;">
+      <span>↓ DOWNLOAD ALL (.ZIP / 280MB)</span>
+    </button>
+  </div>
+
+  <!-- MASONRY GRID -->
+  <div class="media-masonry" style="columns:4;column-gap:12px;">
+    {photos.map((p, i) => {
+      const aspectH = p.data.height;
+      const bg = gradients[i % gradients.length];
+      return (
+        <div class="press-photo">
+          <div style={`background:${bg};width:100%;height:${aspectH}px;`}></div>
+          <div class="press-photo-overlay">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#e8e8e8;letter-spacing:0.14em;">↓ download ({p.data.res})</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">credit: {p.data.credit}</span>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>

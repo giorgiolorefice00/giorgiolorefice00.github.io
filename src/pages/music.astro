@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Footer from "../components/Footer.astro";
+import FeaturedRelease from "../components/music/FeaturedRelease.astro";
+import StreamingEmbeds from "../components/music/StreamingEmbeds.astro";
+import MixesLibrary from "../components/music/MixesLibrary.astro";
+import Discography from "../components/music/Discography.astro";
+---
+
+<Base title="Music — Giorgio Lorefice">
+  <Header />
+  <main>
+    <PageHeader
+      number="[ 002 / music ]"
+      name="music"
+      titleLine1="THE SOUND"
+      titleLine2="ON RECORD."
+    />
+    <FeaturedRelease />
+    <StreamingEmbeds />
+    <MixesLibrary />
+    <Discography />
+  </main>
+  <Footer />
+</Base>

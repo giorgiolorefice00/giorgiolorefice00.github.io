@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+
+const achievements = (await getCollection("achievements")).sort((a, b) => a.data.order - b.data.order);
+const residencies = await getCollection("residencies");
+---
+
+<section style="background:#0a0a0a;padding:100px 72px;">
+  <div class="ach-cols" style="display:flex;gap:64px;align-items:flex-start;">
+
+    <!-- LEFT — achievements -->
+    <div style="flex:1;">
+      <div style="line-height:0.92;margin-bottom:48px;">
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(36px,4vw,60px);color:#e8e8e8;letter-spacing:0.01em;">ACHIEVE</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(36px,4vw,60px);color:#c8102e;letter-spacing:0.01em;">MENTS.</div>
+      </div>
+
+      {achievements.map((a, i) => (
+        <div style={`display:flex;gap:24px;padding:28px 0;${i < achievements.length - 1 ? 'border-bottom:1px solid #161616;' : ''}`}>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.14em;flex-shrink:0;padding-top:2px;">{a.data.year}</div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.08em;margin-bottom:6px;">{a.data.title}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.06em;line-height:1.6;">{a.data.description}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- RIGHT — residencies 2x3 grid -->
+    <div style="flex:1;">
+      <div style="line-height:0.92;margin-bottom:48px;">
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(36px,4vw,60px);color:#e8e8e8;letter-spacing:0.01em;">RESI</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(36px,4vw,60px);color:#c8102e;letter-spacing:0.01em;">DENCIES.</div>
+      </div>
+
+      <div class="residency-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        {residencies.map((r) => (
+          <div class="residency-card">
+            <div style="font-family:'Anton',sans-serif;font-size:clamp(20px,2vw,28px);color:#e8e8e8;letter-spacing:0.02em;margin-bottom:8px;">{r.data.venue}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:12px;">{r.data.city}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.16em;">
+              {r.data.startYear} — {r.data.endYear ?? "present"}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

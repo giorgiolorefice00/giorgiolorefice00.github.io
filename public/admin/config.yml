@@ -1,0 +1,269 @@
+backend:
+  name: github
+  repo: YOURUSERNAME/Dj
+  branch: main
+  base_url: https://PLACEHOLDER.vercel.app
+  auth_endpoint: api/auth
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+
+  # ── EVENTS ────────────────────────────────────────────────────────────────
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: src/content/events
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Venue, name: venue, widget: string }
+      - { label: City, name: city, widget: string, hint: "e.g. berlin, de" }
+      - { label: Day, name: day, widget: string, hint: "e.g. 27" }
+      - { label: Month, name: month, widget: string, hint: "e.g. APR" }
+      - { label: Year, name: year, widget: string, hint: "e.g. 2026" }
+      - { label: Event Title, name: eventTitle, widget: string }
+      - { label: Set Time, name: setTime, widget: string, hint: "e.g. 04:00 – 10:00" }
+      - { label: Serial Tag, name: serial, widget: string, required: false }
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - { label: Available, value: available }
+          - { label: Few Tickets Left, value: few-left }
+          - { label: Sold Out, value: sold-out }
+        default: available
+      - { label: Is Past?, name: isPast, widget: boolean, default: false }
+      - { label: Archive Tag, name: tag, widget: string, required: false, hint: "e.g. peak time — 6h set" }
+      - { label: Latitude, name: latitude, widget: number, required: false, hint: "For map dot" }
+      - { label: Longitude, name: longitude, widget: number, required: false, hint: "For map dot" }
+
+  # ── PRESS QUOTES ──────────────────────────────────────────────────────────
+  - name: press
+    label: Press Quotes
+    label_singular: Press Quote
+    folder: src/content/press
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Publication, name: publication, widget: string, hint: "e.g. RESIDENT ADVISOR" }
+      - { label: Author, name: author, widget: string, hint: "e.g. — c. hayes" }
+      - { label: Date, name: date, widget: string, hint: "e.g. 03.2026" }
+      - { label: Quote Text, name: body, widget: text }
+
+  # ── ABOUT (singleton) ─────────────────────────────────────────────────────
+  - name: about
+    label: About
+    files:
+      - name: about
+        label: About the Artist
+        file: src/content/about/about.md
+        format: frontmatter
+        fields:
+          - label: Headline Lines
+            name: headlineLines
+            widget: list
+            min: 3
+            max: 3
+            hint: "Exactly 3 lines. Line 2 renders in blood red."
+            field: { label: Line, name: line, widget: string }
+          - label: Short Paragraphs (homepage)
+            name: paragraphs
+            widget: list
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - label: Stats
+            name: stats
+            widget: list
+            fields:
+              - { label: Number, name: num, widget: string, hint: "e.g. 10+ or ∞" }
+              - { label: Label, name: label, widget: string }
+          - label: Full Bio (about page)
+            name: fullBio
+            widget: list
+            required: false
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - label: Fact File
+            name: factFile
+            widget: list
+            required: false
+            fields:
+              - { label: Label, name: label, widget: string, hint: "e.g. born" }
+              - { label: Value, name: value, widget: string, hint: "e.g. milano, 1993" }
+          - { label: Born In, name: bornIn, widget: string, required: false }
+          - { label: Based In, name: basedIn, widget: string, required: false }
+          - { label: Active Since, name: activeSince, widget: string, required: false }
+
+  # ── ACHIEVEMENTS ──────────────────────────────────────────────────────────
+  - name: achievements
+    label: Achievements
+    label_singular: Achievement
+    folder: src/content/achievements
+    create: true
+    delete: true
+    slug: "{{order}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Year, name: year, widget: string, hint: "e.g. 2025" }
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Order, name: order, widget: number, hint: "Lower number = shown first" }
+
+  # ── RESIDENCIES ───────────────────────────────────────────────────────────
+  - name: residencies
+    label: Residencies
+    label_singular: Residency
+    folder: src/content/residencies
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Venue, name: venue, widget: string }
+      - { label: City, name: city, widget: string }
+      - { label: Start Year, name: startYear, widget: string }
+      - { label: End Year, name: endYear, widget: string, required: false, hint: "Leave blank for present" }
+
+  # ── PARTNERSHIPS / STAGES ─────────────────────────────────────────────────
+  - name: partnerships
+    label: Partnerships & Stages
+    label_singular: Partnership
+    folder: src/content/partnerships
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Name, name: name, widget: string, hint: "e.g. TIME WARP" }
+      - label: Type
+        name: type
+        widget: select
+        options:
+          - { label: Festival, value: festival }
+          - { label: Brand, value: brand }
+      - { label: Year, name: year, widget: string, required: false }
+
+  # ── RELEASES ──────────────────────────────────────────────────────────────
+  - name: releases
+    label: Releases
+    label_singular: Release
+    folder: src/content/releases
+    create: true
+    delete: true
+    slug: "{{releaseDate}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "e.g. EP · 4 TRACKS" }
+      - { label: Release Date, name: releaseDate, widget: string, hint: "ISO format e.g. 2026-03-01" }
+      - { label: Label, name: label, widget: string }
+      - label: Format
+        name: format
+        widget: select
+        options:
+          - { label: EP, value: EP }
+          - { label: Single, value: Single }
+          - { label: Remix, value: Remix }
+          - { label: Album, value: Album }
+      - { label: Description, name: description, widget: text }
+      - { label: Cover Art, name: coverArt, widget: image, required: false }
+      - label: Tracklist
+        name: tracklist
+        widget: list
+        required: false
+        fields:
+          - { label: Number, name: number, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Duration, name: duration, widget: string }
+      - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
+      - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
+      - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false, hint: "Show as latest release on Music page" }
+
+  # ── MIXES ─────────────────────────────────────────────────────────────────
+  - name: mixes
+    label: Mixes
+    label_singular: Mix
+    folder: src/content/mixes
+    create: true
+    delete: true
+    slug: "{{date}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Duration, name: duration, widget: string, hint: "e.g. 6h 12m" }
+      - { label: Venue / Context, name: venue, widget: string, required: false }
+      - { label: Date, name: date, widget: string, hint: "ISO format e.g. 2026-03-01" }
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: Resident Set, value: resident }
+          - { label: Festival Set, value: festival }
+          - { label: Radio Show, value: radio }
+          - { label: Guest Mix, value: guest }
+      - { label: Cover Art, name: coverArt, widget: image, required: false }
+      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
+      - { label: Mixcloud URL, name: mixcloudUrl, widget: string, required: false }
+      - { label: BPM Range, name: bpmRange, widget: string, hint: "e.g. 132 – 148" }
+      - { label: Genre, name: genre, widget: string }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+
+  # ── VIDEOS ────────────────────────────────────────────────────────────────
+  - name: videos
+    label: Videos
+    label_singular: Video
+    folder: src/content/videos
+    create: true
+    delete: true
+    slug: "{{date}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: Music Video, value: music-video }
+          - { label: Live Set, value: live-set }
+          - { label: Aftermovie, value: aftermovie }
+          - { label: Interview, value: interview }
+      - { label: YouTube ID, name: youtubeId, widget: string, required: false }
+      - { label: Vimeo ID, name: vimeoId, widget: string, required: false }
+      - { label: Duration, name: duration, widget: string, hint: "e.g. 6:42" }
+      - { label: Date, name: date, widget: string, hint: "ISO format e.g. 2026-03-15" }
+      - { label: Producer / Director, name: producer, widget: string, required: false }
+      - { label: Thumbnail, name: thumbnail, widget: image, required: false }
+      - { label: Meta Line, name: meta, widget: string, hint: "e.g. dir. marco rossetti · 2026" }
+
+  # ── PHOTOS ────────────────────────────────────────────────────────────────
+  - name: photos
+    label: Photos
+    label_singular: Photo
+    folder: src/content/photos
+    create: true
+    delete: true
+    slug: "{{category}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Photographer, name: photographer, widget: string }
+      - { label: Date, name: date, widget: string, hint: "ISO format e.g. 2025-01-01" }
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: Press, value: press }
+          - { label: Live, value: live }
+      - { label: Venue, name: venue, widget: string, required: false }
+      - { label: City, name: city, widget: string, required: false }
+      - { label: High-Res Image, name: image, widget: image, required: false }
+      - { label: Thumbnail, name: thumbnail, widget: image, required: false }
+      - { label: Width (px), name: width, widget: number }
+      - { label: Height (px), name: height, widget: number }
+      - { label: Credit Line, name: credit, widget: string }
+      - { label: Resolution, name: res, widget: string, required: false, hint: "e.g. 3840×2560" }

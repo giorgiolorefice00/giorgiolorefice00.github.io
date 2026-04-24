@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Mix from "../components/Mix.astro";
+import Events from "../components/Events.astro";
+import Press from "../components/Press.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Mix />
+    <!-- Record-side change divider -->
+    <div style="padding:0 72px;background:#000;">
+      <div class="section-divider">
+        <span class="section-divider-label">—— set 03 ——</span>
+      </div>
+    </div>
+    <Events />
+    <Press />
+  </main>
+  <Footer />
+</Base>

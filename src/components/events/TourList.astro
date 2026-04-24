@@ -1,0 +1,75 @@
+---
+import { getCollection } from "astro:content";
+
+const allEvents = await getCollection("events");
+const upcoming = allEvents
+  .filter((e) => !e.data.isPast)
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+const statusLabel: Record<string, string> = {
+  "sold-out": "SOLD OUT",
+  "few-left": "FEW LEFT",
+  available: "TICKETS →",
+};
+const statusColor: Record<string, string> = {
+  "sold-out": "#333",
+  "few-left": "#c8102e",
+  available: "#c8102e",
+};
+---
+
+<section style="background:#000;padding:100px 72px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+        <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+        A — next gigs
+      </div>
+      <div style="line-height:0.92;">
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(48px,5.5vw,88px);color:#e8e8e8;letter-spacing:0.01em;">NEXT</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(48px,5.5vw,88px);color:#c8102e;letter-spacing:0.01em;">GIGS.</div>
+      </div>
+    </div>
+    <!-- view toggle (decorative, list is default) -->
+    <div style="display:flex;gap:16px;margin-bottom:6px;">
+      {["list", "calendar"].map((v) => (
+        <span style={`font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:${v === 'list' ? '#c8102e' : '#6b6b6b'};cursor:pointer;border-bottom:${v === 'list' ? '1px solid #c8102e' : '1px solid transparent'};padding-bottom:2px;`}>{v}</span>
+      ))}
+    </div>
+  </div>
+
+  <!-- TOUR ROWS -->
+  <div>
+    {upcoming.map((ev, i) => {
+      const { day, month, year, venue, city, eventTitle, setTime, status } = ev.data;
+      const isSoldOut = status === "sold-out";
+      return (
+        <div
+          class="tour-row-inner"
+          style={`display:flex;align-items:center;gap:32px;padding:28px 0;${i < upcoming.length - 1 ? 'border-bottom:1px solid #111;' : ''}transition:background 0.15s;`}
+          onmouseover="this.style.background='#050505'" onmouseout="this.style.background=''"
+        >
+          <!-- DATE BLOCK -->
+          <div class="tour-date-block" style="flex-shrink:0;width:88px;">
+            <div class="tour-date-num" style={`font-family:'Anton',sans-serif;font-size:clamp(40px,4vw,64px);color:${isSoldOut ? '#333' : '#c8102e'};line-height:1;${isSoldOut ? 'text-decoration:line-through;text-decoration-color:#c8102e;' : ''}`}>{day}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;margin-top:2px;">{month} / {year}</div>
+          </div>
+
+          <!-- VENUE / DETAILS -->
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'Anton',sans-serif;font-size:clamp(20px,2.2vw,32px);color:#e8e8e8;line-height:1;margin-bottom:6px;">{venue}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:4px;">{city}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.1em;">{eventTitle} · {setTime}</div>
+          </div>
+
+          <!-- CTA -->
+          <div style="flex-shrink:0;">
+            <span style={`font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;color:${statusColor[status] ?? '#c8102e'};${isSoldOut ? 'text-decoration:line-through;' : ''}`}>
+              {statusLabel[status] ?? "TICKETS →"}
+            </span>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>

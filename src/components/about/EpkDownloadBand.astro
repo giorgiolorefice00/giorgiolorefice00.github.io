@@ -1,0 +1,29 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<section style="background:#000;padding:120px 72px;text-align:center;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px;">
+    <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+    [ for press &amp; bookers ]
+    <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+  </div>
+
+  <div style="line-height:0.92;margin-bottom:40px;">
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(56px,7vw,96px);color:#e8e8e8;letter-spacing:0.01em;">ELECTRONIC</div>
+    <div style="font-family:'Anton',sans-serif;font-size:clamp(56px,7vw,96px);color:#c8102e;letter-spacing:0.01em;">PRESS KIT.</div>
+  </div>
+
+  <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:48px;line-height:1.7;">
+    bio · hi-res photos · logo pack · technical rider · stage plot — all in one archive.
+  </p>
+
+  <a
+    href={`${base}/press-kit/giorgio-lorefice-epk.zip`}
+    download
+    class="btn-primary"
+    style="display:inline-block;max-width:min(600px,90%);width:100%;padding:22px 40px;font-size:12px;text-align:center;text-decoration:none;"
+  >
+    <span>↓ DOWNLOAD EPK (.ZIP)</span>
+  </a>
+</section>

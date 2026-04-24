@@ -1,0 +1,89 @@
+---
+import { SmokeBackground } from "./SmokeBackground";
+
+const giorgioChars = "GIORGIO".split("");
+const loreficeChars = "LOREFICE".split("");
+---
+
+<section style="position:relative;width:100%;height:100vh;overflow:hidden;">
+
+  <!-- WEBGL SMOKE — full-size canvas behind everything in this section -->
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
+    <SmokeBackground client:load smokeColor="#C8102E" />
+  </div>
+
+  <!-- VIGNETTE -->
+  <div style="position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 60% 50%, transparent 30%, rgba(0,0,0,0.7) 100%);pointer-events:none;"></div>
+
+  <!-- SPLIT LAYOUT -->
+  <div class="hero-split" style="position:absolute;inset:0;z-index:2;display:flex;align-items:stretch;">
+
+    <!-- LEFT — TYPOGRAPHY -->
+    <div class="hero-type-col" style="width:55%;padding:120px 60px 60px 72px;display:flex;flex-direction:column;justify-content:center;">
+
+      <!-- META LABEL -->
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:32px;display:flex;align-items:center;gap:12px;">
+        <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+        [ LIVE / 2026 — MILANO ]
+      </div>
+
+      <!-- NAME -->
+      <div class="hero-name" style="line-height:0.92;margin-bottom:28px;">
+        <div class="name-line" style="overflow:hidden;">
+          {giorgioChars.map((c, i) => (
+            <span
+              class="char"
+              style={`font-family:'Anton',sans-serif;font-size:clamp(80px,9vw,140px);color:#e8e8e8;letter-spacing:-0.01em;animation-delay:${i * 0.04}s;`}
+            >{c}</span>
+          ))}
+        </div>
+        <div class="name-line" style="overflow:hidden;margin-left:3%;">
+          {loreficeChars.map((c, i) => (
+            <span
+              class="char"
+              style={`font-family:'Anton',sans-serif;font-size:clamp(80px,9vw,140px);color:#c8102e;letter-spacing:-0.01em;animation-delay:${(i + 7) * 0.04}s;`}
+            >{c}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- TAGLINE -->
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:48px;display:flex;align-items:center;gap:14px;">
+        underground techno
+        <span style="display:flex;align-items:center;gap:8px;color:#c8102e;">
+          <span style="width:32px;height:1px;background:#c8102e;display:inline-block;"></span>
+          ———
+        </span>
+        rave architecture
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero-ctas" style="display:flex;gap:16px;margin-bottom:64px;flex-wrap:wrap;">
+        <button class="btn-primary"><span>▶ LISTEN TO LATEST MIX</span></button>
+        <button class="btn-secondary"><span>→ VIEW TOUR DATES</span></button>
+      </div>
+
+      <!-- SCROLL INDICATOR -->
+      <div class="scroll-indicator">
+        <div class="scroll-line-wrap">
+          <div class="scroll-line-inner"></div>
+        </div>
+        <span>↓ scroll</span>
+      </div>
+    </div>
+
+    <!-- RIGHT — PHOTO -->
+    <div class="hero-photo-col" style="width:45%;position:relative;border-left:1px solid #c8102e;">
+
+      <div class="photo-duotone" style="position:absolute;inset:0;">
+        <img src={`${import.meta.env.BASE_URL}/dj-photo.jpg`} alt="Giorgio Lorefice at the decks" style="object-position:center top;" />
+      </div>
+
+      <!-- CAPTION TAG -->
+      <div style="position:absolute;bottom:24px;right:24px;z-index:5;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.14em;background:rgba(0,0,0,0.8);padding:4px 8px;">
+        [ 003 — bunker sessions ]
+      </div>
+    </div>
+
+  </div>
+</section>

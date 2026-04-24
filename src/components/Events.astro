@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+
+const rawEvents = await getCollection("events");
+const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<section style="background:#000;padding:120px 72px;border-top:1px solid #c8102e;">
+
+  <!-- SECTION HEADER -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
+    <div>
+      <div style="font-family:'Anton',sans-serif;font-size:clamp(48px,5vw,80px);color:#e8e8e8;line-height:1;letter-spacing:0.01em;">NEXT GIGS</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;margin-top:10px;">catch the chaos, live.</div>
+    </div>
+    <a href="#" class="about-link" style="margin-bottom:6px;">→ all tour dates</a>
+  </div>
+
+  <!-- CARDS -->
+  <div class="events-row" style="display:flex;gap:16px;">
+    {events.map((ev) => {
+      const { venue, city, day, month, year, eventTitle, setTime, serial, status } = ev.data;
+      const soldOut = status === "sold-out";
+      const fewLeft = status === "few-left";
+      return (
+        <div class={`event-card${soldOut ? " sold-out" : ""}`}>
+
+          <!-- SERIAL / TAG -->
+          {fewLeft
+            ? <span class="event-tag few-left">FEW TICKETS LEFT</span>
+            : <span class="event-tag">{serial}</span>
+          }
+
+          <!-- DATE -->
+          <div style={fewLeft ? "margin-top:20px;" : ""}>
+            <div class="event-date-num">{day}</div>
+            <div class="event-date-sub">{month} / {year}</div>
+          </div>
+
+          <!-- DIVIDER -->
+          <div class="event-divider"></div>
+
+          <!-- VENUE -->
+          <div class="event-venue">{venue}</div>
+          <div class="event-city">{city}</div>
+
+          <!-- DETAILS -->
+          <div style="margin-top:20px;">
+            <div class="event-title">{eventTitle}</div>
+            <div class="event-time">{setTime}</div>
+          </div>
+
+          <!-- CTA -->
+          {soldOut
+            ? <div class="event-ticket sold-out-label">SOLD OUT</div>
+            : <a href="#" class="event-ticket">→ tickets</a>
+          }
+
+        </div>
+      );
+    })}
+  </div>
+</section>
