@@ -134,10 +134,16 @@ body[data-menu-open] .mobile-nav {
   /* homepage about snippet */
   .about-cols  { flex-direction: column !important; }
   .about-right { width: 100% !important; }
+  /* Stats stay vertical on mobile — labels like "NIGHTS THAT NEVER ENDED"
+     are ~165px at min-content, so a horizontal 3-up row always overflows. */
   .about-stats {
-    flex-direction: row !important;
-    justify-content: space-between !important;
+    flex-direction: column !important;
+    border-left: none !important;
+    border-top: 1px solid #1a1a1a !important;
   }
+  /* Reduce padding so each stat block breathes without adding width */
+  .stat-block { padding: 16px 0 !important; }
+  .stat-block + .stat-block { border-top: 1px solid #111 !important; }
 
   /* homepage mix player */
   .mix-inner { flex-direction: column !important; }
@@ -236,6 +242,71 @@ body[data-menu-open] .mobile-nav {
 @media (min-width: 769px) {
   .mobile-nav    { display: none !important; }
   .hamburger-btn { display: none !important; }
+}
+
+/* ── FEATURED MIX (homepage) ────────────────────────────────────────────── */
+/*
+ * Root cause of horizontal overflow:
+ * .waveform-wrap is a flex row of 120 bars with flex-shrink:0 and gap:2px.
+ * Minimum natural width = 120×3px + 119×2px = 598px — wider than any phone.
+ * Fix: allow shrink, tighten gap, shrink padding on the frame.
+ * All other mix issues (top-bar overflow, info-strip crowding) fixed below.
+ */
+@media (max-width: 768px) {
+  /* 1. Waveform: allow bars to compress into available space */
+  .waveform-wrap {
+    gap: 1px !important;
+    overflow: hidden;    /* clip any tiny rounding overflow */
+  }
+  .waveform-bar {
+    flex-shrink: 1 !important;
+    min-width: 1px !important;
+    width: 2px !important;
+  }
+
+  /* 2. Player frame: reclaim 16px per side vs the default 24px */
+  .player-frame { padding: 16px !important; }
+
+  /* 3. Top-bar row: stack label + "LATEST DROP" on separate lines */
+  .mix-top-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    margin-bottom: 32px !important;
+  }
+
+  /* 4. Transport row: wrap so time + line + label don't squeeze below 360px */
+  .mix-transport {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* 5. Info strip cells: reduce horizontal padding so text has room */
+  .info-strip > div { padding: 14px 14px !important; }
+
+  /* 6. Track title: prevent any residual overflow from letter-spacing */
+  .mix-title-block {
+    overflow: hidden;
+    word-break: break-word;
+  }
+  .mix-title-block > div:first-child {
+    letter-spacing: 0.005em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Info strip: 2-col at very small sizes so "industrial techno / acid" wraps cleanly */
+  .info-strip {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* Third cell (TRACKLIST) spans both columns */
+  .info-strip > div:last-child {
+    grid-column: 1 / -1 !important;
+    border-right: none !important;
+    border-top: 1px solid #1a1a1a !important;
+  }
+  .info-strip > div { padding: 12px !important; }
 }
 
 /* ── GLOBAL SAFETY ──────────────────────────────────────────────────────── */
