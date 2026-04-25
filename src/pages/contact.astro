@@ -1,10 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
-import Header from "../components/Header.astro";
-import PageHeader from "../components/PageHeader.astro";
-import Footer from "../components/Footer.astro";
-import SkullScene from "../components/SkullScene";
-import BookingForm from "../components/BookingForm";
+import Header from "../components/layout/Header.astro";
+import PageHeader from "../components/layout/PageHeader.astro";
+import Footer from "../components/layout/Footer.astro";
+import SkullScene from "../components/contact/SkullScene";
+import BookingForm from "../components/contact/BookingForm";
 import DirectContact from "../components/contact/DirectContact.astro";
 import GeneralInquiry from "../components/contact/GeneralInquiry.astro";
 ---
@@ -21,13 +21,10 @@ import GeneralInquiry from "../components/contact/GeneralInquiry.astro";
 
     <!-- BOOKING FORM SECTION — skull behind, form in front -->
     <section style="background:#000;padding:100px 72px;position:relative;overflow:hidden;min-height:900px;">
-      <!-- THREE.JS SKULL BACKGROUND -->
       <div style="position:absolute;inset:0;z-index:0;">
         <SkullScene client:visible />
       </div>
-      <!-- GRADIENT OVERLAY for readability -->
       <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.97) 40%,rgba(0,0,0,0.6) 100%);z-index:1;pointer-events:none;"></div>
-      <!-- FORM -->
       <div style="position:relative;z-index:2;">
         <BookingForm client:load />
       </div>
