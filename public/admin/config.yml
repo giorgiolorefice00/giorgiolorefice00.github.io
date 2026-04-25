@@ -1,6 +1,7 @@
 backend:
   name: github
-  repo: YOURUSERNAME/Dj
+  repo: giorgiolorefice00/giorgiolorefice00.github.io
+  site_domain: giorgiolorefice00.github.io
   branch: main
   base_url: https://PLACEHOLDER.vercel.app
   auth_endpoint: api/auth

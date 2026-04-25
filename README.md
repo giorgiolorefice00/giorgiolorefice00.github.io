@@ -10,7 +10,7 @@ Astro 6 · Tailwind CSS v4 · React islands · Three.js · TypeScript strict · 
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321/Dj/
+npm run dev        # http://localhost:4321/
 ```
 
 > The dev server mirrors the GitHub Pages base path `/Dj`. If another project is already on 4321 the port auto-increments.
@@ -27,7 +27,7 @@ npm run preview    # serve dist/ locally
 Push to `main` → GitHub Actions builds and deploys automatically to:
 
 ```
-https://YOURUSERNAME.github.io/Dj/
+https://giorgiolorefice00.github.io/
 ```
 
 One-time setup: repo → **Settings → Pages → Source: GitHub Actions**.
