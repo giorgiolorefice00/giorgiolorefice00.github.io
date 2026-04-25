@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   output: "static",
-  site: "https://giorgiolorefice00.github.io",
+  site: "https://giorgiolorefice.com",
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],

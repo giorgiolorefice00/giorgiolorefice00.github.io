@@ -1,7 +1,9 @@
 backend:
   name: github
   repo: giorgiolorefice00/giorgiolorefice00.github.io
-  site_domain: giorgiolorefice00.github.io
+  site_domain: giorgiolorefice.com
+  site_url: https://giorgiolorefice.com
+  display_url: https://giorgiolorefice.com
   branch: main
   base_url: https://PLACEHOLDER.vercel.app
   auth_endpoint: api/auth
