@@ -12,7 +12,6 @@ import { getEntry } from "astro:content";
 
 const about = await getEntry("about", "about");
 const { fullBio, factFile } = about!.data;
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <Base title="About — Giorgio Lorefice">
@@ -24,7 +23,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       titleLine1="THE MAN"
       titleLine2="BEHIND THE DECKS."
     />
-    <BiographyBlock fullBio={fullBio ?? []} factFile={factFile ?? []} base={base} />
+    <BiographyBlock fullBio={fullBio ?? []} factFile={factFile ?? []} />
     <AchievementsResidencies />
     <PartnershipsMarquee />
     <PressArticlesGrid />

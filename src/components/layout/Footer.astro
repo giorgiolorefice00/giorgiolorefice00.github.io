@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import logoImg from "../../assets/logo.png";
+
 const cols = [
   { label: "— sitemap", links: ["home", "about", "music", "events", "media", "contact"] },
   { label: "— listen",  links: ["Spotify", "SoundCloud", "Apple Music", "Bandcamp", "Mixcloud"] },
@@ -12,10 +15,13 @@ const metaLinks = ["privacy", "terms", "press kit"];
 
   <!-- TOP ROW -->
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:64px;">
-    <img
-      src={`${import.meta.env.BASE_URL}logo.png`}
+    <Image
+      src={logoImg}
+      width={160}
+      height={160}
       alt="Giorgio Lorefice"
       style="width:80px;height:80px;object-fit:cover;"
+      loading="lazy"
     />
     <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3vw,48px);color:#c8102e;letter-spacing:0.04em;text-align:right;line-height:1.1;">
       BOOK. PLAY.<br />DISAPPEAR.

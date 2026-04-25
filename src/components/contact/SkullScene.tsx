@@ -8,18 +8,25 @@ import {
 
 export default function SkullScene() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef(0);
+  const mouseRef  = useRef({ x: 0, y: 0 });
+  const rafRef    = useRef(0);
 
   useEffect(() => {
+    // Disable on mobile (< 768px), reduced-motion, or low-end devices
+    if (window.innerWidth < 768) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lowEnd = typeof navigator.hardwareConcurrency !== "undefined"
+      && navigator.hardwareConcurrency < 4;
+    if (prefersReduced || lowEnd) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); // cap at 1.5
     renderer.setClearColor(0x000000, 0);
 
-    const scene = new Scene();
+    const scene  = new Scene();
     const camera = new PerspectiveCamera(45, canvas.offsetWidth / canvas.offsetHeight, 0.1, 100);
     camera.position.set(0, 0, 5);
 
@@ -31,7 +38,6 @@ export default function SkullScene() {
     resize();
 
     const red = new Color(0xC8102E);
-
     const group = new Group();
     scene.add(group);
 
@@ -93,7 +99,10 @@ export default function SkullScene() {
     window.addEventListener("resize", resize);
 
     let t = 0;
+    let running = true;
+
     const loop = () => {
+      if (!running) return;
       rafRef.current = requestAnimationFrame(loop);
       t += 0.003;
       group.rotation.y = t * 0.4 + mouseRef.current.x * 0.25;
@@ -104,10 +113,27 @@ export default function SkullScene() {
     };
     loop();
 
+    // Pause when tab hidden
+    const onVis = () => {
+      running = !document.hidden;
+      if (running) loop();
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    // Pause when off-screen
+    const io = new IntersectionObserver(([e]) => {
+      running = e!.isIntersecting;
+      if (running) loop();
+      else cancelAnimationFrame(rafRef.current);
+    }, { threshold: 0 });
+    io.observe(canvas);
+
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", onMouse);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
+      io.disconnect();
       renderer.dispose();
     };
   }, []);

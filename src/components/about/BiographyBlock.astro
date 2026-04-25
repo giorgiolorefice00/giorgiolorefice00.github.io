@@ -1,10 +1,12 @@
 ---
+import { Image } from "astro:assets";
+import djPhoto from "../../assets/dj-photo.jpg";
+
 interface Props {
   fullBio: string[];
   factFile: { label: string; value: string }[];
-  base: string;
 }
-const { fullBio, factFile, base } = Astro.props;
+const { fullBio, factFile } = Astro.props;
 const pullQuotes = [
   "the room you walked into was not the room you'd walk out of.",
   "scarcity is part of the art.",
@@ -64,7 +66,7 @@ const pullQuotes = [
       <!-- PORTRAIT -->
       <div style="position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;margin-bottom:0;">
         <div class="photo-duotone" style="position:absolute;inset:0;">
-          <img src={`${base}/dj-photo.jpg`} alt="Giorgio Lorefice" style="object-position:30% 15%;" />
+          <Image src={djPhoto} width={600} height={800} alt="Giorgio Lorefice" style="width:100%;height:100%;object-fit:cover;object-position:30% 15%;" loading="lazy" />
         </div>
         <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#c8102e;z-index:5;"></div>
       </div>

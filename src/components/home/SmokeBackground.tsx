@@ -46,16 +46,19 @@ interface Props {
 
 export function SmokeBackground({ smokeColor = "#C8102E" }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const colorRef = useRef<[number, number, number]>(hexToRgb(smokeColor));
+  const colorRef  = useRef<[number, number, number]>(hexToRgb(smokeColor));
+
+  useEffect(() => { colorRef.current = hexToRgb(smokeColor); }, [smokeColor]);
 
   useEffect(() => {
-    colorRef.current = hexToRgb(smokeColor);
-  }, [smokeColor]);
+    // Skip on reduced-motion preference or low-end devices (< 4 logical cores)
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lowEnd = typeof navigator.hardwareConcurrency !== "undefined"
+      && navigator.hardwareConcurrency < 4;
+    if (prefersReduced || lowEnd) return;
 
-  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const gl = canvas.getContext("webgl2");
     if (!gl) return;
 
@@ -63,32 +66,27 @@ export function SmokeBackground({ smokeColor = "#C8102E" }: Props) {
       const s = gl.createShader(type)!;
       gl.shaderSource(s, src);
       gl.compileShader(s);
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
-        console.error(gl.getShaderInfoLog(s));
       return s;
     };
-
-    const vs = compile(gl.VERTEX_SHADER, VERT);
-    const fs = compile(gl.FRAGMENT_SHADER, FRAG);
     const prog = gl.createProgram()!;
-    gl.attachShader(prog, vs);
-    gl.attachShader(prog, fs);
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
     gl.linkProgram(prog);
 
     const buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
     const pos = gl.getAttribLocation(prog, "position");
     gl.enableVertexAttribArray(pos);
     gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
 
-    const uRes = gl.getUniformLocation(prog, "resolution");
+    const uRes  = gl.getUniformLocation(prog, "resolution");
     const uTime = gl.getUniformLocation(prog, "time");
-    const uCol = gl.getUniformLocation(prog, "u_color");
+    const uCol  = gl.getUniformLocation(prog, "u_color");
 
     const resize = () => {
-      const dpr = Math.max(1, devicePixelRatio);
-      canvas.width = canvas.offsetWidth * dpr;
+      const dpr = Math.min(devicePixelRatio, 1.5); // cap at 1.5 — no 3× rendering on phones
+      canvas.width  = canvas.offsetWidth  * dpr;
       canvas.height = canvas.offsetHeight * dpr;
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
@@ -96,20 +94,41 @@ export function SmokeBackground({ smokeColor = "#C8102E" }: Props) {
     window.addEventListener("resize", resize);
 
     let raf = 0;
-    const loop = (now: number) => {
+    let running = true;
+
+    const tick = (now: number) => {
+      if (!running) return;
       gl.useProgram(prog);
       gl.bindBuffer(gl.ARRAY_BUFFER, buf);
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform1f(uTime, now * 1e-3);
       gl.uniform3fv(uCol, colorRef.current);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      raf = requestAnimationFrame(loop);
+      raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(loop);
+    raf = requestAnimationFrame(tick);
+
+    // Pause when tab is hidden
+    const onVis = () => {
+      running = !document.hidden;
+      if (running) raf = requestAnimationFrame(tick);
+      else cancelAnimationFrame(raf);
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    // Pause when the canvas is scrolled off-screen
+    const io = new IntersectionObserver(([e]) => {
+      running = e!.isIntersecting;
+      if (running) raf = requestAnimationFrame(tick);
+      else cancelAnimationFrame(raf);
+    }, { threshold: 0 });
+    io.observe(canvas);
 
     return () => {
-      window.removeEventListener("resize", resize);
       cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
+      io.disconnect();
       gl.deleteProgram(prog);
     };
   }, []);
