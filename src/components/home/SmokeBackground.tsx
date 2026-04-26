@@ -51,7 +51,8 @@ export function SmokeBackground({ smokeColor = "#C8102E" }: Props) {
   useEffect(() => { colorRef.current = hexToRgb(smokeColor); }, [smokeColor]);
 
   useEffect(() => {
-    // Skip on reduced-motion preference or low-end devices (< 4 logical cores)
+    // Skip on mobile viewports, reduced-motion preference, or low-end devices (< 4 cores)
+    if (window.innerWidth < 768) return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lowEnd = typeof navigator.hardwareConcurrency !== "undefined"
       && navigator.hardwareConcurrency < 4;
