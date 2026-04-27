@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# AI search crawlers — explicitly allowed for discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://giorgiolorefice.com/sitemap-index.xml

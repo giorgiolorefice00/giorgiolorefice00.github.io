@@ -29,8 +29,8 @@ const loreficeChars = "LOREFICE".split("");
         [ LIVE / 2026 — MILANO ]
       </div>
 
-      <!-- NAME -->
-      <div class="hero-name" style="line-height:0.92;margin-bottom:28px;">
+      <!-- H1 — only h1 on the homepage -->
+      <h1 class="hero-name" style="line-height:0.92;margin-bottom:28px;font-size:clamp(80px,9vw,140px);font-weight:400;font-family:'Anton',sans-serif;">
         <div class="name-line" style="overflow:hidden;">
           {giorgioChars.map((c, i) => (
             <span
@@ -47,7 +47,7 @@ const loreficeChars = "LOREFICE".split("");
             >{c}</span>
           ))}
         </div>
-      </div>
+      </h1>
 
       <!-- TAGLINE -->
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:48px;display:flex;align-items:center;gap:14px;">

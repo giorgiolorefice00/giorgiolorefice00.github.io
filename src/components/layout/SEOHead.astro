@@ -1,0 +1,60 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "profile" | "music.album";
+  noindex?: boolean;
+  jsonLd?: object;
+}
+
+const SITE = "https://giorgiolorefice.com";
+
+const {
+  title = "Giorgio Lorefice — Underground Techno DJ",
+  description = "Giorgio Lorefice is a Milan-based underground techno DJ known for warehouse-scale sets and residencies at Berghain, Fabric, and Tresor.",
+  image = `${SITE}/og-image.jpg`,
+  type = "website",
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, SITE).href;
+const fullTitle = title.includes("Giorgio Lorefice") ? title : `${title} — Giorgio Lorefice`;
+---
+
+<!-- Primary -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type"        content={type} />
+<meta property="og:url"         content={canonicalURL} />
+<meta property="og:title"       content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image"       content={image} />
+<meta property="og:image:width"  content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt"    content="Giorgio Lorefice — Underground Techno DJ" />
+<meta property="og:site_name"   content="Giorgio Lorefice" />
+<meta property="og:locale"      content="en_US" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image"       content={image} />
+
+<!-- Favicon set -->
+<link rel="icon"             type="image/x-icon"       href="/favicon.ico" />
+<link rel="icon"             type="image/svg+xml"      href="/favicon.svg" />
+<link rel="apple-touch-icon"                           href="/apple-touch-icon.png" />
+<link rel="manifest"                                   href="/site.webmanifest" />
+<meta name="theme-color" content="#000000" />
+
+<!-- JSON-LD structured data -->
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}

@@ -7,15 +7,35 @@ import Mix from "../components/home/Mix.astro";
 import Events from "../components/home/EventsPreview.astro";
 import Press from "../components/home/Press.astro";
 import Footer from "../components/layout/Footer.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Giorgio Lorefice",
+  "jobTitle": "DJ",
+  "description": "Giorgio Lorefice is a Milan-based underground techno DJ known for warehouse-scale sets and residencies at Berghain, Fabric, and Tresor.",
+  "url": "https://giorgiolorefice.com",
+  "image": "https://giorgiolorefice.com/og-image.jpg",
+  "sameAs": [],
+  "genre": ["Techno", "Acid Techno", "Industrial Techno"],
+  "knowsAbout": ["DJing", "Electronic Music", "Techno"],
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Milan, Italy"
+  }
+};
 ---
 
-<Base>
+<Base
+  title="Giorgio Lorefice — Underground Techno DJ | Milano"
+  description="Giorgio Lorefice is a Milan-based underground techno DJ known for warehouse-scale sets and residencies at Berghain, Fabric, and Tresor."
+  jsonLd={jsonLd}
+>
   <Header />
   <main>
     <Hero />
     <About />
     <Mix />
-    <!-- Record-side change divider -->
     <div style="padding:0 72px;background:#000;">
       <div class="section-divider">
         <span class="section-divider-label">—— set 03 ——</span>
