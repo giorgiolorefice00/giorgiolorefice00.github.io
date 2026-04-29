@@ -1,10 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 
+const locale = (Astro.currentLocale ?? "en") as "en" | "it";
 const releases = await getCollection("releases");
 const featured = releases.find((r) => r.data.featured);
 if (!featured) return;
-const { title, subtitle, releaseDate, label, description, tracklist } = featured.data;
+const { title, subtitle, releaseDate, label, description: descObj, tracklist } = featured.data;
+const description = descObj[locale];
 const year = releaseDate.slice(0, 7).replace("-", ".").toUpperCase();
 ---
 

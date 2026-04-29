@@ -1,12 +1,17 @@
 ---
 venue: OHM
 city: berlin
-day: "01"
+day: '01'
 month: MAR
-year: "2025"
-eventTitle: opening — 4h set
-setTime: "02:00 – 06:00"
+year: '2025'
+eventTitle:
+  en: opening — 4h set
+  it: opening — 4h set
+setTime: 02:00 – 06:00
 status: sold-out
 isPast: true
-tag: opening — 4h set
+tag:
+  en: opening — 4h set
+  it: opening — 4h set
 ---
+

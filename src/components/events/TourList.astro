@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+const locale = (Astro.currentLocale ?? "en") as "en" | "it";
 const allEvents = await getCollection("events");
 const upcoming = allEvents
   .filter((e) => !e.data.isPast)
@@ -41,7 +42,8 @@ const statusColor: Record<string, string> = {
   <!-- TOUR ROWS -->
   <div>
     {upcoming.map((ev, i) => {
-      const { day, month, year, venue, city, eventTitle, setTime, status } = ev.data;
+      const { day, month, year, venue, city, eventTitle: eventTitleObj, setTime, status } = ev.data;
+      const eventTitle = eventTitleObj[locale];
       const isSoldOut = status === "sold-out";
       return (
         <div

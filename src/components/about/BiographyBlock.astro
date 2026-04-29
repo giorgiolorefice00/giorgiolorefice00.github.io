@@ -2,11 +2,13 @@
 import { Image } from "astro:assets";
 import djPhoto from "../../assets/dj-photo.jpg";
 
+interface BilStr { en: string; it: string; }
 interface Props {
-  fullBio: string[];
-  factFile: { label: string; value: string }[];
+  fullBio: BilStr[];
+  factFile: { label: BilStr; value: BilStr }[];
 }
 const { fullBio, factFile } = Astro.props;
+const locale = (Astro.currentLocale ?? "en") as "en" | "it";
 const pullQuotes = [
   "the room you walked into was not the room you'd walk out of.",
   "scarcity is part of the art.",
@@ -27,13 +29,13 @@ const pullQuotes = [
       <div style="margin-bottom:24px;line-height:1.9;">
         <span style="float:left;font-family:'Anton',sans-serif;font-size:96px;color:#c8102e;line-height:0.75;margin-right:12px;margin-top:8px;">G</span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;">
-          {fullBio[0]?.slice(1)}
+          {fullBio[0]?.[locale]?.slice(1)}
         </span>
       </div>
 
       <!-- PARAGRAPH 2 -->
       <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;line-height:1.9;margin-bottom:28px;">
-        {fullBio[1]}
+        {fullBio[1]?.[locale]}
       </p>
 
       <!-- PULL QUOTE 1 -->
@@ -43,7 +45,7 @@ const pullQuotes = [
 
       <!-- PARAGRAPHS 3 & 4 -->
       {fullBio.slice(2, 4).map((p) => (
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;line-height:1.9;margin-bottom:28px;">{p}</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;line-height:1.9;margin-bottom:28px;">{p[locale]}</p>
       ))}
 
       <!-- PULL QUOTE 2 -->
@@ -53,7 +55,7 @@ const pullQuotes = [
 
       <!-- PARAGRAPH 5 -->
       {fullBio[4] && (
-        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;line-height:1.9;margin-bottom:40px;">{fullBio[4]}</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;line-height:1.9;margin-bottom:40px;">{fullBio[4][locale]}</p>
       )}
 
       <a href="#" style="display:inline-flex;align-items:center;gap:8px;color:#6b6b6b;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#c8102e'" onmouseout="this.style.color='#6b6b6b'">
@@ -76,8 +78,8 @@ const pullQuotes = [
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.22em;margin-bottom:20px;">[ FACT FILE ]</div>
         {factFile.map((row, i) => (
           <div style={`display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;${i < factFile.length - 1 ? 'border-bottom:1px solid #111;' : ''}`}>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.14em;">{row.label}</span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#e8e8e8;letter-spacing:0.08em;text-align:right;max-width:60%;">{row.value}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.14em;">{row.label[locale]}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#e8e8e8;letter-spacing:0.08em;text-align:right;max-width:60%;">{row.value[locale]}</span>
           </div>
         ))}
       </div>

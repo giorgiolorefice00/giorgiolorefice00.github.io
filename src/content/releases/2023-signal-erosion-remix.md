@@ -1,8 +1,11 @@
 ---
-title: "SIGNAL EROSION (BLAWAN REMIX)"
-releaseDate: "2023-03-01"
+title: SIGNAL EROSION (BLAWAN REMIX)
+releaseDate: '2023-03-01'
 label: mord
 format: Remix
-description: "blawan remixes signal erosion. heavier than expected. that's the point."
+description:
+  en: blawan remixes signal erosion. heavier than expected. that's the point.
+  it: blawan remixes signal erosion. heavier than expected. that's the point.
 featured: false
 ---
+

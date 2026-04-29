@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+const locale = (Astro.currentLocale ?? 'en') as 'en' | 'it';
 const videos = (await getCollection("videos")).sort((a, b) =>
   b.data.date.localeCompare(a.data.date)
 );
@@ -58,10 +59,10 @@ const catToTab: Record<string, string> = {
           class="video-card"
           data-tab={tab}
           data-video-id={v.data.youtubeId ?? v.data.vimeoId ?? ""}
-          data-title={v.data.title}
+          data-title={v.data.title[locale]}
           style={`${!isFirst ? 'display:none;' : ''}border:1px solid #1a1a1a;overflow:hidden;cursor:pointer;transition:border-color 0.2s;`}
           onmouseover="this.style.borderColor='#c8102e'" onmouseout="this.style.borderColor='#1a1a1a'"
-          onclick={`document.dispatchEvent(new CustomEvent('openLightbox', {detail:{youtubeId:'${v.data.youtubeId ?? ""}',vimeoId:'${v.data.vimeoId ?? ""}',title:'${v.data.title.replace(/'/g, "\\'")}'}}))`}
+          onclick={`document.dispatchEvent(new CustomEvent('openLightbox', {detail:{youtubeId:'${v.data.youtubeId ?? ""}',vimeoId:'${v.data.vimeoId ?? ""}',title:'${v.data.title[locale].replace(/'/g, "\\'")}'}}))`}
         >
           <!-- THUMBNAIL PLACEHOLDER -->
           <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#0a0002 0%,#050000 50%,#1a0008 100%);position:relative;display:flex;align-items:center;justify-content:center;">
@@ -74,8 +75,8 @@ const catToTab: Record<string, string> = {
           </div>
           <!-- META -->
           <div style="padding:16px;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;margin-bottom:6px;line-height:1.4;">{v.data.title}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">{v.data.meta}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;margin-bottom:6px;line-height:1.4;">{v.data.title[locale]}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">{v.data.meta[locale]}</div>
           </div>
         </div>
       );

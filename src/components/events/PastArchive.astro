@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+const locale = (Astro.currentLocale ?? 'en') as 'en' | 'it';
 const allEvents = await getCollection("events");
 const past = allEvents
   .filter((e) => e.data.isPast)
@@ -51,7 +52,7 @@ const years = ["2026", "2025", "2024", "2023", "2022", "all"];
         <div style="font-family:'Anton',sans-serif;font-size:clamp(18px,2vw,26px);color:#e8e8e8;line-height:1;margin-bottom:8px;">{ev.data.venue}</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.12em;margin-bottom:10px;">{ev.data.city}</div>
         {ev.data.tag && (
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;line-height:1.5;">{ev.data.tag}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;line-height:1.5;">{ev.data.tag?.[locale] ?? ev.data.tag?.en}</div>
         )}
       </div>
     ))}

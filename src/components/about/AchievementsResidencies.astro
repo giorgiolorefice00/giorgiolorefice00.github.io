@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+const locale = (Astro.currentLocale ?? "en") as "en" | "it";
 const achievements = (await getCollection("achievements")).sort((a, b) => a.data.order - b.data.order);
 const residencies = await getCollection("residencies");
 ---
@@ -19,8 +20,8 @@ const residencies = await getCollection("residencies");
         <div style={`display:flex;gap:24px;padding:28px 0;${i < achievements.length - 1 ? 'border-bottom:1px solid #161616;' : ''}`}>
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.14em;flex-shrink:0;padding-top:2px;">{a.data.year}</div>
           <div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.08em;margin-bottom:6px;">{a.data.title}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.06em;line-height:1.6;">{a.data.description}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.08em;margin-bottom:6px;">{a.data.title[locale]}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.06em;line-height:1.6;">{a.data.description[locale]}</div>
           </div>
         </div>
       ))}

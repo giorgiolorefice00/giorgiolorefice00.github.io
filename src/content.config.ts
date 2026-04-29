@@ -1,24 +1,26 @@
 import { defineCollection, z } from "astro:content";
 
-// ── EXISTING (unchanged) ────────────────────────────────────────────────────
+// Helper for bilingual string fields
+const bil = z.object({ en: z.string(), it: z.string() });
+
+// ── EXISTING (schemas updated for i18n) ─────────────────────────────────────
 
 const events = defineCollection({
   type: "content",
   schema: z.object({
-    venue: z.string(),
-    city: z.string(),
-    day: z.string(),
-    month: z.string(),
-    year: z.string(),
-    eventTitle: z.string(),
-    setTime: z.string(),
-    serial: z.string().optional(),
-    status: z.enum(["available", "few-left", "sold-out"]).default("available"),
-    // extended for events page
-    isPast: z.boolean().optional().default(false),
-    latitude: z.number().optional(),
-    longitude: z.number().optional(),
-    tag: z.string().optional(), // archive display tag e.g. "peak time — 6h set"
+    venue:      z.string(),
+    city:       z.string(),
+    day:        z.string(),
+    month:      z.string(),
+    year:       z.string(),
+    eventTitle: bil,
+    setTime:    z.string(),
+    serial:     z.string().optional(),
+    status:     z.enum(["available", "few-left", "sold-out"]).default("available"),
+    isPast:     z.boolean().optional().default(false),
+    latitude:   z.number().optional(),
+    longitude:  z.number().optional(),
+    tag:        bil.optional(),
   }),
 });
 
@@ -26,22 +28,22 @@ const press = defineCollection({
   type: "content",
   schema: z.object({
     publication: z.string(),
-    author: z.string(),
-    date: z.string(),
+    author:      z.string(),
+    date:        z.string(),
+    bodyIt:      z.string().optional(), // Italian quote; body = English quote
   }),
 });
 
 const about = defineCollection({
   type: "content",
   schema: z.object({
-    headlineLines: z.tuple([z.string(), z.string(), z.string()]),
-    paragraphs: z.array(z.string()),
-    stats: z.array(z.object({ num: z.string(), label: z.string() })),
-    // extended for About page
-    fullBio: z.array(z.string()).optional(),
-    factFile: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
-    bornIn: z.string().optional(),
-    basedIn: z.string().optional(),
+    headlineLines: z.tuple([bil, bil, bil]),
+    paragraphs:    z.array(bil),
+    stats:         z.array(z.object({ num: z.string(), label: bil })),
+    fullBio:       z.array(bil).optional(),
+    factFile:      z.array(z.object({ label: bil, value: bil })).optional(),
+    bornIn:      z.string().optional(),
+    basedIn:     z.string().optional(),
     activeSince: z.string().optional(),
   }),
 });
@@ -51,20 +53,20 @@ const about = defineCollection({
 const achievements = defineCollection({
   type: "content",
   schema: z.object({
-    year: z.string(),
-    title: z.string(),
-    description: z.string(),
-    order: z.number(),
+    year:        z.string(),
+    title:       bil,
+    description: bil,
+    order:       z.number(),
   }),
 });
 
 const residencies = defineCollection({
   type: "content",
   schema: z.object({
-    venue: z.string(),
-    city: z.string(),
+    venue:     z.string(),
+    city:      z.string(),
     startYear: z.string(),
-    endYear: z.string().optional(),
+    endYear:   z.string().optional(),
   }),
 });
 
@@ -80,72 +82,72 @@ const partnerships = defineCollection({
 const releases = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string(),
-    subtitle: z.string().optional(),
+    title:       z.string(),   // artistic title — not translated
+    subtitle:    z.string().optional(),
     releaseDate: z.string(),
-    label: z.string(),
-    format: z.enum(["EP", "Single", "Remix", "Album"]),
-    description: z.string(),
-    coverArt: z.string().optional(),
-    tracklist: z.array(z.object({
-      number: z.string(),
-      title: z.string(),
+    label:       z.string(),
+    format:      z.enum(["EP", "Single", "Remix", "Album"]),
+    description: bil,
+    coverArt:    z.string().optional(),
+    tracklist:   z.array(z.object({
+      number:   z.string(),
+      title:    z.string(),
       duration: z.string(),
     })).optional(),
-    spotifyUrl: z.string().optional(),
+    spotifyUrl:    z.string().optional(),
     appleMusicUrl: z.string().optional(),
-    bandcampUrl: z.string().optional(),
-    featured: z.boolean().default(false),
+    bandcampUrl:   z.string().optional(),
+    featured:      z.boolean().default(false),
   }),
 });
 
 const mixes = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string(),
-    duration: z.string(),
-    venue: z.string().optional(),
-    date: z.string(),
-    category: z.enum(["resident", "festival", "radio", "guest"]),
-    coverArt: z.string().optional(),
+    title:        z.string(),
+    duration:     z.string(),
+    venue:        z.string().optional(),
+    date:         z.string(),
+    category:     z.enum(["resident", "festival", "radio", "guest"]),
+    coverArt:     z.string().optional(),
     soundcloudUrl: z.string().optional(),
-    mixcloudUrl: z.string().optional(),
-    bpmRange: z.string(),
-    genre: z.string(),
-    featured: z.boolean().default(false),
+    mixcloudUrl:   z.string().optional(),
+    bpmRange:     z.string(),
+    genre:        z.string(),
+    featured:     z.boolean().default(false),
   }),
 });
 
 const videos = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string(),
-    category: z.enum(["music-video", "live-set", "aftermovie", "interview"]),
+    title:     bil,
+    category:  z.enum(["music-video", "live-set", "aftermovie", "interview"]),
     youtubeId: z.string().optional(),
-    vimeoId: z.string().optional(),
-    duration: z.string(),
-    date: z.string(),
-    producer: z.string().optional(),
+    vimeoId:   z.string().optional(),
+    duration:  z.string(),
+    date:      z.string(),
+    producer:  z.string().optional(),
     thumbnail: z.string().optional(),
-    meta: z.string(),
+    meta:      bil,
   }),
 });
 
 const photos = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string(),
+    title:        z.string(),
     photographer: z.string(),
-    date: z.string(),
-    category: z.enum(["press", "live"]),
-    venue: z.string().optional(),
-    city: z.string().optional(),
-    image: z.string().optional(),
-    thumbnail: z.string().optional(),
-    width: z.number(),
-    height: z.number(),
-    credit: z.string(),
-    res: z.string().optional(),
+    date:         z.string(),
+    category:     z.enum(["press", "live"]),
+    venue:        z.string().optional(),
+    city:         z.string().optional(),
+    image:        z.string().optional(),
+    thumbnail:    z.string().optional(),
+    width:        z.number(),
+    height:       z.number(),
+    credit:       z.string(),
+    res:          z.string().optional(),
   }),
 });
 

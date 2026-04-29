@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+const locale = (Astro.currentLocale ?? "en") as "en" | "it";
 const rawEvents = await getCollection("events");
 const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
 ---
@@ -19,7 +20,8 @@ const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
   <!-- CARDS -->
   <div class="events-row" style="display:flex;gap:16px;">
     {events.map((ev) => {
-      const { venue, city, day, month, year, eventTitle, setTime, serial, status } = ev.data;
+      const { venue, city, day, month, year, eventTitle: eventTitleObj, setTime, serial, status } = ev.data;
+      const eventTitle = eventTitleObj[locale];
       const soldOut = status === "sold-out";
       const fewLeft = status === "few-left";
       return (

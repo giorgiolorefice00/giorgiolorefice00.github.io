@@ -19,7 +19,12 @@ const {
   jsonLd,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, SITE).href;
+const rawPath = Astro.url.pathname;
+const isItalian = rawPath.startsWith("/it");
+const canonicalPath = isItalian ? (rawPath.replace(/^\/it/, "") || "/") : rawPath;
+const canonicalURL = new URL(rawPath, SITE).href;
+const enURL = `${SITE}${canonicalPath}`;
+const itURL = `${SITE}/it${canonicalPath}`;
 const fullTitle = title.includes("Giorgio Lorefice") ? title : `${title} — Giorgio Lorefice`;
 ---
 
@@ -28,6 +33,11 @@ const fullTitle = title.includes("Giorgio Lorefice") ? title : `${title} — Gio
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
 {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+<!-- hreflang — tell Google about the language alternates -->
+<link rel="alternate" hreflang="en"        href={enURL} />
+<link rel="alternate" hreflang="it"        href={itURL} />
+<link rel="alternate" hreflang="x-default" href={enURL} />
 
 <!-- Open Graph -->
 <meta property="og:type"        content={type} />

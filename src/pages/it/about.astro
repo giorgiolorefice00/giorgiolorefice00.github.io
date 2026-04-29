@@ -1,0 +1,38 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/layout/Header.astro";
+import PageHeader from "../../components/layout/PageHeader.astro";
+import Footer from "../../components/layout/Footer.astro";
+import BiographyBlock from "../../components/about/BiographyBlock.astro";
+import AchievementsResidencies from "../../components/about/AchievementsResidencies.astro";
+import PartnershipsMarquee from "../../components/about/PartnershipsMarquee.astro";
+import PressArticlesGrid from "../../components/about/PressArticlesGrid.astro";
+import EpkDownloadBand from "../../components/about/EpkDownloadBand.astro";
+import { getEntry } from "astro:content";
+import { useTranslations } from "../../i18n";
+
+const t = useTranslations("it");
+const about = await getEntry("about", "about");
+const { fullBio, factFile } = about!.data;
+---
+
+<Base
+  title="Chi Sono — Giorgio Lorefice"
+  description="Giorgio Lorefice: biografia, residenze e carriera del DJ techno underground di Milano."
+>
+  <Header />
+  <main>
+    <PageHeader
+      number={t.eyebrows.about}
+      name={t.nav.about}
+      titleLine1={t.pageHeaders.about.line1}
+      titleLine2={t.pageHeaders.about.line2}
+    />
+    <BiographyBlock fullBio={fullBio ?? []} factFile={factFile ?? []} />
+    <AchievementsResidencies />
+    <PartnershipsMarquee />
+    <PressArticlesGrid />
+    <EpkDownloadBand />
+  </main>
+  <Footer />
+</Base>

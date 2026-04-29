@@ -1,0 +1,33 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/layout/Header.astro";
+import PageHeader from "../../components/layout/PageHeader.astro";
+import Footer from "../../components/layout/Footer.astro";
+import FeaturedRelease from "../../components/music/FeaturedRelease.astro";
+import StreamingEmbeds from "../../components/music/StreamingEmbeds.astro";
+import MixesLibrary from "../../components/music/MixesLibrary.astro";
+import Discography from "../../components/music/Discography.astro";
+import { useTranslations } from "../../i18n";
+
+const t = useTranslations("it");
+---
+
+<Base
+  title="Musica — Giorgio Lorefice"
+  description="Release, mix e discografia completa di Giorgio Lorefice. Techno industriale e acid su Mord, Soma, Truncate Records e Blueprint."
+>
+  <Header />
+  <main>
+    <PageHeader
+      number={t.eyebrows.listen}
+      name={t.nav.music}
+      titleLine1={t.pageHeaders.music.line1}
+      titleLine2={t.pageHeaders.music.line2}
+    />
+    <FeaturedRelease />
+    <StreamingEmbeds />
+    <MixesLibrary />
+    <Discography />
+  </main>
+  <Footer />
+</Base>
