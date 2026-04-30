@@ -102,6 +102,10 @@ body[data-menu-open] .mobile-nav {
     border-left: none !important;
     border-top: 1px solid #c8102e !important;
   }
+  /* Shift crop down so face is in frame on mobile (default "center top" cuts the head) */
+  .hero-photo-col img {
+    object-position: center 25% !important;
+  }
   .hero-type-col {
     width: 100% !important;
     padding: 40px 24px 36px !important;
