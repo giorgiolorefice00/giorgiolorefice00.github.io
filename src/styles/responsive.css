@@ -38,6 +38,13 @@ body[data-menu-open] .hamburger-btn .h-line:nth-child(3) {
 
 body[data-menu-open] { overflow: hidden; }
 
+/* Force header strip solid black while menu is open — prevents hero bleed-through
+   at the top of the page where the header is intentionally transparent. */
+body[data-menu-open] #site-header {
+  background: #000 !important;
+  border-bottom-color: #c8102e !important;
+}
+
 .mobile-nav {
   position: fixed;
   top: 72px;
