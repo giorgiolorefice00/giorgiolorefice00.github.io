@@ -6,6 +6,7 @@ import djPhoto from "../../assets/dj-photo.jpg";
 const entry = await getEntry("about", "about");
 const { headlineLines, paragraphs, stats } = entry!.data;
 const locale = (Astro.currentLocale ?? "en") as "en" | "it";
+const aboutHref = locale === "it" ? "/it/about" : "/about";
 ---
 
 <section style="background:#000;padding:120px 72px;">
@@ -34,7 +35,7 @@ const locale = (Astro.currentLocale ?? "en") as "en" | "it";
       </div>
 
       <!-- LINK -->
-      <a href="#" class="about-link">
+      <a href={aboutHref} class="about-link">
         read the full story
         <span class="arrow">→</span>
       </a>
