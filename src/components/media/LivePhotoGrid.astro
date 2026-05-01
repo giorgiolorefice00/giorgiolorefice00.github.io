@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 const photos = (await getCollection("photos"))
   .filter((p) => p.data.category === "live")
@@ -29,8 +30,17 @@ const gradients = [
       const bg = gradients[i % gradients.length];
       return (
         <div style="min-width:75vw;height:520px;flex-shrink:0;scroll-snap-align:start;margin-right:16px;position:relative;overflow:hidden;">
-          <!-- PLACEHOLDER BG -->
-          <div style={`position:absolute;inset:0;background:${bg};`}></div>
+          {p.data.image
+            ? <Image
+                src={p.data.image}
+                alt={p.data.title}
+                width={1200}
+                height={800}
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
+                loading="lazy"
+              />
+            : <div style={`position:absolute;inset:0;background:${bg};`}></div>
+          }
           <!-- RED OVERLAY -->
           <div style="position:absolute;inset:0;background:#c8102e;mix-blend-mode:multiply;opacity:0.3;pointer-events:none;"></div>
           <!-- CAPTION -->
