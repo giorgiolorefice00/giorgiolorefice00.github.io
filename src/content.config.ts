@@ -135,17 +135,17 @@ const videos = defineCollection({
 
 const photos = defineCollection({
   type: "content",
-  schema: z.object({
+  schema: ({ image: img }) => z.object({
     title:        z.string(),
     photographer: z.string(),
     date:         z.string(),
     category:     z.enum(["press", "live"]),
     venue:        z.string().optional(),
     city:         z.string().optional(),
-    image:        z.string().optional(),
+    image:        img().optional(),
     thumbnail:    z.string().optional(),
-    width:        z.number(),
-    height:       z.number(),
+    width:        z.number().optional(),
+    height:       z.number().optional(),
     credit:       z.string(),
     res:          z.string().optional(),
   }),
