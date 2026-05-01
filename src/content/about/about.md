@@ -7,12 +7,10 @@ headlineLines:
   - en: OF A CITY THAT NEVER SLEEPS.
     it: OF A CITY THAT NEVER SLEEPS.
 paragraphs:
-  - en: "milano born. ten years deep. giorgio lorefice came up through the basements and backrooms of a city that exports fashion but hides its best music underground."
-    it: "milano born. ten years deep. giorgio lorefice came up through the basements and backrooms of a city that exports fashion but hides its best music underground."
-  - en: "resident at berghain, known for six-hour sets that dissolve the border between industrial texture and acid rhythm. no tracklist. no encore. just the room."
-    it: "resident at berghain, known for six-hour sets that dissolve the border between industrial texture and acid rhythm. no tracklist. no encore. just the room."
-  - en: "he doesn't warm up crowds — he inherits them from silence and returns them to silence. everything in between is architecture."
-    it: "he doesn't warm up crowds — he inherits them from silence and returns them to silence. everything in between is architecture."
+  - en: "Self-taught. Behind the decks since 13. Locked into techno since 16."
+    it: "Autodidatta. Dietro i dischi da 13 anni. Fissato col techno da 16."
+  - en: "A selection sharpened by years of careful research — hypnotic grooves, sensation, power. Detroit, industrial, acid, mental, hardtek."
+    it: "Una selezione affinata da anni di ricerca attenta — groove ipnotici, sensazione, potenza. Detroit, industrial, acid, mental, hardtek."
 stats:
   - num: "10+"
     label:
@@ -27,48 +25,44 @@ stats:
       en: nights that never ended
       it: notti senza fine
 fullBio:
-  - en: "Giorgio Lorefice grew up in the margins of Milan — not the fashion city, not the financial city, but the third one: the one that only exists after midnight, in converted factories and forgotten warehouses three stops past the last tram. he started DJing at seventeen in a friend's basement. he hasn't stopped since."
-    it: "Giorgio Lorefice grew up in the margins of Milan — not the fashion city, not the financial city, but the third one: the one that only exists after midnight, in converted factories and forgotten warehouses three stops past the last tram. he started DJing at seventeen in a friend's basement. he hasn't stopped since."
-  - en: "his first residency came at nineteen — two years of weekly sets at a now-closed club in navigli. it was there he developed what people would later describe as his signature approach: no warm-up, no cool-down. sets that enter at full intensity and sustain it. a refusal to cater to arrivals or departures. the room you walked into was not the room you'd walk out of."
-    it: "his first residency came at nineteen — two years of weekly sets at a now-closed club in navigli. it was there he developed what people would later describe as his signature approach: no warm-up, no cool-down. sets that enter at full intensity and sustain it. a refusal to cater to arrivals or departures. the room you walked into was not the room you'd walk out of."
-  - en: "by his mid-twenties he was traveling. berlin first, then amsterdam, london, new york, tokyo. each city taught him something different — berlin gave him patience (six hours is not long enough), london gave him rhythm (the crowd IS the instrument), tokyo gave him silence (what you don't play is as loud as what you do)."
-    it: "by his mid-twenties he was traveling. berlin first, then amsterdam, london, new york, tokyo. each city taught him something different — berlin gave him patience (six hours is not long enough), london gave him rhythm (the crowd IS the instrument), tokyo gave him silence (what you don't play is as loud as what you do)."
-  - en: "his production work came later, and deliberately so. he didn't want to make records until he knew what he wanted to say. the first release came in 2019 — a 12\" on a small berlin label that sold out in 48 hours and hasn't been repressed. scarcity is part of the art."
-    it: "his production work came later, and deliberately so. he didn't want to make records until he knew what he wanted to say. the first release came in 2019 — a 12\" on a small berlin label that sold out in 48 hours and hasn't been repressed. scarcity is part of the art."
-  - en: "today he splits his time between milan and berlin, refuses to play more than three times a month, and is reportedly working on a debut album that he has been nearly finished with for two years. his booking agent describes him as the least difficult person to work with and simultaneously the most demanding. he takes that as a compliment."
-    it: "today he splits his time between milan and berlin, refuses to play more than three times a month, and is reportedly working on a debut album that he has been nearly finished with for two years. his booking agent describes him as the least difficult person to work with and simultaneously the most demanding. he takes that as a compliment."
+  - en: "Self-taught DJ and producer, started behind the decks at 13. By 16, techno had become the obsession — a fixation that's only sharpened over the years through countless DJ sets, sharpening the ear, exploring genres and subgenres until the selection became surgical."
+    it: "DJ e producer autodidatta, ho iniziato a mettere dischi a 13 anni. A 16 il techno è diventato un'ossessione — una fissazione che si è solo affinata negli anni, attraverso innumerevoli DJ set, allenando l'orecchio, esplorando generi e sottogeneri fino a rendere la selezione chirurgica."
+  - en: "After years as a DJ, the next step was production. Ableton became the workspace — sound design, composition, live performance, all in service of building a personal sound that doesn't borrow."
+    it: "Dopo anni come DJ, il passo successivo è stata la produzione. Ableton è diventato lo spazio di lavoro — sound design, composizione, performance live, tutto al servizio della costruzione di un suono personale che non prende in prestito da nessuno."
+  - en: "The selection runs through Detroit, hardgroove, industrial, acid, mental, hardtek, tribe, oldschool. The sets express sensation and power through hypnotic, engaging grooves. The lives lean into acid, mental and groovy territory — produced on Ableton 12 with virtual synths and professional plugins, with one rule: no trends, only emotions."
+    it: "La selezione attraversa Detroit, hardgroove, industrial, acid, mental, hardtek, tribe, oldschool. I set esprimono sensazione e potenza attraverso groove ipnotici e coinvolgenti. I live si spingono verso territori acid, mental e groovy — prodotti su Ableton 12 con sintetizzatori virtuali e plugin professionali, con una sola regola: niente trend, solo emozioni."
 factFile:
   - label:
-      en: born
-      it: nato
+      en: djing since
+      it: djing since
     value:
-      en: "milano, 1993"
-      it: "milano, 1993"
+      en: "age 13"
+      it: "dai 13 anni"
+  - label:
+      en: producing on
+      it: produzione su
+    value:
+      en: "ableton 12"
+      it: "ableton 12"
   - label:
       en: based
       it: base
     value:
-      en: "milano / berlin"
-      it: "milano / berlino"
-  - label:
-      en: active since
-      it: attivo dal
-    value:
-      en: "2013"
-      it: "2013"
+      en: "milano"
+      it: "milano"
   - label:
       en: genres
       it: generi
     value:
-      en: "industrial · acid · hard techno"
-      it: "industrial · acid · hard techno"
+      en: "detroit · industrial · acid · mental · hardtek · tribe"
+      it: "detroit · industrial · acid · mental · hardtek · tribe"
   - label:
-      en: labels
-      it: etichette
+      en: philosophy
+      it: filosofia
     value:
-      en: "mord · soma · truncate recs"
-      it: "mord · soma · truncate recs"
+      en: "no trends, only emotions"
+      it: "niente trend, solo emozioni"
 bornIn: "milano, 1993"
-basedIn: "milano / berlin"
+basedIn: "milano"
 activeSince: "2013"
 ---
