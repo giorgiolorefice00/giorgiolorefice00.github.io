@@ -1,11 +1,10 @@
 ---
-title: live photo 03
-photographer: placeholder
-date: "2025-01-01"
+title: Live performance 03
+photographer: TODO
+date: "2025-09-07"
 category: live
-venue: placeholder venue
-city: berlin
-width: 3840
-height: 2560
-credit: photographer
+venue: TODO
+city: TODO
+image: ../../assets/photos/live/325e7f36-aaf2-4fac-9265-4dde944570d3.jpg
+credit: TODO
 ---
