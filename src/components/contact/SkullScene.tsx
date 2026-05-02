@@ -32,7 +32,7 @@ export default function SkullScene() {
 
       const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-      renderer.setClearColor(0x000000, 0);
+      renderer.setClearColor(0x0A0A0A, 1);
       disposeRenderer = () => renderer.dispose();
 
       const scene  = new Scene();
@@ -46,27 +46,35 @@ export default function SkullScene() {
       };
       resize();
 
-      const red   = new Color(0xC8102E);
+      const hot  = new Color(0xFF1F1F); // blood-hot: bright wireframe
+      const glow = new Color(0xC8102E); // blood: softer outer halo
       const group = new Group();
       scene.add(group);
 
       // Cranium
       const craniumGeo = new IcosahedronGeometry(1.4, 2);
       craniumGeo.scale(1, 1.1, 0.9);
-      const cranium = new Mesh(craniumGeo, new MeshBasicMaterial({ color: red, wireframe: true, opacity: 0.85, transparent: true }));
+      const cranium = new Mesh(craniumGeo, new MeshBasicMaterial({ color: hot, wireframe: true, opacity: 1.0, transparent: false }));
       cranium.position.y = 0.1;
       group.add(cranium);
+
+      // Cranium glow halo — slightly larger, softer
+      const glowGeo = craniumGeo.clone();
+      glowGeo.scale(1.05, 1.05, 1.05);
+      const glowMesh = new Mesh(glowGeo, new MeshBasicMaterial({ color: glow, wireframe: true, opacity: 0.35, transparent: true }));
+      glowMesh.position.y = 0.1;
+      group.add(glowMesh);
 
       // Jaw
       const jawGeo = new IcosahedronGeometry(0.9, 1);
       jawGeo.scale(0.85, 0.5, 0.8);
-      const jaw = new Mesh(jawGeo, new MeshBasicMaterial({ color: red, wireframe: true, opacity: 0.55, transparent: true }));
+      const jaw = new Mesh(jawGeo, new MeshBasicMaterial({ color: hot, wireframe: true, opacity: 0.9, transparent: true }));
       jaw.position.set(0, -1.0, 0.1);
       group.add(jaw);
 
       // Eye sockets
       const eyeGeo  = new TorusGeometry(0.28, 0.04, 6, 12);
-      const eyeMat  = new MeshBasicMaterial({ color: red, wireframe: true, opacity: 0.9, transparent: true });
+      const eyeMat  = new MeshBasicMaterial({ color: hot, wireframe: true, opacity: 1.0, transparent: false });
       const leftEye = new Mesh(eyeGeo, eyeMat);
       leftEye.position.set(-0.45, 0.2, 1.0);
       leftEye.rotation.x = 0.3;
@@ -79,7 +87,7 @@ export default function SkullScene() {
       // Teeth
       group.add(new Mesh(
         new BoxGeometry(1.4, 0.08, 0.06),
-        new MeshBasicMaterial({ color: red, wireframe: true, opacity: 0.5, transparent: true }),
+        new MeshBasicMaterial({ color: hot, wireframe: true, opacity: 0.85, transparent: true }),
       )).position.set(0, -0.75, 0.7);
 
       // Particles
@@ -91,7 +99,7 @@ export default function SkullScene() {
       }
       const particleGeo = new BufferGeometry();
       particleGeo.setAttribute("position", new BufferAttribute(positions, 3));
-      const particles = new Points(particleGeo, new PointsMaterial({ color: red, size: 0.018, transparent: true, opacity: 0.4 }));
+      const particles = new Points(particleGeo, new PointsMaterial({ color: hot, size: 0.025, transparent: true, opacity: 0.65 }));
       scene.add(particles);
 
       const onMouse = (e: MouseEvent) => {
@@ -154,7 +162,7 @@ export default function SkullScene() {
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block", opacity: 0.6 }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}
     />
   );
 }
