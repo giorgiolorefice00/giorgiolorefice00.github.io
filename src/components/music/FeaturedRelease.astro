@@ -1,13 +1,16 @@
 ---
 import { getCollection } from "astro:content";
+import SoundcloudPlayCard from "../home/SoundcloudPlayCard";
 
 const locale = (Astro.currentLocale ?? "en") as "en" | "it";
 const releases = await getCollection("releases");
 const featured = releases.find((r) => r.data.featured);
 if (!featured) return;
-const { title, subtitle, releaseDate, label, description: descObj, tracklist } = featured.data;
+const { title, subtitle, releaseDate, label, description: descObj, tracklist, coverArt, soundcloudUrl, spotifyUrl, appleMusicUrl, bandcampUrl } = featured.data;
 const description = descObj[locale];
 const year = releaseDate.slice(0, 7).replace("-", ".").toUpperCase();
+const base = import.meta.env.BASE_URL;
+const coverSrc = coverArt || `${base}dj-photo.jpg`;
 ---
 
 <section style="background:#000;padding:100px 72px;">
@@ -18,14 +21,14 @@ const year = releaseDate.slice(0, 7).replace("-", ".").toUpperCase();
 
   <div class="release-cols" style="display:flex;gap:64px;align-items:flex-start;">
 
-    <!-- LEFT 40% — artwork placeholder -->
-    <div class="release-artwork" style="flex:0 0 40%;aspect-ratio:1/1;position:relative;overflow:hidden;background:#050505;border:1px solid #1a1a1a;display:flex;align-items:center;justify-content:center;">
-      <div style="position:absolute;inset:0;background:radial-gradient(circle,transparent 24px,#0a0002 25px);background-size:24px 24px;opacity:0.08;"></div>
-      <div style="position:relative;text-align:center;">
-        <div style="font-family:'Anton',sans-serif;font-size:clamp(24px,3vw,40px);color:#c8102e;opacity:0.15;letter-spacing:0.06em;line-height:1;">{title.split(" ")[0]}</div>
-        <div style="font-family:'Anton',sans-serif;font-size:clamp(24px,3vw,40px);color:#c8102e;opacity:0.15;letter-spacing:0.06em;line-height:1;">{title.split(" ").slice(1).join(" ")}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-top:16px;opacity:0.5;">[ artwork placeholder ]</div>
-      </div>
+    <!-- LEFT 40% — artwork -->
+    <div class="release-artwork" style="flex:0 0 40%;aspect-ratio:1/1;position:relative;overflow:hidden;background:#050505;border:1px solid #1a1a1a;">
+      <img
+        src={coverSrc}
+        alt={title}
+        style="width:100%;height:100%;object-fit:cover;filter:url(#duotone);display:block;"
+        loading="lazy"
+      />
     </div>
 
     <!-- RIGHT 60% — metadata -->
@@ -36,7 +39,9 @@ const year = releaseDate.slice(0, 7).replace("-", ".").toUpperCase();
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:4px;">{year}</div>
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e8e8;letter-spacing:0.08em;font-weight:500;margin-bottom:24px;">{label.toUpperCase()}</div>
 
-      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.04em;line-height:1.7;margin-bottom:32px;">{description}</p>
+      {description && !description.startsWith("TODO") && (
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.04em;line-height:1.7;margin-bottom:32px;">{description}</p>
+      )}
 
       <!-- TRACKLIST -->
       {tracklist && tracklist.length > 0 && (
@@ -53,13 +58,32 @@ const year = releaseDate.slice(0, 7).replace("-", ".").toUpperCase();
         </div>
       )}
 
+      <!-- PLAYER -->
+      {soundcloudUrl && (
+        <div style="margin-bottom:24px;">
+          <SoundcloudPlayCard
+            client:visible
+            trackUrl={soundcloudUrl}
+            trackTitle={title}
+            duration={tracklist?.[0]?.duration ?? "—"}
+          />
+        </div>
+      )}
+
       <!-- STREAMING BUTTONS -->
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        {["▶ SPOTIFY", "▶ APPLE", "▶ BANDCAMP"].map((label) => (
-          <button class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;">
-            <span>{label}</span>
-          </button>
-        ))}
+        {spotifyUrl
+          ? <a href={spotifyUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ SPOTIFY</span></a>
+          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ SPOTIFY</span></button>
+        }
+        {appleMusicUrl
+          ? <a href={appleMusicUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ APPLE</span></a>
+          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ APPLE</span></button>
+        }
+        {bandcampUrl
+          ? <a href={bandcampUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ BANDCAMP</span></a>
+          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ BANDCAMP</span></button>
+        }
       </div>
     </div>
   </div>

@@ -1,9 +1,11 @@
 ---
 import { getCollection } from "astro:content";
+import MixPlayer from "./MixPlayer";
 
 const mixes = (await getCollection("mixes")).sort((a, b) =>
   b.data.date.localeCompare(a.data.date)
 );
+const base = import.meta.env.BASE_URL;
 
 const categoryLabel: Record<string, string> = {
   resident: "resident sets",
@@ -44,21 +46,30 @@ const categoryLabel: Record<string, string> = {
       const dateStr = m.data.date.slice(0, 7).replace("-", ".");
       return (
         <div class="mix-card" data-cat={cat} style="border:1px solid #1a1a1a;background:#050505;overflow:hidden;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c8102e'" onmouseout="this.style.borderColor='#1a1a1a'">
-          <!-- ARTWORK PLACEHOLDER -->
-          <div style="aspect-ratio:1/1;background:linear-gradient(135deg,#0a0002 0%,#050000 50%,#080001 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-            <div class="photo-duotone" style="position:absolute;inset:0;opacity:0.3;">
-              <div style="width:100%;height:100%;background:#111;"></div>
-            </div>
-            <div style="position:relative;text-align:center;padding:16px;">
-              <div style="font-family:'Anton',sans-serif;font-size:11px;color:#c8102e;letter-spacing:0.14em;opacity:0.6;">{cat.toUpperCase()}</div>
-            </div>
+          <!-- ARTWORK -->
+          <div style="aspect-ratio:1/1;background:linear-gradient(135deg,#0a0002 0%,#050000 50%,#080001 100%);position:relative;overflow:hidden;">
+            {m.data.coverArt
+              ? <img
+                  src={m.data.coverArt}
+                  alt={m.data.title}
+                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:url(#duotone);"
+                  loading="lazy"
+                  onerror={`this.style.display='none'`}
+                />
+              : <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                  <div style="font-family:'Anton',sans-serif;font-size:11px;color:#c8102e;letter-spacing:0.14em;opacity:0.6;">{cat.toUpperCase()}</div>
+                </div>
+            }
           </div>
           <!-- INFO -->
           <div style="padding:20px;">
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.18em;margin-bottom:8px;">{cat}</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;margin-bottom:4px;">{m.data.title}</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:16px;">{m.data.venue ?? ""} · {dateStr} · {m.data.duration}</div>
-            <button class="btn-secondary" style="padding:8px 16px;font-size:9px;width:100%;letter-spacing:0.14em;"><span>▶ LISTEN</span></button>
+            {m.data.soundcloudUrl
+              ? <MixPlayer client:visible trackUrl={m.data.soundcloudUrl} trackTitle={m.data.title} />
+              : <button class="btn-secondary" disabled style="padding:8px 16px;font-size:9px;width:100%;letter-spacing:0.14em;opacity:0.3;cursor:not-allowed;"><span>▶ LISTEN</span></button>
+            }
           </div>
         </div>
       );

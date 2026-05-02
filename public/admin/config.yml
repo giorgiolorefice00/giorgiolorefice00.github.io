@@ -182,6 +182,7 @@ collections:
           - { label: Number, name: number, widget: string }
           - { label: Title, name: title, widget: string }
           - { label: Duration, name: duration, widget: string }
+      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
       - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
       - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
       - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }

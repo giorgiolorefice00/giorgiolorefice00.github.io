@@ -1,4 +1,7 @@
 ---
+// TODO: replace with real artist URLs once available
+const spotifyUrl: string | null = null;
+const appleMusicUrl: string | null = null;
 ---
 
 <section style="background:#000;padding:100px 72px;border-top:1px solid #1a1a1a;">
@@ -14,24 +17,34 @@
     <!-- SPOTIFY -->
     <div style="flex:1;border:1px solid #c8102e;padding:4px;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;padding:12px 12px 8px;">SPOTIFY</div>
-      <iframe
-        style="border:none;width:100%;height:232px;display:block;"
-        src="https://open.spotify.com/embed/artist/placeholder?utm_source=generator&theme=0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      ></iframe>
+      {spotifyUrl
+        ? <iframe
+            style="border:none;width:100%;height:232px;display:block;"
+            src={`https://open.spotify.com/embed/artist/${spotifyUrl}?utm_source=generator&theme=0`}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        : <div style="height:232px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">coming soon</span>
+          </div>
+      }
     </div>
 
     <!-- APPLE MUSIC -->
     <div style="flex:1;border:1px solid #c8102e;padding:4px;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;padding:12px 12px 8px;">APPLE MUSIC</div>
-      <iframe
-        style="border:none;width:100%;height:232px;display:block;"
-        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-        src="https://embed.music.apple.com/us/artist/placeholder/placeholder"
-        loading="lazy"
-      ></iframe>
+      {appleMusicUrl
+        ? <iframe
+            style="border:none;width:100%;height:232px;display:block;"
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src={`https://embed.music.apple.com/us/artist/${appleMusicUrl}`}
+            loading="lazy"
+          ></iframe>
+        : <div style="height:232px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">coming soon</span>
+          </div>
+      }
     </div>
   </div>
 </section>

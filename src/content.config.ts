@@ -82,7 +82,7 @@ const partnerships = defineCollection({
 const releases = defineCollection({
   type: "content",
   schema: z.object({
-    title:       z.string(),   // artistic title — not translated
+    title:       z.string(),
     subtitle:    z.string().optional(),
     releaseDate: z.string(),
     label:       z.string(),
@@ -94,6 +94,7 @@ const releases = defineCollection({
       title:    z.string(),
       duration: z.string(),
     })).optional(),
+    soundcloudUrl: z.string().optional(),
     spotifyUrl:    z.string().optional(),
     appleMusicUrl: z.string().optional(),
     bandcampUrl:   z.string().optional(),
