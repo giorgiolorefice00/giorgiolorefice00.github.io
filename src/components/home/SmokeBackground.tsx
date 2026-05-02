@@ -51,8 +51,6 @@ export function SmokeBackground({ smokeColor = "#C8102E" }: Props) {
   useEffect(() => { colorRef.current = hexToRgb(smokeColor); }, [smokeColor]);
 
   useEffect(() => {
-    // Skip on mobile viewports, reduced-motion preference, or low-end devices (< 4 cores)
-    if (window.innerWidth < 768) return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lowEnd = typeof navigator.hardwareConcurrency !== "undefined"
       && navigator.hardwareConcurrency < 4;
@@ -86,7 +84,7 @@ export function SmokeBackground({ smokeColor = "#C8102E" }: Props) {
     const uCol  = gl.getUniformLocation(prog, "u_color");
 
     const resize = () => {
-      const dpr = Math.min(devicePixelRatio, 1.5); // cap at 1.5 — no 3× rendering on phones
+      const dpr = Math.min(devicePixelRatio, window.innerWidth < 768 ? 1.0 : 1.5);
       canvas.width  = canvas.offsetWidth  * dpr;
       canvas.height = canvas.offsetHeight * dpr;
       gl.viewport(0, 0, canvas.width, canvas.height);
