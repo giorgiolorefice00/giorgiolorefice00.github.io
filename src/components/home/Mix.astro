@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import SoundcloudPlayer from "./SoundcloudPlayer";
+import SoundcloudPlayCard from "./SoundcloudPlayCard";
 
 const mixes = await getCollection("mixes", ({ data }) => data.featured);
 const mix = mixes[0];
@@ -45,10 +45,12 @@ const infoStrip = [
     <div style="flex:1;">
       <div class="player-frame">
         {mix?.data.soundcloudUrl
-          ? <SoundcloudPlayer
+          ? <SoundcloudPlayCard
               client:visible
               trackUrl={mix.data.soundcloudUrl}
               trackTitle={mix.data.title}
+              duration={mix.data.duration ?? "—"}
+              coverImage={mix.data.coverArt}
             />
           : <div style="height:96px;display:flex;align-items:center;justify-content:center;">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#333;letter-spacing:0.1em;">no audio source</span>
