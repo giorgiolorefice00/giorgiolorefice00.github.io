@@ -33,11 +33,14 @@ export default function SkullScene() {
 
       const scene  = new Scene();
       const camera = new PerspectiveCamera(45, canvas.offsetWidth / canvas.offsetHeight, 0.1, 100);
-      camera.position.set(0, 0, 5);
+
+      const getCameraZ = () => window.innerWidth < 768 ? 8 : 5;
+      camera.position.set(0, 0, getCameraZ());
 
       const resize = () => {
         renderer.setSize(canvas.offsetWidth, canvas.offsetHeight, false);
         camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+        camera.position.z = getCameraZ();
         camera.updateProjectionMatrix();
       };
       resize();
