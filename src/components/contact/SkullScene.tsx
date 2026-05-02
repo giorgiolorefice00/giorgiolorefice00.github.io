@@ -8,13 +8,9 @@ export default function SkullScene() {
   const rafRef    = useRef(0);
 
   useEffect(() => {
-    // Bail on mobile — dynamic import below never fires, Three.js never downloaded
-    if (window.innerWidth < 768) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lowEnd = typeof navigator.hardwareConcurrency !== "undefined"
-      && navigator.hardwareConcurrency < 4;
-    if (lowEnd) return;
 
+    const mobile = window.innerWidth < 768;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -30,8 +26,8 @@ export default function SkullScene() {
     }) => {
       if (cancelled || !canvas) return;
 
-      const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+      const renderer = new WebGLRenderer({ canvas, antialias: !mobile, alpha: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.0 : 1.5));
       renderer.setClearColor(0x0A0A0A, 1);
       disposeRenderer = () => renderer.dispose();
 
@@ -52,7 +48,7 @@ export default function SkullScene() {
       scene.add(group);
 
       // Cranium
-      const craniumGeo = new IcosahedronGeometry(1.4, 2);
+      const craniumGeo = new IcosahedronGeometry(1.4, mobile ? 1 : 2);
       craniumGeo.scale(1, 1.1, 0.9);
       const cranium = new Mesh(craniumGeo, new MeshBasicMaterial({ color: hot, wireframe: true, opacity: 1.0, transparent: false }));
       cranium.position.y = 0.1;
@@ -114,11 +110,12 @@ export default function SkullScene() {
 
       let t = 0;
       let running = true;
+      const rotSpeed = mobile ? 0.0015 : 0.003;
 
       const loop = () => {
         if (!running) return;
         rafRef.current = requestAnimationFrame(loop);
-        t += 0.003;
+        t += rotSpeed;
         group.rotation.y = t * 0.4 + mouseRef.current.x * 0.25;
         group.rotation.x = Math.sin(t * 0.3) * 0.08 + mouseRef.current.y * 0.12;
         jaw.position.y   = -1.0 + Math.sin(t * 1.2) * 0.02;
