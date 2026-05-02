@@ -162,7 +162,13 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "e.g. EP · 4 TRACKS" }
-      - { label: Release Date, name: releaseDate, widget: string, hint: "ISO format e.g. 2026-03-01" }
+      - label: Release Date
+        name: releaseDate
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
       - { label: Label, name: label, widget: string }
       - label: Format
         name: format
@@ -201,7 +207,13 @@ collections:
       - { label: Title, name: title, widget: string }
       - { label: Duration, name: duration, widget: string, hint: "e.g. 6h 12m" }
       - { label: Venue / Context, name: venue, widget: string, required: false }
-      - { label: Date, name: date, widget: string, hint: "ISO format e.g. 2026-03-01" }
+      - label: Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
       - label: Category
         name: category
         widget: select
@@ -239,7 +251,13 @@ collections:
       - { label: YouTube ID, name: youtubeId, widget: string, required: false }
       - { label: Vimeo ID, name: vimeoId, widget: string, required: false }
       - { label: Duration, name: duration, widget: string, hint: "e.g. 6:42" }
-      - { label: Date, name: date, widget: string, hint: "ISO format e.g. 2026-03-15" }
+      - label: Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
       - { label: Producer / Director, name: producer, widget: string, required: false }
       - { label: Thumbnail, name: thumbnail, widget: image, required: false }
       - { label: Meta Line, name: meta, widget: string, hint: "e.g. dir. marco rossetti · 2026" }
@@ -256,7 +274,13 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Photographer, name: photographer, widget: string }
-      - { label: Date, name: date, widget: string, hint: "ISO format e.g. 2025-01-01" }
+      - label: Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
       - label: Category
         name: category
         widget: select

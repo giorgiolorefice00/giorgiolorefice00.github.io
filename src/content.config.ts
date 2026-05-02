@@ -3,6 +3,12 @@ import { defineCollection, z } from "astro:content";
 // Helper for bilingual string fields
 const bil = z.object({ en: z.string(), it: z.string() });
 
+// Accepts both YAML native dates (what Decap writes) and quoted strings, always outputs YYYY-MM-DD string
+const dateStr = z.preprocess(
+  (v) => v instanceof Date ? v.toISOString().split('T')[0] : v,
+  z.string()
+);
+
 // ── EXISTING (schemas updated for i18n) ─────────────────────────────────────
 
 const events = defineCollection({
@@ -29,7 +35,7 @@ const press = defineCollection({
   schema: z.object({
     publication: z.string(),
     author:      z.string(),
-    date:        z.string(),
+    date:        dateStr,
     bodyIt:      z.string().optional(), // Italian quote; body = English quote
   }),
 });
@@ -84,7 +90,7 @@ const releases = defineCollection({
   schema: z.object({
     title:       z.string(),
     subtitle:    z.string().optional(),
-    releaseDate: z.string(),
+    releaseDate: dateStr,
     label:       z.string(),
     format:      z.enum(["EP", "Single", "Remix", "Album"]),
     description: bil,
@@ -108,7 +114,7 @@ const mixes = defineCollection({
     title:        z.string(),
     duration:     z.string(),
     venue:        z.string().optional(),
-    date:         z.string(),
+    date:         dateStr,
     category:     z.enum(["resident", "festival", "radio", "guest"]),
     coverArt:     z.string().optional(),
     soundcloudUrl: z.string().optional(),
@@ -127,7 +133,7 @@ const videos = defineCollection({
     youtubeId: z.string().optional(),
     vimeoId:   z.string().optional(),
     duration:  z.string(),
-    date:      z.string(),
+    date:      dateStr,
     producer:  z.string().optional(),
     thumbnail: z.string().optional(),
     meta:      bil,
@@ -139,7 +145,7 @@ const photos = defineCollection({
   schema: ({ image: img }) => z.object({
     title:        z.string(),
     photographer: z.string(),
-    date:         z.string(),
+    date:         dateStr,
     category:     z.enum(["press", "live"]),
     venue:        z.string().optional(),
     city:         z.string().optional(),
