@@ -33,21 +33,6 @@ collections:
               - { label: Apple Music profile URL, name: appleMusic, widget: string, required: false, hint: "Used in footer social links" }
               - { label: Bandcamp URL, name: bandcamp, widget: string, required: false }
               - { label: YouTube Music URL, name: youtubeMusic, widget: string, required: false }
-              - label: Spotify embed URL
-                name: spotifyEmbedUrl
-                widget: string
-                required: false
-                hint: "Full iframe-ready URL, e.g. https://open.spotify.com/embed/artist/XXXXX?utm_source=generator&theme=0"
-              - label: Apple Music embed URL
-                name: appleMusicEmbedUrl
-                widget: string
-                required: false
-                hint: "Full iframe-ready URL, e.g. https://embed.music.apple.com/us/artist/XXXXX"
-              - label: Bandcamp embed URL
-                name: bandcampEmbedUrl
-                widget: string
-                required: false
-                hint: "Full iframe-ready URL for Bandcamp player embed"
           - label: Contacts
             name: contacts
             widget: object
@@ -622,184 +607,6 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-          - label: "♫ Music Page"
-            name: music
-            widget: object
-            fields:
-              - label: Page title line 1
-                name: titleLine1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Page title line 2
-                name: titleLine2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Latest release eyebrow
-                name: latestReleaseEyebrow
-                hint: "e.g. A — latest release"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Latest release section label
-                name: latestReleaseSectionLabel
-                hint: "Badge above the release title, e.g. [ RELEASE ]"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Latest release date label
-                name: latestReleaseDateLabel
-                hint: "Prefix before the release year, e.g. released"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Streaming section eyebrow
-                name: streamingHeading
-                hint: "e.g. B — streaming"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Streaming section subtitle
-                name: streamingSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Spotify embed label
-                name: spotifyEmbedLabel
-                hint: "Label shown above the Spotify iframe"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Apple Music embed label
-                name: appleMusicEmbedLabel
-                hint: "Label shown above the Apple Music iframe"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Streaming — Coming Soon fallback
-                name: streamingComingSoonMessage
-                hint: "Shown inside the iframe box when no URL is set yet"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Production note
-                name: productionNote
-                hint: "Small caption below streaming section heading"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes section eyebrow
-                name: mixesHeading
-                hint: "e.g. C — mixes"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes section subtitle
-                name: mixesSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes filter — All
-                name: mixesFilterAllLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes filter — Resident sets
-                name: mixesFilterResidentLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes filter — Festival sets
-                name: mixesFilterFestivalLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes filter — Radio shows
-                name: mixesFilterRadioLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mixes filter — Guest mixes
-                name: mixesFilterGuestLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography section eyebrow
-                name: discographyHeading
-                hint: "e.g. D — discography"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography empty state message
-                name: discographyEmptyStateMessage
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Genre tags label
-                name: genreTagsLabel
-                hint: "e.g. genres ——"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Genre tags list
-                name: genreTagsList
-                hint: "e.g. detroit · hardgroove · industrial · acid"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography table — Year header
-                name: discographyYearHeader
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography table — Title header
-                name: discographyTitleHeader
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography table — Format header
-                name: discographyFormatHeader
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography table — Label header
-                name: discographyLabelHeader
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Discography table — Streams header
-                name: discographyStreamsHeader
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
           - label: "📅 Events Page"
             name: events
             widget: object
@@ -951,9 +758,178 @@ collections:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
 
-  # ── ♫ MUSIC PAGE — RELEASES (DISCOGRAPHY) ───────────────────────────────────
+  # ── ♫ MUSIC — LATEST RELEASE ────────────────────────────────────────────────
+  - name: music-latest-release
+    label: "♫ Music — Latest Release"
+    label_singular: Release
+    folder: src/content/releases
+    create: false
+    delete: false
+    editor: { preview: false }
+    filter: { field: featured, value: true }
+    fields:
+      - label: Title
+        name: title
+        widget: object
+        hint: "The release title shown in the hero section"
+        fields:
+          - { label: English, name: en, widget: string }
+          - { label: Italiano, name: it, widget: string }
+      - label: Subtitle
+        name: subtitle
+        widget: object
+        required: false
+        hint: "Optional descriptor (e.g. EP · 4 TRACKS)"
+        fields:
+          - { label: English, name: en, widget: string, required: false }
+          - { label: Italiano, name: it, widget: string, required: false }
+      - label: Description
+        name: description
+        widget: object
+        required: false
+        fields:
+          - { label: English, name: en, widget: text, required: false }
+          - { label: Italiano, name: it, widget: text, required: false }
+      - label: Release Date
+        name: releaseDate
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+      - { label: Label / Imprint, name: label, widget: string, hint: "Record label — proper noun, not translated" }
+      - label: Format
+        name: format
+        widget: select
+        options:
+          - { label: EP, value: EP }
+          - { label: Single, value: Single }
+          - { label: Remix, value: Remix }
+          - { label: Album, value: Album }
+      - { label: Cover Artwork, name: coverArt, widget: image, required: false, hint: "Square artwork — minimum 800×800px" }
+      - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
+      - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
+      - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
+      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
+      - label: Tracklist
+        name: tracklist
+        widget: list
+        required: false
+        fields:
+          - { label: Track Number, name: number, widget: string }
+          - label: Track Title
+            name: title
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - { label: Duration, name: duration, widget: string, hint: "Format: M:SS (e.g. 7:18)" }
+      - { label: Featured, name: featured, widget: boolean, default: true, hint: "Must stay checked. To swap releases, uncheck this in Discography and check the new one there." }
+
+  # ── ♫ MUSIC — STREAMING ──────────────────────────────────────────────────────
+  - name: musicStreaming
+    label: "♫ Music — Streaming"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/musicStreaming/music-streaming.md
+        label: "Streaming"
+        name: music-streaming
+        fields:
+          - label: Spotify Embed URL
+            name: spotifyEmbedUrl
+            widget: string
+            required: false
+            hint: "Get from Spotify: artist page → ··· → Share → Embed → copy iframe src. e.g. https://open.spotify.com/embed/artist/XXXXX"
+          - label: Apple Music Embed URL
+            name: appleMusicEmbedUrl
+            widget: string
+            required: false
+            hint: "Get from Apple Music: artist page → Share → Embed Code"
+          - label: Bandcamp Embed URL
+            name: bandcampEmbedUrl
+            widget: string
+            required: false
+          - label: Section heading
+            name: streamingHeading
+            widget: object
+            hint: "e.g. B — streaming"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Section subtitle
+            name: streamingSubtitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Spotify embed label
+            name: spotifyEmbedLabel
+            hint: "Label shown above the Spotify iframe"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Apple Music embed label
+            name: appleMusicEmbedLabel
+            hint: "Label shown above the Apple Music iframe"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Coming Soon fallback
+            name: streamingComingSoonMessage
+            hint: "Shown when no embed URL is set"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Production note
+            name: productionNote
+            hint: "Small caption below the section heading"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── ♫ MUSIC — MIXES & PODCASTS ───────────────────────────────────────────────
+  - name: mixes
+    label: "♫ Music — Mixes & Podcasts"
+    label_singular: Mix
+    folder: src/content/mixes
+    create: true
+    delete: true
+    slug: "{{date}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Duration, name: duration, widget: string, hint: "e.g. 6h 12m" }
+      - { label: Venue / Context, name: venue, widget: string, required: false }
+      - label: Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: Resident Set, value: resident }
+          - { label: Festival Set, value: festival }
+          - { label: Radio Show, value: radio }
+          - { label: Guest Mix, value: guest }
+      - { label: Cover Art, name: coverArt, widget: image, required: false }
+      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
+      - { label: Mixcloud URL, name: mixcloudUrl, widget: string, required: false }
+      - { label: BPM Range, name: bpmRange, widget: string, hint: "e.g. 132 – 148" }
+      - { label: Genre, name: genre, widget: string }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+
+  # ── ♫ MUSIC — DISCOGRAPHY ────────────────────────────────────────────────────
   - name: releases
-    label: "♫ Music — Releases (Discography)"
+    label: "♫ Music — Discography"
     label_singular: Release
     folder: src/content/releases
     create: true
@@ -1017,42 +993,151 @@ collections:
       - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
       - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
       - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
-      - { label: Featured, name: featured, widget: boolean, default: false, hint: "If checked, shows as Latest Release on Music page. Only ONE release should be featured at a time." }
+      - { label: Featured, name: featured, widget: boolean, default: false, hint: "If checked, this release appears as Latest Release on the Music page. Only ONE should be featured at a time." }
 
-  # ── ♫ MUSIC PAGE — MIXES & PODCASTS ─────────────────────────────────────────
-  - name: mixes
-    label: "♫ Music — Mixes & Podcasts"
-    label_singular: Mix
-    folder: src/content/mixes
-    create: true
-    delete: true
-    slug: "{{date}}-{{slug}}"
-    format: frontmatter
-    fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Duration, name: duration, widget: string, hint: "e.g. 6h 12m" }
-      - { label: Venue / Context, name: venue, widget: string, required: false }
-      - label: Date
-        name: date
-        widget: datetime
-        format: 'YYYY-MM-DD'
-        date_format: 'YYYY-MM-DD'
-        time_format: false
-        picker_utc: true
-      - label: Category
-        name: category
-        widget: select
-        options:
-          - { label: Resident Set, value: resident }
-          - { label: Festival Set, value: festival }
-          - { label: Radio Show, value: radio }
-          - { label: Guest Mix, value: guest }
-      - { label: Cover Art, name: coverArt, widget: image, required: false }
-      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
-      - { label: Mixcloud URL, name: mixcloudUrl, widget: string, required: false }
-      - { label: BPM Range, name: bpmRange, widget: string, hint: "e.g. 132 – 148" }
-      - { label: Genre, name: genre, widget: string }
-      - { label: Featured, name: featured, widget: boolean, default: false }
+  # ── ♫ MUSIC — PAGE TEXT & LABELS ─────────────────────────────────────────────
+  - name: musicText
+    label: "♫ Music — Page Text & Labels"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/musicText/music-page.md
+        label: "Music Page Text"
+        name: music-page
+        fields:
+          - label: Page title — line 1
+            name: titleLine1
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Page title — line 2
+            name: titleLine2
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Latest Release — eyebrow
+            name: latestReleaseEyebrow
+            hint: "e.g. A — latest release"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Latest Release — section badge
+            name: latestReleaseSectionLabel
+            hint: "e.g. [ RELEASE ]"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Latest Release — date prefix
+            name: latestReleaseDateLabel
+            hint: "e.g. released"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes — section eyebrow
+            name: mixesHeading
+            hint: "e.g. C — mixes"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes — subtitle
+            name: mixesSubtitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes filter — All
+            name: mixesFilterAllLabel
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes filter — Resident sets
+            name: mixesFilterResidentLabel
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes filter — Festival sets
+            name: mixesFilterFestivalLabel
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes filter — Radio shows
+            name: mixesFilterRadioLabel
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes filter — Guest mixes
+            name: mixesFilterGuestLabel
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography — section eyebrow
+            name: discographyHeading
+            hint: "e.g. D — discography"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography — empty state message
+            name: discographyEmptyStateMessage
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography — genre tags label
+            name: genreTagsLabel
+            hint: "e.g. genres ——"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography — genre tags list
+            name: genreTagsList
+            hint: "e.g. detroit · hardgroove · industrial · acid"
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography table — Year header
+            name: discographyYearHeader
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography table — Title header
+            name: discographyTitleHeader
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography table — Format header
+            name: discographyFormatHeader
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography table — Label header
+            name: discographyLabelHeader
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Discography table — Streams header
+            name: discographyStreamsHeader
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
 
   # ── 👤 ABOUT PAGE — BIO & STATS ─────────────────────────────────────────────
   - name: about

@@ -4,9 +4,9 @@ import { t, type Locale } from "../../lib/i18n";
 import SoundcloudPlayCard from "../home/SoundcloudPlayCard";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const pcEntry = await getEntry("pageContent", "page-content");
+const mtEntry = await getEntry("musicText", "music-page");
 const uiEntry = await getEntry("ui", "ui");
-const pc = pcEntry!.data.music;
+const mt = mtEntry!.data;
 const u = uiEntry!.data;
 
 const releases = await getCollection("releases");
@@ -24,7 +24,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
 <section style="background:#000;padding:100px 72px;">
   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:48px;display:flex;align-items:center;gap:12px;">
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-    {t(pc.latestReleaseEyebrow, locale)}
+    {t(mt.latestReleaseEyebrow, locale)}
   </div>
 
   <div class="release-cols" style="display:flex;gap:64px;align-items:flex-start;">
@@ -41,7 +41,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
 
     <!-- RIGHT 60% — metadata -->
     <div style="flex:1;padding:8px 0;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;">{t(pc.latestReleaseSectionLabel, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;">{t(mt.latestReleaseSectionLabel, locale)}</div>
       <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,48px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;margin-bottom:8px;">{localizedTitle}</div>
       {subtitle && <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:6px;">{t(subtitle, locale)}</div>}
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:4px;">{year}</div>

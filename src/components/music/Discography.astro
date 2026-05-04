@@ -3,9 +3,9 @@ import { getCollection, getEntry } from "astro:content";
 import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const pcEntry = await getEntry("pageContent", "page-content");
+const mtEntry = await getEntry("musicText", "music-page");
 const uiEntry = await getEntry("ui", "ui");
-const pc = pcEntry!.data.music;
+const mt = mtEntry!.data;
 const u = uiEntry!.data;
 
 const releases = (await getCollection("releases")).sort((a, b) =>
@@ -16,22 +16,22 @@ const releases = (await getCollection("releases")).sort((a, b) =>
 <section style="background:#000;padding:100px 72px;">
   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-    {t(pc.discographyHeading, locale)}
+    {t(mt.discographyHeading, locale)}
   </div>
   <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:32px;">
-    {t(pc.genreTagsLabel, locale)} {t(pc.genreTagsList, locale)}
+    {t(mt.genreTagsLabel, locale)} {t(mt.genreTagsList, locale)}
   </div>
 
   {releases.length === 0
-    ? <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;padding:40px 0;">{t(pc.discographyEmptyStateMessage, locale)}</div>
+    ? <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;padding:40px 0;">{t(mt.discographyEmptyStateMessage, locale)}</div>
     : <>
         <!-- TABLE HEADER -->
         <div style="display:flex;gap:24px;padding:0 0 12px;border-bottom:1px solid #c8102e;margin-bottom:0;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:48px;flex-shrink:0;">{t(pc.discographyYearHeader, locale)}</div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;flex:1;">{t(pc.discographyTitleHeader, locale)}</div>
-          <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:80px;text-align:center;">{t(pc.discographyFormatHeader, locale)}</div>
-          <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:120px;">{t(pc.discographyLabelHeader, locale)}</div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:80px;text-align:right;">{t(pc.discographyStreamsHeader, locale)}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:48px;flex-shrink:0;">{t(mt.discographyYearHeader, locale)}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;flex:1;">{t(mt.discographyTitleHeader, locale)}</div>
+          <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:80px;text-align:center;">{t(mt.discographyFormatHeader, locale)}</div>
+          <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:120px;">{t(mt.discographyLabelHeader, locale)}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;width:80px;text-align:right;">{t(mt.discographyStreamsHeader, locale)}</div>
         </div>
 
         {releases.map((r, i) => (

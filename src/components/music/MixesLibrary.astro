@@ -4,9 +4,9 @@ import { t, type Locale } from "../../lib/i18n";
 import MixPlayer from "./MixPlayer";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const pcEntry = await getEntry("pageContent", "page-content");
+const mtEntry = await getEntry("musicText", "music-page");
 const uiEntry = await getEntry("ui", "ui");
-const pc = pcEntry!.data.music;
+const mt = mtEntry!.data;
 const u = uiEntry!.data;
 
 const mixes = (await getCollection("mixes")).sort((a, b) =>
@@ -15,21 +15,21 @@ const mixes = (await getCollection("mixes")).sort((a, b) =>
 
 // Map raw category key → translated label + use key as stable data-filter value
 const categoryFilters = [
-  { key: "all",      label: t(pc.mixesFilterAllLabel, locale) },
-  { key: "resident", label: t(pc.mixesFilterResidentLabel, locale) },
-  { key: "festival", label: t(pc.mixesFilterFestivalLabel, locale) },
-  { key: "radio",    label: t(pc.mixesFilterRadioLabel, locale) },
-  { key: "guest",    label: t(pc.mixesFilterGuestLabel, locale) },
+  { key: "all",      label: t(mt.mixesFilterAllLabel, locale) },
+  { key: "resident", label: t(mt.mixesFilterResidentLabel, locale) },
+  { key: "festival", label: t(mt.mixesFilterFestivalLabel, locale) },
+  { key: "radio",    label: t(mt.mixesFilterRadioLabel, locale) },
+  { key: "guest",    label: t(mt.mixesFilterGuestLabel, locale) },
 ];
 ---
 
 <section style="background:#0a0a0a;padding:100px 72px;">
   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-    {t(pc.mixesHeading, locale)}
+    {t(mt.mixesHeading, locale)}
   </div>
   <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:40px;">
-    {t(pc.mixesSubtitle, locale)}
+    {t(mt.mixesSubtitle, locale)}
   </div>
 
   <!-- FILTER CHIPS -->

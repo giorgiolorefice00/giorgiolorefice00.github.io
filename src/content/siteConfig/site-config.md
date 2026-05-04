@@ -6,9 +6,6 @@ socials:
   appleMusic: ""
   bandcamp: ""
   youtubeMusic: ""
-  spotifyEmbedUrl: ""
-  appleMusicEmbedUrl: ""
-  bandcampEmbedUrl: ""
 contacts:
   management:
     name: "TODO: Manager Name"

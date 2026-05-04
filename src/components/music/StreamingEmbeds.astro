@@ -3,28 +3,26 @@ import { getEntry } from "astro:content";
 import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const pcEntry = await getEntry("pageContent", "page-content");
-const scEntry = await getEntry("siteConfig", "site-config");
-const pc = pcEntry!.data.music;
-const site = scEntry!.data;
+const msEntry = await getEntry("musicStreaming", "music-streaming");
+const ms = msEntry!.data;
 
-const spotifyEmbedUrl = site.socials.spotifyEmbedUrl || null;
-const appleMusicEmbedUrl = site.socials.appleMusicEmbedUrl || null;
+const spotifyEmbedUrl = ms.spotifyEmbedUrl || null;
+const appleMusicEmbedUrl = ms.appleMusicEmbedUrl || null;
 ---
 
 <section style="background:#000;padding:100px 72px;border-top:1px solid #1a1a1a;">
   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-    {t(pc.streamingHeading, locale)}
+    {t(ms.streamingHeading, locale)}
   </div>
   <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:32px;">
-    {t(pc.productionNote, locale)}
+    {t(ms.productionNote, locale)}
   </div>
 
   <div class="streaming-cols" style="display:flex;gap:16px;">
     <!-- SPOTIFY -->
     <div style="flex:1;border:1px solid #c8102e;padding:4px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;padding:12px 12px 8px;">{t(pc.spotifyEmbedLabel, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;padding:12px 12px 8px;">{t(ms.spotifyEmbedLabel, locale)}</div>
       {spotifyEmbedUrl
         ? <iframe
             style="border:none;width:100%;height:232px;display:block;"
@@ -33,14 +31,14 @@ const appleMusicEmbedUrl = site.socials.appleMusicEmbedUrl || null;
             loading="lazy"
           ></iframe>
         : <div style="height:232px;display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(pc.streamingComingSoonMessage, locale)}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(ms.streamingComingSoonMessage, locale)}</span>
           </div>
       }
     </div>
 
     <!-- APPLE MUSIC -->
     <div style="flex:1;border:1px solid #c8102e;padding:4px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;padding:12px 12px 8px;">{t(pc.appleMusicEmbedLabel, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;padding:12px 12px 8px;">{t(ms.appleMusicEmbedLabel, locale)}</div>
       {appleMusicEmbedUrl
         ? <iframe
             style="border:none;width:100%;height:232px;display:block;"
@@ -50,7 +48,7 @@ const appleMusicEmbedUrl = site.socials.appleMusicEmbedUrl || null;
             loading="lazy"
           ></iframe>
         : <div style="height:232px;display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(pc.streamingComingSoonMessage, locale)}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(ms.streamingComingSoonMessage, locale)}</span>
           </div>
       }
     </div>
