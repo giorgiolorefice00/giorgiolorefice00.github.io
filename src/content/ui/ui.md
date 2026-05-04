@@ -67,6 +67,12 @@ cta:
   listenApple:
     en: "▶ APPLE"
     it: "▶ APPLE"
+  listenSpotifyShort:
+    en: "▶ SPOTIFY"
+    it: "▶ SPOTIFY"
+  listenBandcampShort:
+    en: "▶ BANDCAMP"
+    it: "▶ BANDCAMP"
   listen:
     en: "▶ LISTEN"
     it: "▶ ASCOLTA"

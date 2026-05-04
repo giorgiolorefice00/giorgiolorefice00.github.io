@@ -4,10 +4,8 @@ import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const pcEntry = await getEntry("pageContent", "page-content");
-const uiEntry = await getEntry("ui", "ui");
 const scEntry = await getEntry("siteConfig", "site-config");
 const pc = pcEntry!.data.music;
-const u = uiEntry!.data;
 const site = scEntry!.data;
 
 const spotifyEmbedUrl = site.socials.spotifyEmbedUrl || null;
@@ -35,7 +33,7 @@ const appleMusicEmbedUrl = site.socials.appleMusicEmbedUrl || null;
             loading="lazy"
           ></iframe>
         : <div style="height:232px;display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(u.cta.comingSoon, locale).toLowerCase()}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(pc.streamingComingSoonMessage, locale)}</span>
           </div>
       }
     </div>
@@ -52,7 +50,7 @@ const appleMusicEmbedUrl = site.socials.appleMusicEmbedUrl || null;
             loading="lazy"
           ></iframe>
         : <div style="height:232px;display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(u.cta.comingSoon, locale).toLowerCase()}</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.18em;">{t(pc.streamingComingSoonMessage, locale)}</span>
           </div>
       }
     </div>

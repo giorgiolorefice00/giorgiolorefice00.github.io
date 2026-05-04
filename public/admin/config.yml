@@ -239,6 +239,18 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
+              - label: "▶ SPOTIFY (short release button label)"
+                name: listenSpotifyShort
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
+              - label: "▶ BANDCAMP (short release button label)"
+                name: listenBandcampShort
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
               - label: Listen (generic — disabled mix card button)
                 name: listen
                 widget: object
@@ -674,6 +686,13 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
+              - label: Streaming — Coming Soon fallback
+                name: streamingComingSoonMessage
+                hint: "Shown inside the iframe box when no URL is set yet"
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
               - label: Production note
                 name: productionNote
                 hint: "Small caption below streaming section heading"
@@ -942,8 +961,21 @@ collections:
     slug: "{{releaseDate}}-{{slug}}"
     format: frontmatter
     fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Subtitle, name: subtitle, widget: string, required: false, hint: "e.g. EP · 4 TRACKS" }
+      - label: Title
+        name: title
+        widget: object
+        hint: "Release title (e.g. BUNKER PROTOCOL)"
+        fields:
+          - { label: English, name: en, widget: string }
+          - { label: Italiano, name: it, widget: string }
+      - label: Subtitle
+        name: subtitle
+        widget: object
+        required: false
+        hint: "Optional descriptor (e.g. EP · 4 TRACKS)"
+        fields:
+          - { label: English, name: en, widget: string, required: false }
+          - { label: Italiano, name: it, widget: string, required: false }
       - label: Release Date
         name: releaseDate
         widget: datetime
@@ -951,7 +983,7 @@ collections:
         date_format: 'YYYY-MM-DD'
         time_format: false
         picker_utc: true
-      - { label: Label, name: label, widget: string }
+      - { label: Label, name: label, widget: string, hint: "Record label name — proper noun, not translated" }
       - label: Format
         name: format
         widget: select
@@ -960,26 +992,32 @@ collections:
           - { label: Single, value: Single }
           - { label: Remix, value: Remix }
           - { label: Album, value: Album }
-      - label: Description (English)
+      - label: Description
         name: description
         widget: object
+        required: false
         fields:
-          - { label: English, name: en, widget: text }
-          - { label: Italiano, name: it, widget: text }
-      - { label: Cover Art, name: coverArt, widget: image, required: false }
+          - { label: English, name: en, widget: text, required: false }
+          - { label: Italiano, name: it, widget: text, required: false }
+      - { label: Cover Art, name: coverArt, widget: image, required: false, hint: "Square artwork — minimum 800×800px" }
       - label: Tracklist
         name: tracklist
         widget: list
         required: false
         fields:
-          - { label: Number, name: number, widget: string }
-          - { label: Title, name: title, widget: string }
-          - { label: Duration, name: duration, widget: string }
+          - { label: Track Number, name: number, widget: string }
+          - label: Track Title
+            name: title
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - { label: Duration, name: duration, widget: string, hint: "Format: M:SS (e.g. 7:18)" }
       - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
       - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
       - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
       - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
-      - { label: Featured, name: featured, widget: boolean, default: false, hint: "Show as latest release on Music page" }
+      - { label: Featured, name: featured, widget: boolean, default: false, hint: "If checked, shows as Latest Release on Music page. Only ONE release should be featured at a time." }
 
   # ── ♫ MUSIC PAGE — MIXES & PODCASTS ─────────────────────────────────────────
   - name: mixes

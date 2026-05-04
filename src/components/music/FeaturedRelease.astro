@@ -12,8 +12,10 @@ const u = uiEntry!.data;
 const releases = await getCollection("releases");
 const featured = releases.find((r) => r.data.featured);
 if (!featured) return;
-const { title, subtitle, releaseDate, label, description: descObj, tracklist, coverArt, soundcloudUrl, spotifyUrl, appleMusicUrl, bandcampUrl } = featured.data;
-const description = descObj[locale];
+const { title, subtitle, releaseDate, label, description, tracklist, coverArt, soundcloudUrl, spotifyUrl, appleMusicUrl, bandcampUrl } = featured.data;
+
+const localizedTitle = t(title, locale);
+const localizedDesc = description ? t(description, locale) : null;
 const year = releaseDate.slice(0, 7).replace("-", ".").toUpperCase();
 const base = import.meta.env.BASE_URL;
 const coverSrc = coverArt || `${base}dj-photo.jpg`;
@@ -31,7 +33,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
     <div class="release-artwork" style="flex:0 0 40%;aspect-ratio:1/1;position:relative;overflow:hidden;background:#050505;border:1px solid #1a1a1a;">
       <img
         src={coverSrc}
-        alt={title}
+        alt={localizedTitle}
         style="width:100%;height:100%;object-fit:cover;filter:url(#duotone);display:block;"
         loading="lazy"
       />
@@ -40,13 +42,13 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
     <!-- RIGHT 60% — metadata -->
     <div style="flex:1;padding:8px 0;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;">{t(pc.latestReleaseSectionLabel, locale)}</div>
-      <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,48px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;margin-bottom:8px;">{title}</div>
-      {subtitle && <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:6px;">{subtitle}</div>}
+      <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,48px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;margin-bottom:8px;">{localizedTitle}</div>
+      {subtitle && <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:6px;">{t(subtitle, locale)}</div>}
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:4px;">{year}</div>
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e8e8;letter-spacing:0.08em;font-weight:500;margin-bottom:24px;">{label.toUpperCase()}</div>
 
-      {description && !description.startsWith("TODO") && (
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.04em;line-height:1.7;margin-bottom:32px;">{description}</p>
+      {localizedDesc && !localizedDesc.startsWith("TODO") && (
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.04em;line-height:1.7;margin-bottom:32px;">{localizedDesc}</p>
       )}
 
       <!-- TRACKLIST -->
@@ -56,7 +58,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
             <div style={`display:flex;justify-content:space-between;align-items:center;padding:12px 0;${i < tracklist.length - 1 ? 'border-bottom:1px solid #111;' : ''}`}>
               <div style="display:flex;align-items:center;gap:16px;">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.14em;">{tr.number}</span>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;">{tr.title}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;">{t(tr.title, locale)}</span>
               </div>
               <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">{tr.duration}</span>
             </div>
@@ -70,7 +72,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
           <SoundcloudPlayCard
             client:visible
             trackUrl={soundcloudUrl}
-            trackTitle={title}
+            trackTitle={localizedTitle}
             duration={tracklist?.[0]?.duration ?? "—"}
           />
         </div>
@@ -79,16 +81,16 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
       <!-- STREAMING BUTTONS -->
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         {spotifyUrl
-          ? <a href={spotifyUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ SPOTIFY</span></a>
-          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ SPOTIFY</span></button>
+          ? <a href={spotifyUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenSpotifyShort, locale)}</span></a>
+          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenSpotifyShort, locale)}</span></button>
         }
         {appleMusicUrl
           ? <a href={appleMusicUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenApple, locale)}</span></a>
           : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenApple, locale)}</span></button>
         }
         {bandcampUrl
-          ? <a href={bandcampUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ BANDCAMP</span></a>
-          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ BANDCAMP</span></button>
+          ? <a href={bandcampUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenBandcampShort, locale)}</span></a>
+          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenBandcampShort, locale)}</span></button>
         }
       </div>
     </div>
