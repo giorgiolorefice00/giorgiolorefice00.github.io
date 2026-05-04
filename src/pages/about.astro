@@ -9,9 +9,13 @@ import PartnershipsMarquee from "../components/about/PartnershipsMarquee.astro";
 import PressArticlesGrid from "../components/about/PressArticlesGrid.astro";
 import EpkDownloadBand from "../components/about/EpkDownloadBand.astro";
 import { getEntry } from "astro:content";
+import { t, type Locale } from "../lib/i18n";
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
 const about = await getEntry("about", "about");
 const { fullBio, factFile } = about!.data;
+const pcEntry = await getEntry("pageContent", "page-content");
+const pc = pcEntry!.data.about;
 ---
 
 <Base
@@ -23,8 +27,8 @@ const { fullBio, factFile } = about!.data;
     <PageHeader
       number="[ 001 / about ]"
       name="about"
-      titleLine1="THE MAN"
-      titleLine2="BEHIND THE DECKS."
+      titleLine1={t(pc.titleLine1, locale)}
+      titleLine2={t(pc.titleLine2, locale)}
     />
     <BiographyBlock fullBio={fullBio ?? []} factFile={factFile ?? []} />
     <AchievementsResidencies />

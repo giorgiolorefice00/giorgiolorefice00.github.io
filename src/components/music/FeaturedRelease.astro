@@ -1,8 +1,14 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
+import { t, type Locale } from "../../lib/i18n";
 import SoundcloudPlayCard from "../home/SoundcloudPlayCard";
 
-const locale = (Astro.currentLocale ?? "en") as "en" | "it";
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const pcEntry = await getEntry("pageContent", "page-content");
+const uiEntry = await getEntry("ui", "ui");
+const pc = pcEntry!.data.music;
+const u = uiEntry!.data;
+
 const releases = await getCollection("releases");
 const featured = releases.find((r) => r.data.featured);
 if (!featured) return;
@@ -16,7 +22,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
 <section style="background:#000;padding:100px 72px;">
   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:48px;display:flex;align-items:center;gap:12px;">
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-    A — latest release
+    {t(pc.latestReleaseEyebrow, locale)}
   </div>
 
   <div class="release-cols" style="display:flex;gap:64px;align-items:flex-start;">
@@ -33,7 +39,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
 
     <!-- RIGHT 60% — metadata -->
     <div style="flex:1;padding:8px 0;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;">[ RELEASE ]</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;">{t(pc.latestReleaseSectionLabel, locale)}</div>
       <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,48px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;margin-bottom:8px;">{title}</div>
       {subtitle && <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:6px;">{subtitle}</div>}
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:4px;">{year}</div>
@@ -46,13 +52,13 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
       <!-- TRACKLIST -->
       {tracklist && tracklist.length > 0 && (
         <div style="margin-bottom:32px;border-top:1px solid #1a1a1a;">
-          {tracklist.map((t, i) => (
+          {tracklist.map((tr, i) => (
             <div style={`display:flex;justify-content:space-between;align-items:center;padding:12px 0;${i < tracklist.length - 1 ? 'border-bottom:1px solid #111;' : ''}`}>
               <div style="display:flex;align-items:center;gap:16px;">
-                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.14em;">{t.number}</span>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;">{t.title}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.14em;">{tr.number}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;">{tr.title}</span>
               </div>
-              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">{t.duration}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">{tr.duration}</span>
             </div>
           ))}
         </div>
@@ -77,8 +83,8 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
           : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ SPOTIFY</span></button>
         }
         {appleMusicUrl
-          ? <a href={appleMusicUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ APPLE</span></a>
-          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>▶ APPLE</span></button>
+          ? <a href={appleMusicUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenApple, locale)}</span></a>
+          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenApple, locale)}</span></button>
         }
         {bandcampUrl
           ? <a href={bandcampUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ BANDCAMP</span></a>

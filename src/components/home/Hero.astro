@@ -2,6 +2,14 @@
 import { SmokeBackground } from "./SmokeBackground";
 import { Image } from "astro:assets";
 import djPhoto from "../../assets/dj-photo.jpg";
+import { getEntry } from "astro:content";
+import { t, type Locale } from "../../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const uiEntry = await getEntry("ui", "ui");
+const pcEntry = await getEntry("pageContent", "page-content");
+const u = uiEntry!.data;
+const pc = pcEntry!.data.home;
 
 const giorgioChars = "GIORGIO".split("");
 const loreficeChars = "LOREFICE".split("");
@@ -26,7 +34,7 @@ const loreficeChars = "LOREFICE".split("");
       <!-- META LABEL -->
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:32px;display:flex;align-items:center;gap:12px;">
         <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-        [ LIVE / 2026 — MILANO ]
+        {t(pc.heroEyebrow, locale)}
       </div>
 
       <!-- H1 — only h1 on the homepage -->
@@ -51,18 +59,18 @@ const loreficeChars = "LOREFICE".split("");
 
       <!-- TAGLINE -->
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:48px;display:flex;align-items:center;gap:14px;">
-        underground techno
+        {t(pc.heroTaglineLeft, locale)}
         <span style="display:flex;align-items:center;gap:8px;color:#c8102e;">
           <span style="width:32px;height:1px;background:#c8102e;display:inline-block;"></span>
           ———
         </span>
-        rave architecture
+        {t(pc.heroTaglineRight, locale)}
       </div>
 
       <!-- CTAs -->
       <div class="hero-ctas" style="display:flex;gap:16px;margin-bottom:64px;flex-wrap:wrap;">
-        <button class="btn-primary"><span>▶ LISTEN TO LATEST MIX</span></button>
-        <button class="btn-secondary"><span>→ VIEW TOUR DATES</span></button>
+        <button class="btn-primary"><span>{t(u.cta.listenLatest, locale)}</span></button>
+        <button class="btn-secondary"><span>{t(u.cta.viewTour, locale)}</span></button>
       </div>
 
       <!-- SCROLL INDICATOR -->
@@ -70,7 +78,7 @@ const loreficeChars = "LOREFICE".split("");
         <div class="scroll-line-wrap">
           <div class="scroll-line-inner"></div>
         </div>
-        <span>↓ scroll</span>
+        <span>{t(u.misc.scroll, locale)}</span>
       </div>
     </div>
 
@@ -83,7 +91,7 @@ const loreficeChars = "LOREFICE".split("");
 
       <!-- CAPTION TAG -->
       <div style="position:absolute;bottom:24px;right:24px;z-index:5;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.14em;background:rgba(0,0,0,0.8);padding:4px 8px;">
-        [ 003 — bunker sessions ]
+        {t(pc.heroPhotoCaption, locale)}
       </div>
     </div>
 

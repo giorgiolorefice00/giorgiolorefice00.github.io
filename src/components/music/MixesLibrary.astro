@@ -1,32 +1,43 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
+import { t, type Locale } from "../../lib/i18n";
 import MixPlayer from "./MixPlayer";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const pcEntry = await getEntry("pageContent", "page-content");
+const uiEntry = await getEntry("ui", "ui");
+const pc = pcEntry!.data.music;
+const u = uiEntry!.data;
 
 const mixes = (await getCollection("mixes")).sort((a, b) =>
   b.data.date.localeCompare(a.data.date)
 );
-const base = import.meta.env.BASE_URL;
 
-const categoryLabel: Record<string, string> = {
-  resident: "resident sets",
-  festival: "festival sets",
-  radio: "radio shows",
-  guest: "guest mixes",
-};
+// Map raw category key → translated label + use key as stable data-filter value
+const categoryFilters = [
+  { key: "all",      label: t(pc.mixesFilterAllLabel, locale) },
+  { key: "resident", label: t(pc.mixesFilterResidentLabel, locale) },
+  { key: "festival", label: t(pc.mixesFilterFestivalLabel, locale) },
+  { key: "radio",    label: t(pc.mixesFilterRadioLabel, locale) },
+  { key: "guest",    label: t(pc.mixesFilterGuestLabel, locale) },
+];
 ---
 
 <section style="background:#0a0a0a;padding:100px 72px;">
-  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:48px;display:flex;align-items:center;gap:12px;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-    C — mixes
+    {t(pc.mixesHeading, locale)}
+  </div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:40px;">
+    {t(pc.mixesSubtitle, locale)}
   </div>
 
   <!-- FILTER CHIPS -->
   <div id="mix-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;">
-    {["all", "resident sets", "festival sets", "radio shows", "guest mixes"].map((f) => (
+    {categoryFilters.map((f) => (
       <button
-        class={`filter-chip${f === "all" ? " active" : ""}`}
-        data-filter={f}
+        class={`filter-chip${f.key === "all" ? " active" : ""}`}
+        data-filter={f.key}
         onclick="
           document.querySelectorAll('#mix-filters .filter-chip').forEach(b => b.classList.remove('active'));
           this.classList.add('active');
@@ -35,14 +46,15 @@ const categoryLabel: Record<string, string> = {
             c.style.display = (v === 'all' || c.dataset.cat === v) ? '' : 'none';
           });
         "
-      >{f}</button>
+      >{f.label}</button>
     ))}
   </div>
 
   <!-- MIX CARDS -->
   <div class="mix-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
     {mixes.map((m) => {
-      const cat = categoryLabel[m.data.category] ?? m.data.category;
+      const cat = m.data.category;
+      const catLabel = categoryFilters.find(f => f.key === cat)?.label ?? cat;
       const dateStr = m.data.date.slice(0, 7).replace("-", ".");
       return (
         <div class="mix-card" data-cat={cat} style="border:1px solid #1a1a1a;background:#050505;overflow:hidden;transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c8102e'" onmouseout="this.style.borderColor='#1a1a1a'">
@@ -57,18 +69,18 @@ const categoryLabel: Record<string, string> = {
                   onerror={`this.style.display='none'`}
                 />
               : <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-                  <div style="font-family:'Anton',sans-serif;font-size:11px;color:#c8102e;letter-spacing:0.14em;opacity:0.6;">{cat.toUpperCase()}</div>
+                  <div style="font-family:'Anton',sans-serif;font-size:11px;color:#c8102e;letter-spacing:0.14em;opacity:0.6;">{catLabel.toUpperCase()}</div>
                 </div>
             }
           </div>
           <!-- INFO -->
           <div style="padding:20px;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.18em;margin-bottom:8px;">{cat}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.18em;margin-bottom:8px;">{catLabel}</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;margin-bottom:4px;">{m.data.title}</div>
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:16px;">{m.data.venue ?? ""} · {dateStr} · {m.data.duration}</div>
             {m.data.soundcloudUrl
               ? <MixPlayer client:visible trackUrl={m.data.soundcloudUrl} trackTitle={m.data.title} />
-              : <button class="btn-secondary" disabled style="padding:8px 16px;font-size:9px;width:100%;letter-spacing:0.14em;opacity:0.3;cursor:not-allowed;"><span>▶ LISTEN</span></button>
+              : <button class="btn-secondary" disabled style="padding:8px 16px;font-size:9px;width:100%;letter-spacing:0.14em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listen, locale)}</span></button>
             }
           </div>
         </div>

@@ -1,10 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import logoImg from "../../assets/logo.png";
-import { useTranslations, type Locale } from "../../i18n";
+import { getEntry } from "astro:content";
+import { t as tr, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const t = useTranslations(locale);
+const uiEntry = await getEntry("ui", "ui");
+const u = uiEntry!.data;
 
 const path = Astro.url.pathname;
 const localePrefix = locale === "it" ? "/it" : "";
@@ -44,7 +46,7 @@ const navKeys = ["home", "about", "music", "events", "media", "contact"] as cons
   <!-- DESKTOP NAV -->
   <nav class="header-nav" style="display:flex;gap:36px;align-items:center;" aria-label="Main navigation">
     {navKeys.map((key) => (
-      <a href={navHref(key)} class={`nav-link${isActive(key) ? " active" : ""}`}>{t.nav[key]}</a>
+      <a href={navHref(key)} class={`nav-link${isActive(key) ? " active" : ""}`}>{tr(u.nav[key], locale)}</a>
     ))}
   </nav>
 
@@ -85,7 +87,7 @@ const navKeys = ["home", "about", "music", "events", "media", "contact"] as cons
     </div>
 
     <!-- BOOK NOW (desktop only) -->
-    <a href={navHref("contact")} class="btn-book header-book-btn"><span>{t.cta.bookNow}</span></a>
+    <a href={navHref("contact")} class="btn-book header-book-btn"><span>{tr(u.cta.bookNow, locale)}</span></a>
 
     <!-- HAMBURGER (mobile only) -->
     <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
@@ -101,7 +103,7 @@ const navKeys = ["home", "about", "music", "events", "media", "contact"] as cons
   <div>
     {navKeys.map((key) => (
       <a href={navHref(key)} class={`mobile-nav-link${isActive(key) ? " active" : ""}`}>
-        {t.nav[key].toUpperCase()}
+        {tr(u.nav[key], locale).toUpperCase()}
       </a>
     ))}
   </div>

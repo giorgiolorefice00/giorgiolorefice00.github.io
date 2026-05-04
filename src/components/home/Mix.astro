@@ -1,6 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import SoundcloudPlayCard from "./SoundcloudPlayCard";
+import { t, type Locale } from "../../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const uiEntry = await getEntry("ui", "ui");
+const pcEntry = await getEntry("pageContent", "page-content");
+const u = uiEntry!.data;
+const pc = pcEntry!.data.home;
 
 const mixes = await getCollection("mixes", ({ data }) => data.featured);
 const mix = mixes[0];
@@ -20,11 +27,11 @@ const infoStrip = [
   <div class="mix-top-bar" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:56px;">
     <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;display:flex;align-items:center;gap:12px;">
       <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
-      [ 002 / listen ]
+      {t(pc.mixEyebrow, locale)}
     </div>
     <div style="display:flex;align-items:center;gap:10px;">
       <span class="live-dot"></span>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;">LATEST DROP —— {dateDisplay}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;">{t(pc.mixLatestDropLabel, locale)} —— {dateDisplay}</span>
     </div>
   </div>
 
@@ -75,19 +82,19 @@ const infoStrip = [
         <span style="color:#c8102e;flex-shrink:0;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2z"/></svg>
         </span>
-        listen on spotify
+        {t(u.cta.listenSpotify, locale)}
       </a>
       <a href={mix?.data.soundcloudUrl ?? "#"} target="_blank" rel="noopener" class="mix-cta-link">
         <span style="color:#c8102e;flex-shrink:0;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.056 0-.094.037-.1.094l-.233 2.154.233 2.105c.006.06.044.094.1.094s.094-.037.1-.094l.255-2.105-.27-2.154c-.006-.057-.045-.094-.1-.094m.899-.263c-.068 0-.116.05-.122.116l-.2 2.711.2 2.568c.006.067.054.117.122.117s.116-.05.122-.117l.227-2.568-.227-2.71c-.006-.067-.054-.117-.122-.117m1.086-.264c-.08 0-.137.058-.143.138l-.17 2.976.17 2.568c.006.08.063.138.143.138s.136-.058.143-.138l.193-2.568-.193-2.976c-.007-.08-.063-.138-.143-.138m1.09-.162c-.09 0-.155.065-.16.155l-.143 3.133.143 2.496c.005.09.07.155.16.155s.155-.065.16-.155l.163-2.496-.163-3.133c-.005-.09-.07-.155-.16-.155m1.098-.06c-.1 0-.172.072-.177.17l-.117 3.193.117 2.43c.005.098.077.17.177.17s.172-.072.177-.17l.133-2.43-.133-3.193c-.005-.098-.077-.17-.177-.17m1.09-.044c-.11 0-.188.079-.193.187l-.1 3.232.1 2.371c.005.108.083.187.193.187s.188-.079.193-.187l.113-2.371-.113-3.232c-.005-.108-.083-.187-.193-.187m1.09-.02c-.118 0-.204.088-.208.204l-.083 3.252.083 2.32c.004.116.09.204.208.204s.204-.088.208-.204l.094-2.32-.094-3.252c-.004-.116-.09-.204-.208-.204m1.088-.006c-.128 0-.22.094-.224.22l-.067 3.258.067 2.274c.004.126.096.22.224.22s.22-.094.224-.22l.076-2.274-.076-3.258c-.004-.126-.096-.22-.224-.22m1.09.03c-.137 0-.236.1-.24.236l-.05 3.228.05 2.228c.004.136.103.236.24.236s.236-.1.24-.236l.057-2.228-.057-3.228c-.004-.136-.103-.236-.24-.236m1.087.04c-.146 0-.252.107-.255.252l-.034 3.188.034 2.186c.003.145.109.252.255.252s.252-.107.255-.252l.038-2.186-.038-3.188c-.003-.145-.109-.252-.255-.252m4.458-1.332c-.27 0-.537.049-.784.143-.156-1.739-1.616-3.089-3.394-3.089-.46 0-.897.097-1.288.268-.146.062-.185.124-.187.178v8.66c.003.057.046.103.104.107H18.63c.622 0 1.127-.504 1.127-1.126V10.316c0-.622-.505-1.127-1.127-1.127"/></svg>
         </span>
-        listen on soundcloud
+        {t(u.cta.listenSoundcloud, locale)}
       </a>
       <a href="#" class="mix-cta-link">
         <span style="color:#c8102e;flex-shrink:0;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
         </span>
-        listen on bandcamp
+        {t(u.cta.listenBandcamp, locale)}
       </a>
     </div>
   </div>

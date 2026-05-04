@@ -7,6 +7,12 @@ import SkullScene from "../components/contact/SkullScene";
 import BookingForm from "../components/contact/BookingForm";
 import DirectContact from "../components/contact/DirectContact.astro";
 import GeneralInquiry from "../components/contact/GeneralInquiry.astro";
+import { getEntry } from "astro:content";
+import { t, type Locale } from "../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const pcEntry = await getEntry("pageContent", "page-content");
+const pc = pcEntry!.data.contact;
 ---
 
 <Base
@@ -18,8 +24,8 @@ import GeneralInquiry from "../components/contact/GeneralInquiry.astro";
     <PageHeader
       number="[ 005 / contact ]"
       name="contact"
-      titleLine1="GET IN"
-      titleLine2="TOUCH."
+      titleLine1={t(pc.titleLine1, locale)}
+      titleLine2={t(pc.titleLine2, locale)}
     />
 
     <!-- BOOKING FORM SECTION — skull behind, form in front -->

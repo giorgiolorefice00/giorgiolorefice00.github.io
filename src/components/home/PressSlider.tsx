@@ -8,9 +8,14 @@ interface Quote {
 
 interface Props {
   quotes: Quote[];
+  eyebrow: string;
+  heading1: string;
+  heading2: string;
+  prevLabel: string;
+  nextLabel: string;
 }
 
-export default function PressSlider({ quotes }: Props) {
+export default function PressSlider({ quotes, eyebrow, heading1, heading2, prevLabel, nextLabel }: Props) {
   const [active, setActive] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -43,12 +48,12 @@ export default function PressSlider({ quotes }: Props) {
       <div style={{ textAlign: "center", marginBottom: 80 }}>
         <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#c8102e", letterSpacing: "0.22em", marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
           <span style={{ width: 20, height: 1, background: "#c8102e", display: "inline-block" }} />
-          [ 004 / press ]
+          {eyebrow}
           <span style={{ width: 20, height: 1, background: "#c8102e", display: "inline-block" }} />
         </div>
         <div style={{ fontFamily: "'Anton',sans-serif", fontSize: "clamp(36px,4vw,64px)", lineHeight: 1 }}>
-          <span style={{ color: "#e8e8e8" }}>WHAT THEY'RE</span><br />
-          <span style={{ color: "#c8102e" }}>SAYING.</span>
+          <span style={{ color: "#e8e8e8" }}>{heading1}</span><br />
+          <span style={{ color: "#c8102e" }}>{heading2}</span>
         </div>
       </div>
 
@@ -66,13 +71,13 @@ export default function PressSlider({ quotes }: Props) {
 
       {/* CONTROLS */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 20, marginTop: 64 }}>
-        <button className="slider-nav" onClick={() => goTo((active - 1 + quotes.length) % quotes.length)}>← prev</button>
+        <button className="slider-nav" onClick={() => goTo((active - 1 + quotes.length) % quotes.length)}>{prevLabel}</button>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
           {quotes.map((_, i) => (
             <div key={i} className={`slider-dot${i === active ? " active" : ""}`} onClick={() => goTo(i)} />
           ))}
         </div>
-        <button className="slider-nav" onClick={() => goTo((active + 1) % quotes.length)}>next →</button>
+        <button className="slider-nav" onClick={() => goTo((active + 1) % quotes.length)}>{nextLabel}</button>
       </div>
     </section>
   );

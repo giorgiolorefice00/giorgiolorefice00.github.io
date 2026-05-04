@@ -7,6 +7,12 @@ import PressPhotosGallery from "../components/media/PressPhotosGallery.astro";
 import LivePhotoGrid from "../components/media/LivePhotoGrid.astro";
 import VideoGallery from "../components/media/VideoGallery.astro";
 import VideoLightbox from "../components/media/VideoLightbox";
+import { getEntry } from "astro:content";
+import { t, type Locale } from "../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const pcEntry = await getEntry("pageContent", "page-content");
+const pc = pcEntry!.data.media;
 ---
 
 <Base
@@ -18,8 +24,8 @@ import VideoLightbox from "../components/media/VideoLightbox";
     <PageHeader
       number="[ 004 / media ]"
       name="media"
-      titleLine1="THE VISUAL"
-      titleLine2="RECORD."
+      titleLine1={t(pc.titleLine1, locale)}
+      titleLine2={t(pc.titleLine2, locale)}
     />
     <PressPhotosGallery />
     <LivePhotoGrid />

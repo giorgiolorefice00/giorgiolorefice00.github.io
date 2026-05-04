@@ -1,6 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import PressSlider from "./PressSlider.tsx";
+import { t, type Locale } from "../../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const uiEntry = await getEntry("ui", "ui");
+const pcEntry = await getEntry("pageContent", "page-content");
+const u = uiEntry!.data;
+const pc = pcEntry!.data.home;
 
 const rawPress = await getCollection("press");
 const quotes = rawPress
@@ -12,4 +19,12 @@ const quotes = rawPress
   }));
 ---
 
-<PressSlider client:visible quotes={quotes} />
+<PressSlider
+  client:visible
+  quotes={quotes}
+  eyebrow={t(pc.pressEyebrow, locale)}
+  heading1={t(pc.pressHeading1, locale)}
+  heading2={t(pc.pressHeading2, locale)}
+  prevLabel={locale === "it" ? "← prec" : "← prev"}
+  nextLabel={locale === "it" ? "succ →" : "next →"}
+/>

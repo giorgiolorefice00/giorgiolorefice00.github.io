@@ -1,14 +1,31 @@
 ---
 import { Image } from "astro:assets";
 import logoImg from "../../assets/logo.png";
+import { getEntry } from "astro:content";
+import { t, type Locale } from "../../lib/i18n";
 
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const uiEntry = await getEntry("ui", "ui");
+const u = uiEntry!.data;
+
+const siteEntry = await getEntry("siteConfig", "site-config");
+const site = siteEntry!.data;
+
+const navLinks = ["home", "about", "music", "events", "media", "contact"] as const;
 const cols = [
-  { label: "— sitemap", links: ["home", "about", "music", "events", "media", "contact"] },
-  { label: "— listen",  links: ["Spotify", "SoundCloud", "Apple Music", "Bandcamp", "Mixcloud"] },
-  { label: "— follow",  links: ["Instagram", "YouTube Music", "Telegram", "email"] },
+  { label: t(u.footer.sitemap, locale), links: navLinks.map((k) => ({ label: t(u.nav[k], locale), href: k === "home" ? "/" : `/${k}` })) },
+  { label: t(u.footer.listen, locale),  links: [
+    { label: "spotify",      href: site.socials.spotify      || "#" },
+    { label: "soundcloud",   href: site.socials.soundcloud   || "#" },
+    { label: "apple music",  href: site.socials.appleMusic   || "#" },
+    { label: "bandcamp",     href: site.socials.bandcamp     || "#" },
+  ]},
+  { label: t(u.footer.follow, locale),  links: [
+    { label: "instagram",    href: site.socials.instagram    || "#" },
+    { label: "youtube music",href: site.socials.youtubeMusic || "#" },
+    { label: "email",        href: `mailto:${site.contacts.generalEmail}` },
+  ]},
 ];
-
-const metaLinks = ["privacy", "terms", "press kit"];
 ---
 
 <footer style="background:#000;border-top:1px solid #c8102e;padding:64px 72px 0;">
@@ -25,7 +42,7 @@ const metaLinks = ["privacy", "terms", "press kit"];
       loading="lazy"
     />
     <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3vw,48px);color:#c8102e;letter-spacing:0.04em;text-align:right;line-height:1.1;">
-      BOOK. PLAY.<br />DISAPPEAR.
+      {t(u.footer.brandPhrase1, locale)}<br />{t(u.footer.brandPhrase2, locale)}
     </div>
   </div>
 
@@ -37,7 +54,7 @@ const metaLinks = ["privacy", "terms", "press kit"];
           {col.label}
         </div>
         {col.links.map((l) => (
-          <a href="#" class="footer-link">{l.toLowerCase()}</a>
+          <a href={l.href} class="footer-link">{l.label}</a>
         ))}
       </div>
     ))}
@@ -46,16 +63,20 @@ const metaLinks = ["privacy", "terms", "press kit"];
   <!-- BOTTOM META -->
   <div style="border-top:1px solid #1a1a1a;padding:16px 0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
     <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.06em;">
-      © 2026 giorgio lorefice — all rights reserved
+      © 2026 giorgio lorefice — {t(u.footer.rights, locale)}
     </span>
     <div style="display:flex;gap:24px;">
-      {metaLinks.map((l) => (
+      {[
+        { label: t(u.footer.privacy, locale),  href: "#" },
+        { label: t(u.footer.terms, locale),    href: "#" },
+        { label: t(u.footer.pressKit, locale), href: site.files.epk || "#" },
+      ].map((l) => (
         <a
-          href="#"
+          href={l.href}
           style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;text-decoration:none;letter-spacing:0.06em;transition:color 0.15s;"
           onmouseover="this.style.color='#e8e8e8'"
           onmouseout="this.style.color='#6b6b6b'"
-        >{l}</a>
+        >{l.label}</a>
       ))}
     </div>
   </div>

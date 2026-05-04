@@ -1,7 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
+import { t, type Locale } from "../../lib/i18n";
 
-const locale = (Astro.currentLocale ?? "en") as "en" | "it";
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const uiEntry = await getEntry("ui", "ui");
+const pcEntry = await getEntry("pageContent", "page-content");
+const u = uiEntry!.data;
+const pc = pcEntry!.data.home;
+
 const rawEvents = await getCollection("events");
 const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
 ---
@@ -11,10 +17,10 @@ const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
   <!-- SECTION HEADER -->
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
     <div>
-      <div style="font-family:'Anton',sans-serif;font-size:clamp(48px,5vw,80px);color:#e8e8e8;line-height:1;letter-spacing:0.01em;">NEXT GIGS</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;margin-top:10px;">catch the chaos, live.</div>
+      <div style="font-family:'Anton',sans-serif;font-size:clamp(48px,5vw,80px);color:#e8e8e8;line-height:1;letter-spacing:0.01em;">{t(pc.eventsHeading, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;margin-top:10px;">{t(pc.eventsSubtitle, locale)}</div>
     </div>
-    <a href="#" class="about-link" style="margin-bottom:6px;">→ all tour dates</a>
+    <a href="#" class="about-link" style="margin-bottom:6px;">{t(u.cta.allTourDates, locale)}</a>
   </div>
 
   <!-- CARDS -->
@@ -29,7 +35,7 @@ const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
 
           <!-- SERIAL / TAG -->
           {fewLeft
-            ? <span class="event-tag few-left">FEW TICKETS LEFT</span>
+            ? <span class="event-tag few-left">{t(u.cta.fewLeft, locale)}</span>
             : <span class="event-tag">{serial}</span>
           }
 
@@ -54,8 +60,8 @@ const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
 
           <!-- CTA -->
           {soldOut
-            ? <div class="event-ticket sold-out-label">SOLD OUT</div>
-            : <a href="#" class="event-ticket">→ tickets</a>
+            ? <div class="event-ticket sold-out-label">{t(u.cta.soldOut, locale)}</div>
+            : <a href="#" class="event-ticket">{t(u.cta.tickets, locale)}</a>
           }
 
         </div>

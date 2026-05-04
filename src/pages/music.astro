@@ -7,6 +7,12 @@ import FeaturedRelease from "../components/music/FeaturedRelease.astro";
 import StreamingEmbeds from "../components/music/StreamingEmbeds.astro";
 import MixesLibrary from "../components/music/MixesLibrary.astro";
 import Discography from "../components/music/Discography.astro";
+import { getEntry } from "astro:content";
+import { t, type Locale } from "../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const pcEntry = await getEntry("pageContent", "page-content");
+const pc = pcEntry!.data.music;
 ---
 
 <Base
@@ -18,8 +24,8 @@ import Discography from "../components/music/Discography.astro";
     <PageHeader
       number="[ 002 / music ]"
       name="music"
-      titleLine1="THE SOUND"
-      titleLine2="ON RECORD."
+      titleLine1={t(pc.titleLine1, locale)}
+      titleLine2={t(pc.titleLine2, locale)}
     />
     <FeaturedRelease />
     <StreamingEmbeds />

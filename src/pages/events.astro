@@ -6,6 +6,12 @@ import Footer from "../components/layout/Footer.astro";
 import TourList from "../components/events/TourList.astro";
 import TourMap from "../components/events/TourMap";
 import PastArchive from "../components/events/PastArchive.astro";
+import { getEntry } from "astro:content";
+import { t, type Locale } from "../lib/i18n";
+
+const locale = (Astro.currentLocale ?? "en") as Locale;
+const pcEntry = await getEntry("pageContent", "page-content");
+const pc = pcEntry!.data.events;
 ---
 
 <Base
@@ -17,8 +23,8 @@ import PastArchive from "../components/events/PastArchive.astro";
     <PageHeader
       number="[ 003 / events ]"
       name="events"
-      titleLine1="WHERE TO"
-      titleLine2="FIND HIM."
+      titleLine1={t(pc.titleLine1, locale)}
+      titleLine2={t(pc.titleLine2, locale)}
     />
     <TourList />
     <TourMap client:visible />
