@@ -23,23 +23,23 @@ soundcloudUrl: https://soundcloud.com/giorgio-lorefice-828070878/calcagno-1
 tracklist:
   - number: "01"
     title:
-      en: bunker protocol
-      it: bunker protocol
+      en: Calcagno (liveset extract)
+      it: Calcagno (liveset extract)
     duration: 8:32
   - number: "02"
     title:
-      en: acid conduit
-      it: acid conduit
-    duration: 7:18
+      en: Psychostasia - 5 (liveset extract)
+      it: Psychostasia - 5 (liveset extract)
+    duration: 4:12
   - number: "03"
     title:
-      en: null space
-      it: null space
-    duration: 9:44
+      en: Psychostasia - 4 (liveset extract)
+      it: Psychostasia - 4 (liveset extract)
+    duration: 10:33
   - number: "04"
     title:
-      en: signal terminus
-      it: signal terminus
-    duration: 6:57
+      en: Big Shampoo
+      it: Big Shampoo
+    duration: 7:34
 featured: true
 ---
