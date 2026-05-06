@@ -86,9 +86,6 @@ const navKeys = ["home", "about", "music", "events", "media", "contact"] as cons
       <a href={itPath} class={`lang-link${isItalian ? " active" : ""}`} aria-label="Italiano" lang="it">IT</a>
     </div>
 
-    <!-- BOOK NOW (desktop only) -->
-    <a href={navHref("contact")} class="btn-book header-book-btn"><span>{tr(u.cta.bookNow, locale)}</span></a>
-
     <!-- HAMBURGER (mobile only) -->
     <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
       <span class="h-line"></span>

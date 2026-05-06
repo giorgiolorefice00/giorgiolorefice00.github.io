@@ -4,39 +4,111 @@ import Header from "../../components/layout/Header.astro";
 import PageHeader from "../../components/layout/PageHeader.astro";
 import Footer from "../../components/layout/Footer.astro";
 import SkullScene from "../../components/contact/SkullScene";
-import BookingForm from "../../components/contact/BookingForm";
-import DirectContact from "../../components/contact/DirectContact.astro";
-import GeneralInquiry from "../../components/contact/GeneralInquiry.astro";
+import { getEntry } from "astro:content";
 import { useTranslations } from "../../i18n";
 
 const t = useTranslations("it");
+const pcEntry = await getEntry("contactText", "contact-text");
+const pc = pcEntry!.data;
+const siteEntry = await getEntry("siteConfig", "site-config");
+const contacts = siteEntry!.data.contacts;
 ---
 
 <Base
-  title="Booking — Giorgio Lorefice"
-  description="Prenota Giorgio Lorefice per serate in club, festival e live set. Richieste di booking, management e ufficio stampa."
+  title="Contatti — Giorgio Lorefice"
+  description="Contatta Giorgio Lorefice. Email e telefono diretti."
 >
   <Header />
   <main>
     <PageHeader
       number="[ 005 / contatti ]"
       name={t.nav.contact}
-      titleLine1={t.pageHeaders.contact.line1}
-      titleLine2={t.pageHeaders.contact.line2}
+      titleLine1={pc.titleLine1.it}
+      titleLine2={pc.titleLine2.it}
     />
 
-    <section style="background:#000;padding:100px 72px;position:relative;overflow:hidden;min-height:900px;">
-      <div style="position:absolute;inset:0;z-index:0;">
+    <section class="contact-section">
+      <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
         <SkullScene client:visible />
       </div>
-      <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.97) 40%,rgba(0,0,0,0.6) 100%);z-index:1;pointer-events:none;"></div>
-      <div style="position:relative;z-index:2;">
-        <BookingForm client:idle />
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;pointer-events:none;" aria-hidden="true"></div>
+
+      <div class="contact-inner" style="position:relative;z-index:2;text-align:center;">
+
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:12px;">
+          <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+          {pc.contactEyebrow.it}
+          <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
+        </div>
+
+        {pc.contactIntroLine && (
+          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:48px;">
+            {pc.contactIntroLine.it}
+          </p>
+        )}
+
+        <div style="margin-bottom:40px;">
+          {pc.emailLabel && (
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
+              {pc.emailLabel.it}
+            </div>
+          )}
+          <a
+            href={`mailto:${contacts.email}`}
+            style="font-family:'Anton',sans-serif;font-size:clamp(24px,3.5vw,52px);color:#c8102e;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
+            onmouseover="this.style.color='#ff1f1f'"
+            onmouseout="this.style.color='#c8102e'"
+          >
+            {contacts.email}
+          </a>
+        </div>
+
+        {contacts.phone && (
+          <div style="margin-bottom:48px;">
+            {pc.phoneLabel && (
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
+                {pc.phoneLabel.it}
+              </div>
+            )}
+            <a
+              href={`tel:${contacts.phone.replace(/\s/g, "")}`}
+              style="font-family:'Anton',sans-serif;font-size:clamp(24px,3.5vw,52px);color:#e8e8e8;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
+              onmouseover="this.style.color='#c8102e'"
+              onmouseout="this.style.color='#e8e8e8'"
+            >
+              {contacts.phone}
+            </a>
+          </div>
+        )}
+
+        {pc.contactNote && (
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.14em;">
+            {pc.contactNote.it}
+          </p>
+        )}
+
       </div>
     </section>
-
-    <DirectContact />
-    <GeneralInquiry />
   </main>
   <Footer />
 </Base>
+
+<style>
+  .contact-section {
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 72px;
+  }
+  .contact-inner {
+    max-width: 640px;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    .contact-section { padding: 80px 24px; }
+  }
+</style>

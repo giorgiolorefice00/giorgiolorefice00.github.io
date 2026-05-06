@@ -10,7 +10,6 @@ const it: Translations = {
     contact: "contatti",
   },
   cta: {
-    bookNow:      "PRENOTA ORA",
     listenLatest: "▶ ASCOLTA L'ULTIMO MIX",
     viewTour:     "→ VEDI LE DATE DEL TOUR",
     readFullStory: "leggi la storia completa",

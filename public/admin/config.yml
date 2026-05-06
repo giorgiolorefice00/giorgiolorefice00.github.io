@@ -33,37 +33,13 @@ collections:
               - { label: Apple Music profile URL, name: appleMusic, widget: string, required: false }
               - { label: Bandcamp URL, name: bandcamp, widget: string, required: false }
               - { label: YouTube Music URL, name: youtubeMusic, widget: string, required: false }
-          - label: Contacts
+          - label: Contact Information
             name: contacts
             widget: object
+            hint: "Direct contact info shown on the Contact page"
             fields:
-              - label: Management
-                name: management
-                widget: object
-                fields:
-                  - { label: Name, name: name, widget: string }
-                  - { label: Email, name: email, widget: string }
-                  - { label: Phone, name: phone, widget: string, required: false }
-              - label: Booking Agency
-                name: bookingAgency
-                widget: object
-                fields:
-                  - { label: Name, name: name, widget: string }
-                  - { label: Email, name: email, widget: string }
-                  - { label: Phone, name: phone, widget: string, required: false }
-                  - label: Territory
-                    name: territory
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-              - label: Press
-                name: press
-                widget: object
-                fields:
-                  - { label: Name, name: name, widget: string }
-                  - { label: Email, name: email, widget: string }
-              - { label: General Contact Email, name: generalEmail, widget: string }
+              - { label: Email Address, name: email, widget: string, hint: "Public-facing email shown on the Contact page" }
+              - { label: Phone Number, name: phone, widget: string, required: false, hint: "With country code and spaces (e.g. +39 333 123 4567)" }
           - label: Downloadable Files
             name: files
             widget: object
@@ -127,12 +103,6 @@ collections:
             name: cta
             widget: object
             fields:
-              - label: Book Now (header button)
-                name: bookNow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
               - label: Listen to Latest Mix (hero CTA)
                 name: listenLatest
                 widget: object
@@ -1331,58 +1301,45 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Booking eyebrow
-            name: bookingEyebrow
+          - label: Contact section eyebrow
+            name: contactEyebrow
             widget: object
-            hint: "Small label above the booking form"
+            hint: "Mono label above the email/phone (e.g. [ direct contact ])"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Booking section heading
-            name: bookingHeading
+          - label: Intro line
+            name: contactIntroLine
             widget: object
-            hint: "e.g. BOOKING INQUIRY."
+            required: false
+            hint: "Optional sentence above the email (e.g. the fastest way to reach me.)"
             fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Booking section subtitle
-            name: bookingSubtitle
+              - { label: English, name: en, widget: string, required: false }
+              - { label: Italiano, name: it, widget: string, required: false }
+          - label: Email label
+            name: emailLabel
             widget: object
+            required: false
+            hint: "Small label above the email address (e.g. email)"
             fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Direct contact section heading
-            name: directContactHeading
+              - { label: English, name: en, widget: string, required: false }
+              - { label: Italiano, name: it, widget: string, required: false }
+          - label: Phone label
+            name: phoneLabel
             widget: object
+            required: false
+            hint: "Small label above the phone number (e.g. phone)"
             fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: General inquiry line
-            name: generalInquiryLine
+              - { label: English, name: en, widget: string, required: false }
+              - { label: Italiano, name: it, widget: string, required: false }
+          - label: Bottom note
+            name: contactNote
             widget: object
-            hint: "Large display text (e.g. EMAIL.)"
+            required: false
+            hint: "Optional small note at the bottom (e.g. no spam. no demos.)"
             fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: General inquiry email / note
-            name: generalInquiryNote
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Form receipt title
-            name: receiptTitle
-            widget: object
-            hint: "Shown after form submission (e.g. RECEIVED.)"
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Form receipt confirmation message
-            name: receiptConfirm
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
+              - { label: English, name: en, widget: string, required: false }
+              - { label: Italiano, name: it, widget: string, required: false }
 
   # ── 💬 SHARED — PRESS QUOTES ─────────────────────────────────────────────────
   - name: press

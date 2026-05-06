@@ -8,7 +8,6 @@ const en = {
     contact: "contact",
   },
   cta: {
-    bookNow:      "BOOK NOW",
     listenLatest: "▶ LISTEN TO LATEST MIX",
     viewTour:     "→ VIEW TOUR DATES",
     readFullStory: "read the full story",

@@ -195,22 +195,8 @@ const siteConfig = defineCollection({
       youtubeMusic: z.string().optional(),
     }),
     contacts: z.object({
-      management: z.object({
-        name:  z.string(),
-        email: z.string(),
-        phone: z.string().optional(),
-      }),
-      bookingAgency: z.object({
-        name:      z.string(),
-        email:     z.string(),
-        phone:     z.string().optional(),
-        territory: bil,
-      }),
-      press: z.object({
-        name:  z.string(),
-        email: z.string(),
-      }),
-      generalEmail: z.string(),
+      email: z.string(),
+      phone: z.string(),
     }),
     files: z.object({
       epk:            z.string().optional(),
@@ -233,7 +219,6 @@ const ui = defineCollection({
       contact: bil,
     }),
     cta: z.object({
-      bookNow:          bil,
       listenLatest:     bil,
       viewTour:         bil,
       readFullStory:    bil,
@@ -388,16 +373,13 @@ const mediaText = defineCollection({
 const contactText = defineCollection({
   type: "content",
   schema: z.object({
-    titleLine1:           bil,
-    titleLine2:           bil,
-    bookingEyebrow:       bil,
-    bookingHeading:       bil,
-    bookingSubtitle:      bil,
-    directContactHeading: bil,
-    generalInquiryLine:   bil,
-    generalInquiryNote:   bil,
-    receiptTitle:         bil,
-    receiptConfirm:       bil,
+    titleLine1:        bil,
+    titleLine2:        bil,
+    contactEyebrow:    bil,
+    contactIntroLine:  bil.optional(),
+    emailLabel:        bil.optional(),
+    phoneLabel:        bil.optional(),
+    contactNote:       bil.optional(),
   }),
 });
 

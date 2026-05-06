@@ -19,9 +19,6 @@ nav:
     en: "contact"
     it: "contatti"
 cta:
-  bookNow:
-    en: "BOOK NOW"
-    it: "PRENOTA ORA"
   listenLatest:
     en: "▶ LISTEN TO LATEST MIX"
     it: "▶ ASCOLTA L'ULTIMO MIX"

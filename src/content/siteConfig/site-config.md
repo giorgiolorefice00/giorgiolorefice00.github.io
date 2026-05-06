@@ -7,21 +7,8 @@ socials:
   bandcamp: ""
   youtubeMusic: https://giorgiolorefice.com/
 contacts:
-  management:
-    name: "TODO: Manager Name"
-    email: management@giorgiolorefice.com
-    phone: ""
-  bookingAgency:
-    name: "TODO: Booking Agency"
-    email: booking@giorgiolorefice.com
-    phone: ""
-    territory:
-      en: europe / world
-      it: europa / mondo
-  press:
-    name: "TODO: Press Contact"
-    email: press@giorgiolorefice.com
-  generalEmail: info@giorgiolorefice.com
+  email: "info@giorgiolorefice.com"
+  phone: ""
 files:
   epk: ""
   technicalRider: ""
