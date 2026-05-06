@@ -904,7 +904,6 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Duration, name: duration, widget: string, hint: "e.g. 6h 12m" }
-      - { label: Venue / Context, name: venue, widget: string, required: false }
       - label: Date
         name: date
         widget: datetime
@@ -922,9 +921,6 @@ collections:
           - { label: Guest Mix, value: guest }
       - { label: Cover Art, name: coverArt, widget: image, required: false }
       - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
-      - { label: Mixcloud URL, name: mixcloudUrl, widget: string, required: false }
-      - { label: BPM Range, name: bpmRange, widget: string, required: false, hint: "e.g. 132 – 148" }
-      - { label: Genre, name: genre, widget: string }
       - { label: Featured, name: featured, widget: boolean, default: false }
 
   # ── ♫ MUSIC — DISCOGRAPHY ────────────────────────────────────────────────────

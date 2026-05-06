@@ -113,14 +113,10 @@ const mixes = defineCollection({
   schema: z.object({
     title:        z.string(),
     duration:     z.string(),
-    venue:        z.string().optional(),
     date:         dateStr,
     category:     z.enum(["resident", "festival", "radio", "guest"]),
     coverArt:     z.string().optional(),
     soundcloudUrl: z.string().optional(),
-    mixcloudUrl:   z.string().optional(),
-    bpmRange:     z.string().optional(),
-    genre:        z.string(),
     featured:     z.boolean().default(false),
   }),
 });

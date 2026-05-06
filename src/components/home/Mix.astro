@@ -15,8 +15,6 @@ const mix = mixes[0];
 const dateDisplay = mix?.data.date.replaceAll("-", ".") ?? "—";
 
 const infoStrip = [
-  { label: "BPM",       value: mix?.data.bpmRange ?? "—" },
-  { label: "GENRE",     value: mix?.data.genre ?? "—" },
   { label: "TRACKLIST", value: "view →", isLink: true },
 ];
 ---
@@ -39,9 +37,6 @@ const infoStrip = [
   <div class="mix-title-block" style="margin-bottom:8px;">
     <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,56px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;">
       {mix?.data.title.toUpperCase() ?? "—"}
-    </div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-top:10px;">
-      {mix?.data.venue ?? ""}
     </div>
   </div>
 
@@ -67,8 +62,8 @@ const infoStrip = [
 
       <!-- INFO STRIP -->
       <div class="info-strip" style="display:flex;border-top:1px solid #1a1a1a;margin-top:0;">
-        {infoStrip.map((item, i) => (
-          <div style={`flex:1;padding:20px 24px;${i < 2 ? 'border-right:1px solid #1a1a1a;' : ''}`}>
+        {infoStrip.map((item) => (
+          <div style="flex:1;padding:20px 24px;">
             <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;margin-bottom:6px;">{item.label}</div>
             <div style={`font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;${item.isLink ? 'color:#c8102e;cursor:pointer;' : 'color:#e8e8e8;'}`}>{item.value}</div>
           </div>
