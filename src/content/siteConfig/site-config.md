@@ -1,27 +1,27 @@
 ---
 socials:
-  instagram: "https://instagram.com/giorgiolorefice"
-  soundcloud: "https://soundcloud.com/giorgio-lorefice-828070878"
-  spotify: ""
-  appleMusic: ""
+  instagram: https://instagram.com/giorgiolorefice
+  soundcloud: https://soundcloud.com/giorgio-lorefice-828070878
+  spotify: https://giorgiolorefice.com/
+  appleMusic: https://giorgiolorefice.com/
   bandcamp: ""
-  youtubeMusic: ""
+  youtubeMusic: https://giorgiolorefice.com/
 contacts:
   management:
     name: "TODO: Manager Name"
-    email: "management@giorgiolorefice.com"
+    email: management@giorgiolorefice.com
     phone: ""
   bookingAgency:
     name: "TODO: Booking Agency"
-    email: "booking@giorgiolorefice.com"
+    email: booking@giorgiolorefice.com
     phone: ""
     territory:
-      en: "europe / world"
-      it: "europa / mondo"
+      en: europe / world
+      it: europa / mondo
   press:
     name: "TODO: Press Contact"
-    email: "press@giorgiolorefice.com"
-  generalEmail: "info@giorgiolorefice.com"
+    email: press@giorgiolorefice.com
+  generalEmail: info@giorgiolorefice.com
 files:
   epk: ""
   technicalRider: ""
