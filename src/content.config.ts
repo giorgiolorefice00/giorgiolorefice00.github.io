@@ -375,16 +375,11 @@ const latestRelease = defineCollection({
   type: "content",
   schema: z.object({
     title:          bil,
-    subtitle:       bil.optional(),
     description:    bil.optional(),
     releaseDate:    dateStr,
-    label:          z.string(),
-    format:         z.enum(["EP", "Single", "Remix", "Album"]),
     coverArt:       z.string().optional(),
-    spotifyUrl:     z.string().optional(),
-    appleMusicUrl:  z.string().optional(),
-    bandcampUrl:    z.string().optional(),
     soundcloudUrl:  z.string().optional(),
+    youtubeMusicUrl: z.string().optional(),
     tracklist:      z.array(z.object({
       number:   z.coerce.number(),
       title:    bil,

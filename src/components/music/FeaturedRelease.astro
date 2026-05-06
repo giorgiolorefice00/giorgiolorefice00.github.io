@@ -5,13 +5,11 @@ import SoundcloudPlayCard from "../home/SoundcloudPlayCard";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const mtEntry = await getEntry("musicText", "music-page");
-const uiEntry = await getEntry("ui", "ui");
 const mt = mtEntry!.data;
-const u = uiEntry!.data;
 
 const featuredEntry = await getEntry("latestRelease", "latest-release");
 if (!featuredEntry) return;
-const { title, subtitle, releaseDate, label, description, tracklist, coverArt, soundcloudUrl, spotifyUrl, appleMusicUrl, bandcampUrl } = featuredEntry.data;
+const { title, releaseDate, description, tracklist, coverArt, soundcloudUrl, youtubeMusicUrl } = featuredEntry.data;
 
 const localizedTitle = t(title, locale);
 const localizedDesc = description ? t(description, locale) : null;
@@ -42,9 +40,7 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
     <div class="release-meta" style="padding:8px 0;">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.22em;margin-bottom:16px;">{t(mt.latestReleaseSectionLabel, locale)}</div>
       <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,48px);color:#e8e8e8;letter-spacing:0.02em;line-height:1;margin-bottom:8px;">{localizedTitle}</div>
-      {subtitle && <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:6px;">{t(subtitle, locale)}</div>}
-      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:4px;">{year}</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e8e8;letter-spacing:0.08em;font-weight:500;margin-bottom:24px;">{label.toUpperCase()}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;margin-bottom:24px;">{year}</div>
 
       {localizedDesc && !localizedDesc.startsWith("TODO") && (
         <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.04em;line-height:1.7;margin-bottom:32px;">{localizedDesc}</p>
@@ -79,18 +75,8 @@ const coverSrc = coverArt || `${base}dj-photo.jpg`;
 
       <!-- STREAMING BUTTONS -->
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        {spotifyUrl
-          ? <a href={spotifyUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenSpotifyShort, locale)}</span></a>
-          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenSpotifyShort, locale)}</span></button>
-        }
-        {appleMusicUrl
-          ? <a href={appleMusicUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenApple, locale)}</span></a>
-          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenApple, locale)}</span></button>
-        }
-        {bandcampUrl
-          ? <a href={bandcampUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>{t(u.cta.listenBandcampShort, locale)}</span></a>
-          : <button class="btn-secondary" disabled style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;opacity:0.3;cursor:not-allowed;"><span>{t(u.cta.listenBandcampShort, locale)}</span></button>
-        }
+        {soundcloudUrl && <a href={soundcloudUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ SOUNDCLOUD</span></a>}
+        {youtubeMusicUrl && <a href={youtubeMusicUrl} target="_blank" rel="noopener" class="btn-secondary" style="padding:8px 14px;font-size:9px;letter-spacing:0.12em;text-decoration:none;"><span>▶ YOUTUBE MUSIC</span></a>}
       </div>
     </div>
   </div>
