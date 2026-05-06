@@ -764,7 +764,7 @@ collections:
     label_singular: Release
     folder: src/content/releases
     create: false
-    delete: false
+    delete: true
     editor: { preview: false }
     filter: { field: featured, value: true }
     fields:
