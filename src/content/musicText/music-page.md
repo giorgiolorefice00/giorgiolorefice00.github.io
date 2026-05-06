@@ -18,23 +18,20 @@ mixesHeading:
   en: "C — mixes"
   it: "C — mix"
 mixesSubtitle:
-  en: "recorded sets, radio shows, guest mixes."
-  it: "set registrati, show radio, guest mix."
+  en: "singles, live sets, collabs."
+  it: "singoli, live set, collab."
 mixesFilterAllLabel:
   en: "all"
   it: "tutti"
-mixesFilterResidentLabel:
-  en: "resident sets"
-  it: "set resident"
-mixesFilterFestivalLabel:
-  en: "festival sets"
-  it: "set festival"
-mixesFilterRadioLabel:
-  en: "radio shows"
-  it: "show radio"
-mixesFilterGuestLabel:
-  en: "guest mixes"
-  it: "guest mix"
+mixesFilterSingleLabel:
+  en: "single"
+  it: "single"
+mixesFilterLiveLabel:
+  en: "live"
+  it: "live"
+mixesFilterCollabLabel:
+  en: "collab"
+  it: "collab"
 discographyHeading:
   en: "D — discography"
   it: "D — discografia"

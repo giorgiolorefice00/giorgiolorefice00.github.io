@@ -15,11 +15,10 @@ const mixes = (await getCollection("mixes")).sort((a, b) =>
 
 // Map raw category key → translated label + use key as stable data-filter value
 const categoryFilters = [
-  { key: "all",      label: t(mt.mixesFilterAllLabel, locale) },
-  { key: "resident", label: t(mt.mixesFilterResidentLabel, locale) },
-  { key: "festival", label: t(mt.mixesFilterFestivalLabel, locale) },
-  { key: "radio",    label: t(mt.mixesFilterRadioLabel, locale) },
-  { key: "guest",    label: t(mt.mixesFilterGuestLabel, locale) },
+  { key: "all",    label: t(mt.mixesFilterAllLabel, locale) },
+  { key: "single", label: t(mt.mixesFilterSingleLabel, locale) },
+  { key: "live",   label: t(mt.mixesFilterLiveLabel, locale) },
+  { key: "collab", label: t(mt.mixesFilterCollabLabel, locale) },
 ];
 ---
 

@@ -914,11 +914,11 @@ collections:
       - label: Category
         name: category
         widget: select
+        hint: "Single = standalone track. Live = recorded live performance. Collab = collaborative set."
         options:
-          - { label: Resident Set, value: resident }
-          - { label: Festival Set, value: festival }
-          - { label: Radio Show, value: radio }
-          - { label: Guest Mix, value: guest }
+          - { label: Single, value: single }
+          - { label: Live, value: live }
+          - { label: Collab, value: collab }
       - { label: Cover Art, name: coverArt, widget: image, required: false }
       - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
       - { label: Featured, name: featured, widget: boolean, default: false }
@@ -1053,26 +1053,20 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Mixes filter — Resident sets
-            name: mixesFilterResidentLabel
+          - label: Mixes filter — Single
+            name: mixesFilterSingleLabel
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Mixes filter — Festival sets
-            name: mixesFilterFestivalLabel
+          - label: Mixes filter — Live
+            name: mixesFilterLiveLabel
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Mixes filter — Radio shows
-            name: mixesFilterRadioLabel
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Mixes filter — Guest mixes
-            name: mixesFilterGuestLabel
+          - label: Mixes filter — Collab
+            name: mixesFilterCollabLabel
             widget: object
             fields:
               - { label: English, name: en, widget: string }
