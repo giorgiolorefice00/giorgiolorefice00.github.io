@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import { t, type Locale } from "../../lib/i18n";
+import SoundCloudIcon from "../icons/SoundCloudIcon.astro";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const mtEntry = await getEntry("musicText", "music-page");
@@ -43,9 +44,20 @@ const releases = (await getCollection("releases")).sort((a, b) =>
             </div>
             <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.1em;width:80px;text-align:center;">{r.data.format}</div>
             <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.08em;width:120px;">{r.data.label}</div>
-            <div style="width:80px;text-align:right;">
+            <div style="width:80px;text-align:right;display:flex;justify-content:flex-end;align-items:center;">
               {r.data.soundcloudUrl
-                ? <a href={r.data.soundcloudUrl} target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.1em;text-decoration:none;">▶ SC</a>
+                ? (
+                  <a
+                    href={r.data.soundcloudUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Listen to ${t(r.data.title, locale)} on SoundCloud`}
+                    class="sc-link"
+                  >
+                    <SoundCloudIcon size={20} />
+                    <span class="sc-label">SoundCloud</span>
+                  </a>
+                )
                 : <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.1em;">—</span>
               }
             </div>
@@ -54,3 +66,31 @@ const releases = (await getCollection("releases")).sort((a, b) =>
       </>
   }
 </section>
+
+<style>
+  .sc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: #c8102e;
+    transition: color 0.15s ease;
+    cursor: pointer;
+  }
+  .sc-link:hover { color: #ff1f1f; }
+
+  .sc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Mobile: icon only */
+  @media (max-width: 767px) {
+    .sc-label { display: none; }
+  }
+</style>
