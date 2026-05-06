@@ -119,7 +119,7 @@ const mixes = defineCollection({
     coverArt:     z.string().optional(),
     soundcloudUrl: z.string().optional(),
     mixcloudUrl:   z.string().optional(),
-    bpmRange:     z.string(),
+    bpmRange:     z.string().optional(),
     genre:        z.string(),
     featured:     z.boolean().default(false),
   }),
