@@ -11,21 +11,21 @@ const u = uiEntry!.data;
 const siteEntry = await getEntry("siteConfig", "site-config");
 const site = siteEntry!.data;
 
+const base = import.meta.env.BASE_URL;
 const navLinks = ["home", "about", "music", "events", "media", "contact"] as const;
-const cols = [
-  { label: t(u.footer.sitemap, locale), links: navLinks.map((k) => ({ label: t(u.nav[k], locale), href: k === "home" ? "/" : `/${k}` })) },
-  { label: t(u.footer.listen, locale),  links: [
-    { label: "spotify",      href: site.socials.spotify      || "#" },
-    { label: "soundcloud",   href: site.socials.soundcloud   || "#" },
-    { label: "apple music",  href: site.socials.appleMusic   || "#" },
-    { label: "bandcamp",     href: site.socials.bandcamp     || "#" },
-  ]},
-  { label: t(u.footer.follow, locale),  links: [
-    { label: "instagram",    href: site.socials.instagram    || "#" },
-    { label: "youtube music",href: site.socials.youtubeMusic || "#" },
-    { label: "email",        href: `mailto:${site.contacts.generalEmail}` },
-  ]},
-];
+
+// Only include external links when a URL is actually configured
+const listenLinks = [
+  site.socials.spotify      && { label: "spotify",       href: site.socials.spotify },
+  site.socials.soundcloud   && { label: "soundcloud",    href: site.socials.soundcloud },
+  site.socials.appleMusic   && { label: "apple music",   href: site.socials.appleMusic },
+  site.socials.youtubeMusic && { label: "youtube music", href: site.socials.youtubeMusic },
+].filter(Boolean) as { label: string; href: string }[];
+
+const followLinks = [
+  site.socials.instagram    && { label: "instagram",     href: site.socials.instagram },
+  { label: "email", href: `mailto:${site.contacts.generalEmail}` },
+].filter(Boolean) as { label: string; href: string }[];
 ---
 
 <footer style="background:#000;border-top:1px solid #c8102e;padding:64px 72px 0;">
@@ -48,16 +48,37 @@ const cols = [
 
   <!-- MIDDLE — 3 COLS -->
   <div class="footer-cols" style="display:flex;gap:80px;margin-bottom:48px;">
-    {cols.map((col) => (
-      <div style="flex:1;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">
-          {col.label}
-        </div>
-        {col.links.map((l) => (
-          <a href={l.href} class="footer-link">{l.label}</a>
+
+    <!-- SITEMAP -->
+    <div style="flex:1;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(u.footer.sitemap, locale)}</div>
+      <div class="footer-link-col">
+        {navLinks.map((k) => (
+          <a href={k === "home" ? base : `${base}${k}`} class="footer-link">{t(u.nav[k], locale)}</a>
         ))}
       </div>
-    ))}
+    </div>
+
+    <!-- LISTEN -->
+    <div style="flex:1;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(u.footer.listen, locale)}</div>
+      <div class="footer-link-col">
+        {listenLinks.map((l) => (
+          <a href={l.href} class="footer-link" target="_blank" rel="noopener">{l.label}</a>
+        ))}
+      </div>
+    </div>
+
+    <!-- FOLLOW -->
+    <div style="flex:1;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(u.footer.follow, locale)}</div>
+      <div class="footer-link-col">
+        {followLinks.map((l) => (
+          <a href={l.href} class="footer-link" target={l.href.startsWith("mailto") ? undefined : "_blank"} rel={l.href.startsWith("mailto") ? undefined : "noopener"}>{l.label}</a>
+        ))}
+      </div>
+    </div>
+
   </div>
 
   <!-- BOTTOM META -->
@@ -81,3 +102,21 @@ const cols = [
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-link-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #6b6b6b;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.15s;
+    display: block;
+  }
+  .footer-link:hover { color: #c8102e; }
+</style>

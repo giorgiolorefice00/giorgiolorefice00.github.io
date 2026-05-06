@@ -325,11 +325,13 @@ img { max-width: 100%; }
 
 /* tap targets */
 @media (max-width: 768px) {
-  .nav-link, .footer-link, .about-link, .event-ticket {
+  .nav-link, .about-link, .event-ticket {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
   }
+  /* footer-link stays block (set in Footer.astro scoped style); just ensure tap target height */
+  .footer-link { min-height: 44px; }
   .filter-chip { min-height: 44px; padding: 8px 16px; }
   .social-btn  { min-width: 44px; min-height: 44px; }
   .btn-book    { min-height: 44px; padding: 10px 18px; }
