@@ -88,23 +88,11 @@ const partnerships = defineCollection({
 const releases = defineCollection({
   type: "content",
   schema: z.object({
-    title:       bil,
-    subtitle:    bil.optional(),
-    releaseDate: dateStr,
-    label:       z.string(),
-    format:      z.enum(["EP", "Single", "Remix", "Album"]),
-    description: bil.optional(),
-    coverArt:    z.string().optional(),
-    tracklist:   z.array(z.object({
-      number:   z.string(),
-      title:    bil,
-      duration: z.string(),
-    })).optional(),
+    title:         bil,
+    year:          z.number(),
+    format:        z.enum(["EP", "Single", "Remix", "Album"]),
+    label:         z.string(),
     soundcloudUrl: z.string().optional(),
-    spotifyUrl:    z.string().optional(),
-    appleMusicUrl: z.string().optional(),
-    bandcampUrl:   z.string().optional(),
-    featured:      z.boolean().default(false),
   }),
 });
 
@@ -172,8 +160,6 @@ const musicStreaming = defineCollection({
 const musicText = defineCollection({
   type: "content",
   schema: z.object({
-    titleLine1:                  bil,
-    titleLine2:                  bil,
     latestReleaseEyebrow:        bil,
     latestReleaseSectionLabel:   bil,
     latestReleaseDateLabel:      bil,
@@ -325,6 +311,10 @@ const pageContent = defineCollection({
       pressEyebrow:       bil,
       pressHeading1:      bil,
       pressHeading2:      bil,
+    }),
+    music: z.object({
+      titleLine1: bil,
+      titleLine2: bil,
     }),
     about: z.object({
       titleLine1:           bil,

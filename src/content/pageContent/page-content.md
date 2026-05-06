@@ -39,6 +39,13 @@ home:
   pressHeading2:
     en: "SAYING."
     it: "DI LUI."
+music:
+  titleLine1:
+    en: "THE SOUND"
+    it: "IL SUONO"
+  titleLine2:
+    en: "ON RECORD."
+    it: "SU DISCO."
 about:
   titleLine1:
     en: "THE MAN"

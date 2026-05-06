@@ -693,6 +693,22 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
+          - label: "🎵 Music Page"
+            name: music
+            widget: object
+            fields:
+              - label: Page title — line 1
+                name: titleLine1
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
+              - label: Page title — line 2
+                name: titleLine2
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
           - label: "✉ Contact Page"
             name: contact
             widget: object
@@ -912,7 +928,7 @@ collections:
     folder: src/content/releases
     create: true
     delete: true
-    slug: "{{releaseDate}}-{{slug}}"
+    slug: "{{year}}-{{slug}}"
     format: frontmatter
     fields:
       - label: Title
@@ -922,22 +938,7 @@ collections:
         fields:
           - { label: English, name: en, widget: string }
           - { label: Italiano, name: it, widget: string }
-      - label: Subtitle
-        name: subtitle
-        widget: object
-        required: false
-        hint: "Optional descriptor (e.g. EP · 4 TRACKS)"
-        fields:
-          - { label: English, name: en, widget: string, required: false }
-          - { label: Italiano, name: it, widget: string, required: false }
-      - label: Release Date
-        name: releaseDate
-        widget: datetime
-        format: 'YYYY-MM-DD'
-        date_format: 'YYYY-MM-DD'
-        time_format: false
-        picker_utc: true
-      - { label: Label, name: label, widget: string, hint: "Record label name — proper noun, not translated" }
+      - { label: Year, name: year, widget: number, value_type: int, min: 1990, max: 2100, hint: "Release year (e.g. 2026)" }
       - label: Format
         name: format
         widget: select
@@ -946,32 +947,8 @@ collections:
           - { label: Single, value: Single }
           - { label: Remix, value: Remix }
           - { label: Album, value: Album }
-      - label: Description
-        name: description
-        widget: object
-        required: false
-        fields:
-          - { label: English, name: en, widget: text, required: false }
-          - { label: Italiano, name: it, widget: text, required: false }
-      - { label: Cover Art, name: coverArt, widget: image, required: false, hint: "Square artwork — minimum 800×800px" }
-      - label: Tracklist
-        name: tracklist
-        widget: list
-        required: false
-        fields:
-          - { label: Track Number, name: number, widget: string }
-          - label: Track Title
-            name: title
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - { label: Duration, name: duration, widget: string, hint: "Format: M:SS (e.g. 7:18)" }
-      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
-      - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
-      - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
-      - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
-      - { label: Featured, name: featured, widget: boolean, default: false, hint: "If checked, this release appears as Latest Release on the Music page. Only ONE should be featured at a time." }
+      - { label: Label / Imprint, name: label, widget: string, hint: "Record label name (e.g. 'self-released', 'Drumcode')" }
+      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false, hint: "Direct link to this release on SoundCloud. The Streams button opens this URL." }
 
   # ── ♫ MUSIC — PAGE TEXT & LABELS ─────────────────────────────────────────────
   - name: musicText
@@ -983,18 +960,6 @@ collections:
         label: "Music Page Text"
         name: music-page
         fields:
-          - label: Page title — line 1
-            name: titleLine1
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Page title — line 2
-            name: titleLine2
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
           - label: Latest Release — eyebrow
             name: latestReleaseEyebrow
             hint: "e.g. A — latest release"
