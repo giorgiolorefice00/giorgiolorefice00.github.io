@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import { t, type Locale } from "../../lib/i18n";
 import SoundcloudPlayCard from "../home/SoundcloudPlayCard";
 
@@ -9,10 +9,9 @@ const uiEntry = await getEntry("ui", "ui");
 const mt = mtEntry!.data;
 const u = uiEntry!.data;
 
-const releases = await getCollection("releases");
-const featured = releases.find((r) => r.data.featured);
-if (!featured) return;
-const { title, subtitle, releaseDate, label, description, tracklist, coverArt, soundcloudUrl, spotifyUrl, appleMusicUrl, bandcampUrl } = featured.data;
+const featuredEntry = await getEntry("latestRelease", "latest-release");
+if (!featuredEntry) return;
+const { title, subtitle, releaseDate, label, description, tracklist, coverArt, soundcloudUrl, spotifyUrl, appleMusicUrl, bandcampUrl } = featuredEntry.data;
 
 const localizedTitle = t(title, locale);
 const localizedDesc = description ? t(description, locale) : null;

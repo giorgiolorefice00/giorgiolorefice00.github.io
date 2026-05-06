@@ -761,70 +761,69 @@ collections:
   # ── ♫ MUSIC — LATEST RELEASE ────────────────────────────────────────────────
   - name: music-latest-release
     label: "♫ Music — Latest Release"
-    label_singular: Release
-    folder: src/content/releases
-    create: false
-    delete: true
+    delete: false
     editor: { preview: false }
-    filter: { field: featured, value: true }
-    fields:
-      - label: Title
-        name: title
-        widget: object
-        hint: "The release title shown in the hero section"
+    files:
+      - file: src/content/latestRelease/latest-release.md
+        label: "Latest Release"
+        name: latest-release
         fields:
-          - { label: English, name: en, widget: string }
-          - { label: Italiano, name: it, widget: string }
-      - label: Subtitle
-        name: subtitle
-        widget: object
-        required: false
-        hint: "Optional descriptor (e.g. EP · 4 TRACKS)"
-        fields:
-          - { label: English, name: en, widget: string, required: false }
-          - { label: Italiano, name: it, widget: string, required: false }
-      - label: Description
-        name: description
-        widget: object
-        required: false
-        fields:
-          - { label: English, name: en, widget: text, required: false }
-          - { label: Italiano, name: it, widget: text, required: false }
-      - label: Release Date
-        name: releaseDate
-        widget: datetime
-        format: 'YYYY-MM-DD'
-        date_format: 'YYYY-MM-DD'
-        time_format: false
-        picker_utc: true
-      - { label: Label / Imprint, name: label, widget: string, hint: "Record label — proper noun, not translated" }
-      - label: Format
-        name: format
-        widget: select
-        options:
-          - { label: EP, value: EP }
-          - { label: Single, value: Single }
-          - { label: Remix, value: Remix }
-          - { label: Album, value: Album }
-      - { label: Cover Artwork, name: coverArt, widget: image, required: false, hint: "Square artwork — minimum 800×800px" }
-      - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
-      - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
-      - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
-      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
-      - label: Tracklist
-        name: tracklist
-        widget: list
-        required: false
-        fields:
-          - { label: Track Number, name: number, widget: string }
-          - label: Track Title
+          - label: Title
             name: title
             widget: object
+            hint: "The release title shown in the hero section"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - { label: Duration, name: duration, widget: string, hint: "Format: M:SS (e.g. 7:18)" }
-      - { label: Featured, name: featured, widget: boolean, default: true, hint: "Must stay checked. To swap releases, uncheck this in Albums and check the new one there." }
+          - label: Subtitle
+            name: subtitle
+            widget: object
+            required: false
+            hint: "Optional descriptor (e.g. EP · 4 TRACKS)"
+            fields:
+              - { label: English, name: en, widget: string, required: false }
+              - { label: Italiano, name: it, widget: string, required: false }
+          - label: Description
+            name: description
+            widget: object
+            required: false
+            fields:
+              - { label: English, name: en, widget: text, required: false }
+              - { label: Italiano, name: it, widget: text, required: false }
+          - label: Release Date
+            name: releaseDate
+            widget: datetime
+            format: 'YYYY-MM-DD'
+            date_format: 'YYYY-MM-DD'
+            time_format: false
+            picker_utc: true
+          - { label: Label / Imprint, name: label, widget: string, hint: "Record label — proper noun, not translated" }
+          - label: Format
+            name: format
+            widget: select
+            options:
+              - { label: EP, value: EP }
+              - { label: Single, value: Single }
+              - { label: Remix, value: Remix }
+              - { label: Album, value: Album }
+          - { label: Cover Artwork, name: coverArt, widget: image, required: false, hint: "Square artwork — minimum 800×800px" }
+          - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
+          - { label: Apple Music URL, name: appleMusicUrl, widget: string, required: false }
+          - { label: Bandcamp URL, name: bandcampUrl, widget: string, required: false }
+          - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
+          - label: Tracklist
+            name: tracklist
+            widget: list
+            required: false
+            fields:
+              - { label: Track Number, name: number, widget: number, value_type: int }
+              - label: Track Title
+                name: title
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
+              - { label: Duration, name: duration, widget: string, hint: "Format: M:SS (e.g. 7:18)" }
 
   # ── ♫ MUSIC — STREAMING ──────────────────────────────────────────────────────
   - name: musicStreaming
