@@ -242,7 +242,7 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: Streams (discography streaming indicator)
+              - label: Streams (albums streaming indicator)
                 name: streams
                 widget: object
                 fields:
@@ -824,7 +824,7 @@ collections:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - { label: Duration, name: duration, widget: string, hint: "Format: M:SS (e.g. 7:18)" }
-      - { label: Featured, name: featured, widget: boolean, default: true, hint: "Must stay checked. To swap releases, uncheck this in Discography and check the new one there." }
+      - { label: Featured, name: featured, widget: boolean, default: true, hint: "Must stay checked. To swap releases, uncheck this in Albums and check the new one there." }
 
   # ── ♫ MUSIC — STREAMING ──────────────────────────────────────────────────────
   - name: musicStreaming
@@ -923,9 +923,9 @@ collections:
       - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
       - { label: Featured, name: featured, widget: boolean, default: false }
 
-  # ── ♫ MUSIC — DISCOGRAPHY ────────────────────────────────────────────────────
+  # ── ♫ MUSIC — ALBUMS ─────────────────────────────────────────────────────────
   - name: releases
-    label: "♫ Music — Discography"
+    label: "♫ Music — Albums"
     label_singular: Release
     folder: src/content/releases
     create: true
@@ -1071,59 +1071,59 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography — section eyebrow
-            name: discographyHeading
-            hint: "e.g. D — discography"
+          - label: Albums — section eyebrow
+            name: albumsHeading
+            hint: "e.g. D — albums"
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography — empty state message
-            name: discographyEmptyStateMessage
+          - label: Albums — empty state message
+            name: albumsEmptyStateMessage
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography — genre tags label
+          - label: Albums — genre tags label
             name: genreTagsLabel
             hint: "e.g. genres ——"
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography — genre tags list
+          - label: Albums — genre tags list
             name: genreTagsList
             hint: "e.g. detroit · hardgroove · industrial · acid"
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography table — Year header
-            name: discographyYearHeader
+          - label: Albums table — Year header
+            name: albumsYearHeader
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography table — Title header
-            name: discographyTitleHeader
+          - label: Albums table — Title header
+            name: albumsTitleHeader
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography table — Format header
-            name: discographyFormatHeader
+          - label: Albums table — Format header
+            name: albumsFormatHeader
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography table — Label header
-            name: discographyLabelHeader
+          - label: Albums table — Label header
+            name: albumsLabelHeader
             widget: object
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Discography table — Streams header
-            name: discographyStreamsHeader
+          - label: Albums table — Streams header
+            name: albumsStreamsHeader
             widget: object
             fields:
               - { label: English, name: en, widget: string }

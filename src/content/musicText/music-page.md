@@ -32,10 +32,10 @@ mixesFilterLiveLabel:
 mixesFilterCollabLabel:
   en: "collab"
   it: "collab"
-discographyHeading:
-  en: "D — discography"
-  it: "D — discografia"
-discographyEmptyStateMessage:
+albumsHeading:
+  en: "D — albums"
+  it: "D — album"
+albumsEmptyStateMessage:
   en: "no releases found."
   it: "nessuna uscita trovata."
 genreTagsLabel:
@@ -44,19 +44,19 @@ genreTagsLabel:
 genreTagsList:
   en: "detroit · hardgroove · industrial · acid · mental · hardtek · tribe · oldschool"
   it: "detroit · hardgroove · industrial · acid · mental · hardtek · tribe · oldschool"
-discographyYearHeader:
+albumsYearHeader:
   en: "YEAR"
   it: "ANNO"
-discographyTitleHeader:
+albumsTitleHeader:
   en: "TITLE"
   it: "TITOLO"
-discographyFormatHeader:
+albumsFormatHeader:
   en: "FORMAT"
   it: "FORMATO"
-discographyLabelHeader:
+albumsLabelHeader:
   en: "LABEL"
   it: "LABEL"
-discographyStreamsHeader:
+albumsStreamsHeader:
   en: "STREAMS"
   it: "STREAM"
 ---

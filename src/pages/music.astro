@@ -6,7 +6,7 @@ import Footer from "../components/layout/Footer.astro";
 import FeaturedRelease from "../components/music/FeaturedRelease.astro";
 import StreamingEmbeds from "../components/music/StreamingEmbeds.astro";
 import MixesLibrary from "../components/music/MixesLibrary.astro";
-import Discography from "../components/music/Discography.astro";
+import Albums from "../components/music/Albums.astro";
 import { getEntry } from "astro:content";
 import { t, type Locale } from "../lib/i18n";
 
@@ -17,7 +17,7 @@ const mt = mtEntry!.data;
 
 <Base
   title="Music — Giorgio Lorefice"
-  description="Releases, mixes, and full discography for Giorgio Lorefice. Industrial techno and acid released on Mord, Soma, Truncate Records, and Blueprint."
+  description="Releases, mixes, and full albums catalogue for Giorgio Lorefice. Industrial techno and acid released on Mord, Soma, Truncate Records, and Blueprint."
 >
   <Header />
   <main>
@@ -30,7 +30,7 @@ const mt = mtEntry!.data;
     <FeaturedRelease />
     <StreamingEmbeds />
     <MixesLibrary />
-    <Discography />
+    <Albums />
   </main>
   <Footer />
 </Base>

@@ -198,7 +198,7 @@ body[data-menu-open] .mobile-nav {
   /* music — mixes 2-col on tablet, 1 col at 480 (see below) */
   .mix-grid { grid-template-columns: 1fr 1fr !important; }
 
-  /* music — discography hide columns */
+  /* music — albums hide columns */
   .disc-row-meta { display: none !important; }
 
   /* events — tour list: stacked card */
