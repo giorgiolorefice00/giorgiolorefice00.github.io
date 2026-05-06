@@ -5,9 +5,9 @@ import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const uiEntry = await getEntry("ui", "ui");
-const pcEntry = await getEntry("pageContent", "page-content");
+const pcEntry = await getEntry("homeMix", "home-mix");
 const u = uiEntry!.data;
-const pc = pcEntry!.data.home;
+const pc = pcEntry!.data;
 
 const mixes = await getCollection("mixes", ({ data }) => data.featured);
 const mix = mixes[0];

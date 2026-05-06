@@ -5,9 +5,9 @@ import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const uiEntry = await getEntry("ui", "ui");
-const pcEntry = await getEntry("pageContent", "page-content");
+const pcEntry = await getEntry("homePress", "home-press");
 const u = uiEntry!.data;
-const pc = pcEntry!.data.home;
+const pc = pcEntry!.data;
 
 const rawPress = await getCollection("press");
 const quotes = rawPress

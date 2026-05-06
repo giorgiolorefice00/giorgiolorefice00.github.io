@@ -13,8 +13,6 @@ import { t, type Locale } from "../lib/i18n";
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const mtEntry = await getEntry("musicText", "music-page");
 const mt = mtEntry!.data;
-const pcEntry = await getEntry("pageContent", "page-content");
-const pc = pcEntry!.data;
 ---
 
 <Base
@@ -26,8 +24,8 @@ const pc = pcEntry!.data;
     <PageHeader
       number="[ 002 / music ]"
       name="music"
-      titleLine1={t(pc.music.titleLine1, locale)}
-      titleLine2={t(pc.music.titleLine2, locale)}
+      titleLine1={t(mt.titleLine1, locale)}
+      titleLine2={t(mt.titleLine2, locale)}
     />
     <FeaturedRelease />
     <StreamingEmbeds />

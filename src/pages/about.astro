@@ -14,8 +14,8 @@ import { t, type Locale } from "../lib/i18n";
 const locale = (Astro.currentLocale ?? "en") as Locale;
 const about = await getEntry("about", "about");
 const { fullBio, factFile } = about!.data;
-const pcEntry = await getEntry("pageContent", "page-content");
-const pc = pcEntry!.data.about;
+const pcEntry = await getEntry("aboutText", "about-text");
+const pc = pcEntry!.data;
 ---
 
 <Base

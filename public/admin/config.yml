@@ -29,8 +29,8 @@ collections:
             fields:
               - { label: Instagram URL, name: instagram, widget: string, required: false }
               - { label: SoundCloud URL, name: soundcloud, widget: string, required: false }
-              - { label: Spotify profile URL, name: spotify, widget: string, required: false, hint: "Used in footer social links" }
-              - { label: Apple Music profile URL, name: appleMusic, widget: string, required: false, hint: "Used in footer social links" }
+              - { label: Spotify profile URL, name: spotify, widget: string, required: false }
+              - { label: Apple Music profile URL, name: appleMusic, widget: string, required: false }
               - { label: Bandcamp URL, name: bandcamp, widget: string, required: false }
               - { label: YouTube Music URL, name: youtubeMusic, widget: string, required: false }
           - label: Contacts
@@ -86,7 +86,6 @@ collections:
           - label: Navigation Links
             name: nav
             widget: object
-            hint: "Header nav labels — shown in desktop nav and mobile overlay"
             fields:
               - label: Home
                 name: home
@@ -200,7 +199,7 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: Listen on Spotify (release button)
+              - label: Listen on Spotify
                 name: listenSpotify
                 widget: object
                 fields:
@@ -212,37 +211,37 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: Listen on Bandcamp (release button)
+              - label: Listen on Bandcamp
                 name: listenBandcamp
                 widget: object
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: Listen on Apple Music (release button)
+              - label: Listen on Apple Music
                 name: listenApple
                 widget: object
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: "▶ SPOTIFY (short release button label)"
+              - label: "▶ SPOTIFY (short label)"
                 name: listenSpotifyShort
                 widget: object
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: "▶ BANDCAMP (short release button label)"
+              - label: "▶ BANDCAMP (short label)"
                 name: listenBandcampShort
                 widget: object
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: Listen (generic — disabled mix card button)
+              - label: Listen (generic)
                 name: listen
                 widget: object
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-              - label: Streams (albums streaming indicator)
+              - label: Streams (albums column header)
                 name: streams
                 widget: object
                 fields:
@@ -443,336 +442,327 @@ collections:
                       - { label: English, name: en, widget: string }
                       - { label: Italiano, name: it, widget: string }
 
-  # ── 📄 ALL PAGE TEXT (homepage · about · music · events · media · contact) ──
-  - name: pageContent
-    label: "📄 Page Text (All Pages)"
+  # ── 🏠 HOME — HERO ───────────────────────────────────────────────────────────
+  - name: homeHero
+    label: "🏠 Home — Hero"
     delete: false
     editor: { preview: false }
     files:
-      - file: src/content/pageContent/page-content.md
-        label: "Page Text"
-        name: page-content
+      - file: src/content/homeHero/home-hero.md
+        label: "Hero Section"
+        name: home-hero
         fields:
-          - label: "🏠 Homepage"
-            name: home
+          - label: Eyebrow
+            name: heroEyebrow
+            widget: object
+            hint: "Small label above the DJ name (e.g. [ LIVE / 2026 — MILANO ])"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Tagline — left half
+            name: heroTaglineLeft
+            widget: object
+            hint: "Appears left of the red divider (e.g. underground techno)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Tagline — right half
+            name: heroTaglineRight
+            widget: object
+            hint: "Appears right of the red divider (e.g. rave architecture)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Photo caption
+            name: heroPhotoCaption
+            widget: object
+            hint: "Small mono tag bottom-right of the DJ photo"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 🏠 HOME — ABOUT SNIPPET ──────────────────────────────────────────────────
+  - name: homeAbout
+    label: "🏠 Home — About Snippet"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/homeAbout/home-about.md
+        label: "About Snippet"
+        name: home-about
+        fields:
+          - label: Section eyebrow
+            name: aboutEyebrow
+            widget: object
+            hint: "Small label above the headline (e.g. [ 001 / about ])"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Read full story link text
+            name: aboutLinkText
+            widget: object
+            hint: "The link that goes to /about (e.g. read the full story)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 🏠 HOME — FEATURED MIX ───────────────────────────────────────────────────
+  - name: homeMix
+    label: "🏠 Home — Featured Mix"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/homeMix/home-mix.md
+        label: "Featured Mix Section"
+        name: home-mix
+        fields:
+          - label: Section eyebrow
+            name: mixEyebrow
+            widget: object
+            hint: "Small label above the player (e.g. [ 002 / listen ])"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Latest Drop badge
+            name: mixLatestDropLabel
+            widget: object
+            hint: "Badge shown on the mix card (e.g. LATEST DROP)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 🏠 HOME — EVENTS PREVIEW ─────────────────────────────────────────────────
+  - name: homeEvents
+    label: "🏠 Home — Events Preview"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/homeEvents/home-events.md
+        label: "Events Preview Section"
+        name: home-events
+        fields:
+          - label: Section heading
+            name: eventsHeading
+            widget: object
+            hint: "Large heading above the event cards (e.g. NEXT GIGS)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Section subtitle
+            name: eventsSubtitle
+            widget: object
+            hint: "Small mono line below the heading"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 🏠 HOME — PRESS SLIDER ───────────────────────────────────────────────────
+  - name: homePress
+    label: "🏠 Home — Press Slider"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/homePress/home-press.md
+        label: "Press Slider Section"
+        name: home-press
+        fields:
+          - label: Section eyebrow
+            name: pressEyebrow
+            widget: object
+            hint: "Small label above the heading (e.g. [ 004 / press ])"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Heading line 1
+            name: pressHeading1
+            widget: object
+            hint: "First line of the large heading (e.g. WHAT THEY'RE)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Heading line 2
+            name: pressHeading2
+            widget: object
+            hint: "Second line of the large heading (e.g. SAYING.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 👤 ABOUT — BIO & STATS ──────────────────────────────────────────────────
+  - name: about
+    label: "👤 About — Bio & Stats"
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: about
+        label: About the Artist
+        file: src/content/about/about.md
+        format: frontmatter
+        fields:
+          - label: Headline Lines
+            name: headlineLines
+            widget: list
+            min: 3
+            max: 3
+            hint: "Exactly 3 lines. Line 2 renders in blood red."
+            field: { label: Line, name: line, widget: string }
+          - label: Short Paragraphs (homepage snippet)
+            name: paragraphs
+            widget: list
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - label: Stats
+            name: stats
+            widget: list
+            fields:
+              - { label: Number, name: num, widget: string, hint: "e.g. 10+ or ∞" }
+              - { label: Label, name: label, widget: string }
+          - label: Full Bio (about page)
+            name: fullBio
+            widget: list
+            required: false
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - label: Fact File
+            name: factFile
+            widget: list
+            required: false
+            fields:
+              - { label: Label, name: label, widget: string, hint: "e.g. born" }
+              - { label: Value, name: value, widget: string, hint: "e.g. milano, 1993" }
+          - { label: Born In, name: bornIn, widget: string, required: false }
+          - { label: Based In, name: basedIn, widget: string, required: false }
+          - { label: Active Since, name: activeSince, widget: string, required: false }
+
+  # ── 👤 ABOUT — ACHIEVEMENTS ─────────────────────────────────────────────────
+  - name: achievements
+    label: "👤 About — Achievements"
+    label_singular: Achievement
+    folder: src/content/achievements
+    create: true
+    delete: true
+    slug: "{{order}}-{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Year, name: year, widget: string, hint: "e.g. 2025" }
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Order, name: order, widget: number, hint: "Lower number = shown first" }
+
+  # ── 👤 ABOUT — RESIDENCIES ──────────────────────────────────────────────────
+  - name: residencies
+    label: "👤 About — Residencies"
+    label_singular: Residency
+    folder: src/content/residencies
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Venue, name: venue, widget: string }
+      - { label: City, name: city, widget: string }
+      - { label: Start Year, name: startYear, widget: string }
+      - { label: End Year, name: endYear, widget: string, required: false, hint: "Leave blank for present" }
+
+  # ── 👤 ABOUT — PARTNERSHIPS & STAGES ────────────────────────────────────────
+  - name: partnerships
+    label: "👤 About — Partnerships & Stages"
+    label_singular: Partnership
+    folder: src/content/partnerships
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    format: frontmatter
+    fields:
+      - { label: Name, name: name, widget: string, hint: "e.g. TIME WARP" }
+      - label: Type
+        name: type
+        widget: select
+        options:
+          - { label: Festival, value: festival }
+          - { label: Brand, value: brand }
+      - { label: Year, name: year, widget: string, required: false }
+
+  # ── 👤 ABOUT — PAGE TEXT ────────────────────────────────────────────────────
+  - name: aboutText
+    label: "👤 About — Page Text"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/aboutText/about-text.md
+        label: "About Page Text"
+        name: about-text
+        fields:
+          - label: Page title — line 1
+            name: titleLine1
+            widget: object
+            hint: "Large display text, line 1 (e.g. THE MAN)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Page title — line 2
+            name: titleLine2
+            widget: object
+            hint: "Renders in blood red (e.g. BEHIND THE DECKS.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Achievements section heading
+            name: achievementsHeading
             widget: object
             fields:
-              - label: Hero eyebrow
-                name: heroEyebrow
-                hint: "Small label above the DJ name, e.g. [ LIVE / 2026 — MILANO ]"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Hero tagline — left half
-                name: heroTaglineLeft
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Hero tagline — right half
-                name: heroTaglineRight
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Hero photo caption
-                name: heroPhotoCaption
-                hint: "Small label on the DJ photo, bottom-right"
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: About section eyebrow
-                name: aboutEyebrow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: About section link text
-                name: aboutLinkText
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mix section eyebrow
-                name: mixEyebrow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Mix — Latest Drop label
-                name: mixLatestDropLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Events section heading
-                name: eventsHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Events section subtitle
-                name: eventsSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press section eyebrow
-                name: pressEyebrow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press heading line 1
-                name: pressHeading1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press heading line 2
-                name: pressHeading2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: "👤 About Page"
-            name: about
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Residencies section heading
+            name: residenciesHeading
             widget: object
             fields:
-              - label: Page title line 1
-                name: titleLine1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Page title line 2
-                name: titleLine2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Achievements section heading
-                name: achievementsHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Residencies section heading
-                name: residenciesHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Partnerships section heading
-                name: partnershipsHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press articles section heading
-                name: pressArticlesHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: EPK eyebrow
-                name: epkEyebrow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: EPK download heading
-                name: epkHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: EPK description
-                name: epkDescription
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Fact file label
-                name: factFileLabel
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Download bio link
-                name: downloadBio
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: "📅 Events Page"
-            name: events
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Partnerships section heading
+            name: partnershipsHeading
             widget: object
             fields:
-              - label: Page title line 1
-                name: titleLine1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Page title line 2
-                name: titleLine2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Upcoming section heading
-                name: upcomingHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Upcoming section subtitle
-                name: upcomingSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Map section heading
-                name: mapHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Archive section heading
-                name: archiveHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Archive section subtitle
-                name: archiveSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: "📸 Media Page"
-            name: media
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Press articles section heading
+            name: pressArticlesHeading
             widget: object
             fields:
-              - label: Page title line 1
-                name: titleLine1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Page title line 2
-                name: titleLine2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press photos heading
-                name: pressPhotosHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press photos subtitle
-                name: pressPhotosSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Live gallery heading
-                name: liveHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Video gallery heading
-                name: videoHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: "🎵 Music Page"
-            name: music
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: EPK eyebrow
+            name: epkEyebrow
+            widget: object
+            hint: "Small label above the EPK download CTA"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: EPK download heading
+            name: epkHeading
+            widget: object
+            hint: "Large CTA heading (e.g. ↓ DOWNLOAD EPK (.ZIP))"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: EPK description
+            name: epkDescription
+            widget: object
+            hint: "What's inside the EPK archive"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Fact file label
+            name: factFileLabel
+            widget: object
+            hint: "Header above the fact file sidebar (e.g. [ FACT FILE ])"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Download full bio link text
+            name: downloadBio
             widget: object
             fields:
-              - label: Page title — line 1
-                name: titleLine1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Page title — line 2
-                name: titleLine2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: "✉ Contact Page"
-            name: contact
-            widget: object
-            fields:
-              - label: Page title line 1
-                name: titleLine1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Page title line 2
-                name: titleLine2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Booking eyebrow
-                name: bookingEyebrow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Booking section heading
-                name: bookingHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Booking section subtitle
-                name: bookingSubtitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Direct contact section heading
-                name: directContactHeading
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: General inquiry heading
-                name: generalInquiryLine
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: General inquiry email/note
-                name: generalInquiryNote
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Form receipt title
-                name: receiptTitle
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Form receipt confirmation message
-                name: receiptConfirm
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
 
   # ── ♫ MUSIC — LATEST RELEASE ────────────────────────────────────────────────
   - name: music-latest-release
@@ -787,7 +777,7 @@ collections:
           - label: Title
             name: title
             widget: object
-            hint: "The release title shown as the headline (e.g. 'BIG SHAMPOO')"
+            hint: "The release title shown as the headline"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -807,8 +797,8 @@ collections:
             time_format: false
             picker_utc: true
           - { label: Cover Artwork, name: coverArt, widget: image, required: false, hint: "Square artwork — minimum 800×800px" }
-          - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false, hint: "Direct link to this release on SoundCloud" }
-          - { label: YouTube Music URL, name: youtubeMusicUrl, widget: string, required: false, hint: "Direct link to this release on YouTube Music" }
+          - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
+          - { label: YouTube Music URL, name: youtubeMusicUrl, widget: string, required: false }
           - label: Tracklist
             name: tracklist
             widget: list
@@ -834,20 +824,9 @@ collections:
         label: "Streaming"
         name: music-streaming
         fields:
-          - label: Spotify Embed URL
-            name: spotifyEmbedUrl
-            widget: string
-            required: false
-            hint: "Get from Spotify: artist page → ··· → Share → Embed → copy iframe src. e.g. https://open.spotify.com/embed/artist/XXXXX"
-          - label: Apple Music Embed URL
-            name: appleMusicEmbedUrl
-            widget: string
-            required: false
-            hint: "Get from Apple Music: artist page → Share → Embed Code"
-          - label: Bandcamp Embed URL
-            name: bandcampEmbedUrl
-            widget: string
-            required: false
+          - { label: Spotify Embed URL, name: spotifyEmbedUrl, widget: string, required: false, hint: "Spotify embed src URL" }
+          - { label: Apple Music Embed URL, name: appleMusicEmbedUrl, widget: string, required: false }
+          - { label: Bandcamp Embed URL, name: bandcampEmbedUrl, widget: string, required: false }
           - label: Section heading
             name: streamingHeading
             widget: object
@@ -863,29 +842,29 @@ collections:
               - { label: Italiano, name: it, widget: string }
           - label: Spotify embed label
             name: spotifyEmbedLabel
-            hint: "Label shown above the Spotify iframe"
             widget: object
+            hint: "Label shown above the Spotify iframe"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Apple Music embed label
             name: appleMusicEmbedLabel
-            hint: "Label shown above the Apple Music iframe"
             widget: object
+            hint: "Label shown above the Apple Music iframe"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Coming Soon fallback
             name: streamingComingSoonMessage
-            hint: "Shown when no embed URL is set"
             widget: object
+            hint: "Shown when no embed URL is set"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Production note
             name: productionNote
-            hint: "Small caption below the section heading"
             widget: object
+            hint: "Small caption below the section heading"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -919,7 +898,7 @@ collections:
           - { label: Collab, value: collab }
       - { label: Cover Art, name: coverArt, widget: image, required: false }
       - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
-      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Featured (shows on homepage), name: featured, widget: boolean, default: false }
 
   # ── ♫ MUSIC — ALBUMS ─────────────────────────────────────────────────────────
   - name: releases
@@ -947,12 +926,12 @@ collections:
           - { label: Single, value: Single }
           - { label: Remix, value: Remix }
           - { label: Album, value: Album }
-      - { label: Label / Imprint, name: label, widget: string, hint: "Record label name (e.g. 'self-released', 'Drumcode')" }
-      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false, hint: "Direct link to this release on SoundCloud. The Streams button opens this URL." }
+      - { label: Label / Imprint, name: label, widget: string, hint: "e.g. self-released, Drumcode" }
+      - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false, hint: "Direct link — shown as the Streams button" }
 
-  # ── ♫ MUSIC — PAGE TEXT & LABELS ─────────────────────────────────────────────
+  # ── ♫ MUSIC — PAGE TEXT ──────────────────────────────────────────────────────
   - name: musicText
-    label: "♫ Music — Page Text & Labels"
+    label: "♫ Music — Page Text"
     delete: false
     editor: { preview: false }
     files:
@@ -960,31 +939,45 @@ collections:
         label: "Music Page Text"
         name: music-page
         fields:
+          - label: Page title — line 1
+            name: titleLine1
+            widget: object
+            hint: "Large display text, line 1 (e.g. THE SOUND)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Page title — line 2
+            name: titleLine2
+            widget: object
+            hint: "Renders in blood red (e.g. ON RECORD.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
           - label: Latest Release — eyebrow
             name: latestReleaseEyebrow
-            hint: "e.g. A — latest release"
             widget: object
+            hint: "e.g. A — latest release"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Latest Release — section badge
             name: latestReleaseSectionLabel
-            hint: "e.g. [ RELEASE ]"
             widget: object
+            hint: "e.g. [ RELEASE ]"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Latest Release — date prefix
             name: latestReleaseDateLabel
-            hint: "e.g. released"
             widget: object
+            hint: "e.g. released"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Mixes — section eyebrow
             name: mixesHeading
-            hint: "e.g. C — mixes"
             widget: object
+            hint: "e.g. C — mixes"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -1020,8 +1013,8 @@ collections:
               - { label: Italiano, name: it, widget: string }
           - label: Albums — section eyebrow
             name: albumsHeading
-            hint: "e.g. D — albums"
             widget: object
+            hint: "e.g. D — albums"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -1033,15 +1026,15 @@ collections:
               - { label: Italiano, name: it, widget: string }
           - label: Albums — genre tags label
             name: genreTagsLabel
-            hint: "e.g. genres ——"
             widget: object
+            hint: "e.g. genres ——"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
           - label: Albums — genre tags list
             name: genreTagsList
-            hint: "e.g. detroit · hardgroove · industrial · acid"
             widget: object
+            hint: "e.g. detroit · hardgroove · industrial · acid"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -1076,98 +1069,7 @@ collections:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
 
-  # ── 👤 ABOUT PAGE — BIO & STATS ─────────────────────────────────────────────
-  - name: about
-    label: "👤 About — Bio & Stats"
-    files:
-      - name: about
-        label: About the Artist
-        file: src/content/about/about.md
-        format: frontmatter
-        fields:
-          - label: Headline Lines
-            name: headlineLines
-            widget: list
-            min: 3
-            max: 3
-            hint: "Exactly 3 lines. Line 2 renders in blood red."
-            field: { label: Line, name: line, widget: string }
-          - label: Short Paragraphs (homepage)
-            name: paragraphs
-            widget: list
-            field: { label: Paragraph, name: paragraph, widget: text }
-          - label: Stats
-            name: stats
-            widget: list
-            fields:
-              - { label: Number, name: num, widget: string, hint: "e.g. 10+ or ∞" }
-              - { label: Label, name: label, widget: string }
-          - label: Full Bio (about page)
-            name: fullBio
-            widget: list
-            required: false
-            field: { label: Paragraph, name: paragraph, widget: text }
-          - label: Fact File
-            name: factFile
-            widget: list
-            required: false
-            fields:
-              - { label: Label, name: label, widget: string, hint: "e.g. born" }
-              - { label: Value, name: value, widget: string, hint: "e.g. milano, 1993" }
-          - { label: Born In, name: bornIn, widget: string, required: false }
-          - { label: Based In, name: basedIn, widget: string, required: false }
-          - { label: Active Since, name: activeSince, widget: string, required: false }
-
-  # ── 👤 ABOUT PAGE — ACHIEVEMENTS ────────────────────────────────────────────
-  - name: achievements
-    label: "👤 About — Achievements"
-    label_singular: Achievement
-    folder: src/content/achievements
-    create: true
-    delete: true
-    slug: "{{order}}-{{slug}}"
-    format: frontmatter
-    fields:
-      - { label: Year, name: year, widget: string, hint: "e.g. 2025" }
-      - { label: Title, name: title, widget: string }
-      - { label: Description, name: description, widget: text }
-      - { label: Order, name: order, widget: number, hint: "Lower number = shown first" }
-
-  # ── 👤 ABOUT PAGE — RESIDENCIES ─────────────────────────────────────────────
-  - name: residencies
-    label: "👤 About — Residencies"
-    label_singular: Residency
-    folder: src/content/residencies
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    format: frontmatter
-    fields:
-      - { label: Venue, name: venue, widget: string }
-      - { label: City, name: city, widget: string }
-      - { label: Start Year, name: startYear, widget: string }
-      - { label: End Year, name: endYear, widget: string, required: false, hint: "Leave blank for present" }
-
-  # ── 👤 ABOUT PAGE — BRAND PARTNERSHIPS ──────────────────────────────────────
-  - name: partnerships
-    label: "👤 About — Partnerships & Stages"
-    label_singular: Partnership
-    folder: src/content/partnerships
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    format: frontmatter
-    fields:
-      - { label: Name, name: name, widget: string, hint: "e.g. TIME WARP" }
-      - label: Type
-        name: type
-        widget: select
-        options:
-          - { label: Festival, value: festival }
-          - { label: Brand, value: brand }
-      - { label: Year, name: year, widget: string, required: false }
-
-  # ── 📅 EVENTS PAGE — TOUR DATES ─────────────────────────────────────────────
+  # ── 📅 EVENTS — TOUR DATES ───────────────────────────────────────────────────
   - name: events
     label: "📅 Events — Tour Dates"
     label_singular: Event
@@ -1198,15 +1100,71 @@ collections:
       - { label: Latitude, name: latitude, widget: number, required: false, hint: "For map dot" }
       - { label: Longitude, name: longitude, widget: number, required: false, hint: "For map dot" }
 
-  # ── 📸 MEDIA PAGE — PHOTOS ───────────────────────────────────────────────────
-  - name: photos
-    label: "📸 Media — Photos"
-    label_singular: Photo
+  # ── 📅 EVENTS — PAGE TEXT ────────────────────────────────────────────────────
+  - name: eventsText
+    label: "📅 Events — Page Text"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/eventsText/events-text.md
+        label: "Events Page Text"
+        name: events-text
+        fields:
+          - label: Page title — line 1
+            name: titleLine1
+            widget: object
+            hint: "e.g. WHERE TO"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Page title — line 2
+            name: titleLine2
+            widget: object
+            hint: "e.g. FIND HIM."
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Upcoming section heading
+            name: upcomingHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Upcoming section subtitle
+            name: upcomingSubtitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Map section heading
+            name: mapHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Archive section heading
+            name: archiveHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Archive section subtitle
+            name: archiveSubtitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 📸 MEDIA — PRESS PHOTOS ──────────────────────────────────────────────────
+  - name: photos-press
+    label: "📸 Media — Press Photos"
+    label_singular: Press Photo
     folder: src/content/photos
     create: true
     delete: true
-    slug: "{{category}}-{{slug}}"
+    slug: "press-{{slug}}"
     format: frontmatter
+    filter: { field: category, value: press }
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Photographer, name: photographer, widget: string }
@@ -1220,6 +1178,41 @@ collections:
       - label: Category
         name: category
         widget: select
+        default: press
+        options:
+          - { label: Press, value: press }
+          - { label: Live, value: live }
+      - { label: High-Res Image, name: image, widget: image, required: false }
+      - { label: Thumbnail, name: thumbnail, widget: image, required: false }
+      - { label: Width (px), name: width, widget: number }
+      - { label: Height (px), name: height, widget: number }
+      - { label: Credit Line, name: credit, widget: string }
+      - { label: Resolution, name: res, widget: string, required: false, hint: "e.g. 3840×2560" }
+
+  # ── 📸 MEDIA — LIVE PHOTOS ───────────────────────────────────────────────────
+  - name: photos-live
+    label: "📸 Media — Live Photos"
+    label_singular: Live Photo
+    folder: src/content/photos
+    create: true
+    delete: true
+    slug: "live-{{slug}}"
+    format: frontmatter
+    filter: { field: category, value: live }
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Photographer, name: photographer, widget: string }
+      - label: Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        date_format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
+      - label: Category
+        name: category
+        widget: select
+        default: live
         options:
           - { label: Press, value: press }
           - { label: Live, value: live }
@@ -1232,7 +1225,7 @@ collections:
       - { label: Credit Line, name: credit, widget: string }
       - { label: Resolution, name: res, widget: string, required: false, hint: "e.g. 3840×2560" }
 
-  # ── 📸 MEDIA PAGE — VIDEOS ───────────────────────────────────────────────────
+  # ── 📸 MEDIA — VIDEOS ────────────────────────────────────────────────────────
   - name: videos
     label: "📸 Media — Videos"
     label_singular: Video
@@ -1265,7 +1258,133 @@ collections:
       - { label: Thumbnail, name: thumbnail, widget: image, required: false }
       - { label: Meta Line, name: meta, widget: string, hint: "e.g. dir. marco rossetti · 2026" }
 
-  # ── 💬 SHARED — PRESS QUOTES (Homepage + About) ──────────────────────────────
+  # ── 📸 MEDIA — PAGE TEXT ─────────────────────────────────────────────────────
+  - name: mediaText
+    label: "📸 Media — Page Text"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/mediaText/media-text.md
+        label: "Media Page Text"
+        name: media-text
+        fields:
+          - label: Page title — line 1
+            name: titleLine1
+            widget: object
+            hint: "e.g. THE VISUAL"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Page title — line 2
+            name: titleLine2
+            widget: object
+            hint: "e.g. RECORD."
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Press photos heading
+            name: pressPhotosHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Press photos subtitle
+            name: pressPhotosSubtitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Live gallery heading
+            name: liveHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Video gallery heading
+            name: videoHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── ✉ CONTACT — PAGE TEXT ───────────────────────────────────────────────────
+  - name: contactText
+    label: "✉ Contact — Page Text"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/contactText/contact-text.md
+        label: "Contact Page Text"
+        name: contact-text
+        fields:
+          - label: Page title — line 1
+            name: titleLine1
+            widget: object
+            hint: "e.g. GET IN"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Page title — line 2
+            name: titleLine2
+            widget: object
+            hint: "e.g. TOUCH."
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Booking eyebrow
+            name: bookingEyebrow
+            widget: object
+            hint: "Small label above the booking form"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Booking section heading
+            name: bookingHeading
+            widget: object
+            hint: "e.g. BOOKING INQUIRY."
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Booking section subtitle
+            name: bookingSubtitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Direct contact section heading
+            name: directContactHeading
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: General inquiry line
+            name: generalInquiryLine
+            widget: object
+            hint: "Large display text (e.g. EMAIL.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: General inquiry email / note
+            name: generalInquiryNote
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Form receipt title
+            name: receiptTitle
+            widget: object
+            hint: "Shown after form submission (e.g. RECEIVED.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Form receipt confirmation message
+            name: receiptConfirm
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+
+  # ── 💬 SHARED — PRESS QUOTES ─────────────────────────────────────────────────
   - name: press
     label: "💬 Press Quotes"
     label_singular: Press Quote

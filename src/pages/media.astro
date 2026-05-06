@@ -11,8 +11,8 @@ import { getEntry } from "astro:content";
 import { t, type Locale } from "../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const pcEntry = await getEntry("pageContent", "page-content");
-const pc = pcEntry!.data.media;
+const pcEntry = await getEntry("mediaText", "media-text");
+const pc = pcEntry!.data;
 ---
 
 <Base

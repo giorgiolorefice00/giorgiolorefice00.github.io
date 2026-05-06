@@ -160,6 +160,8 @@ const musicStreaming = defineCollection({
 const musicText = defineCollection({
   type: "content",
   schema: z.object({
+    titleLine1:                  bil,
+    titleLine2:                  bil,
     latestReleaseEyebrow:        bil,
     latestReleaseSectionLabel:   bil,
     latestReleaseDateLabel:      bil,
@@ -294,70 +296,108 @@ const ui = defineCollection({
   }),
 });
 
-const pageContent = defineCollection({
+// ── HOME PAGE TEXT (one collection per section) ─────────────────────────────
+
+const homeHero = defineCollection({
   type: "content",
   schema: z.object({
-    home: z.object({
-      heroEyebrow:        bil,
-      heroTaglineLeft:    bil,
-      heroTaglineRight:   bil,
-      heroPhotoCaption:   bil,
-      aboutEyebrow:       bil,
-      aboutLinkText:      bil,
-      mixEyebrow:         bil,
-      mixLatestDropLabel: bil,
-      eventsHeading:      bil,
-      eventsSubtitle:     bil,
-      pressEyebrow:       bil,
-      pressHeading1:      bil,
-      pressHeading2:      bil,
-    }),
-    music: z.object({
-      titleLine1: bil,
-      titleLine2: bil,
-    }),
-    about: z.object({
-      titleLine1:           bil,
-      titleLine2:           bil,
-      achievementsHeading:  bil,
-      residenciesHeading:   bil,
-      partnershipsHeading:  bil,
-      pressArticlesHeading: bil,
-      epkEyebrow:           bil,
-      epkHeading:           bil,
-      epkDescription:       bil,
-      factFileLabel:        bil,
-      downloadBio:          bil,
-    }),
-    events: z.object({
-      titleLine1:       bil,
-      titleLine2:       bil,
-      upcomingHeading:  bil,
-      upcomingSubtitle: bil,
-      mapHeading:       bil,
-      archiveHeading:   bil,
-      archiveSubtitle:  bil,
-    }),
-    media: z.object({
-      titleLine1:          bil,
-      titleLine2:          bil,
-      pressPhotosHeading:  bil,
-      pressPhotosSubtitle: bil,
-      liveHeading:         bil,
-      videoHeading:        bil,
-    }),
-    contact: z.object({
-      titleLine1:           bil,
-      titleLine2:           bil,
-      bookingEyebrow:       bil,
-      bookingHeading:       bil,
-      bookingSubtitle:      bil,
-      directContactHeading: bil,
-      generalInquiryLine:   bil,
-      generalInquiryNote:   bil,
-      receiptTitle:         bil,
-      receiptConfirm:       bil,
-    }),
+    heroEyebrow:      bil,
+    heroTaglineLeft:  bil,
+    heroTaglineRight: bil,
+    heroPhotoCaption: bil,
+  }),
+});
+
+const homeAbout = defineCollection({
+  type: "content",
+  schema: z.object({
+    aboutEyebrow:  bil,
+    aboutLinkText: bil,
+  }),
+});
+
+const homeMix = defineCollection({
+  type: "content",
+  schema: z.object({
+    mixEyebrow:         bil,
+    mixLatestDropLabel: bil,
+  }),
+});
+
+const homeEvents = defineCollection({
+  type: "content",
+  schema: z.object({
+    eventsHeading:  bil,
+    eventsSubtitle: bil,
+  }),
+});
+
+const homePress = defineCollection({
+  type: "content",
+  schema: z.object({
+    pressEyebrow:  bil,
+    pressHeading1: bil,
+    pressHeading2: bil,
+  }),
+});
+
+// ── INNER PAGE TEXT ──────────────────────────────────────────────────────────
+
+const aboutText = defineCollection({
+  type: "content",
+  schema: z.object({
+    titleLine1:           bil,
+    titleLine2:           bil,
+    achievementsHeading:  bil,
+    residenciesHeading:   bil,
+    partnershipsHeading:  bil,
+    pressArticlesHeading: bil,
+    epkEyebrow:           bil,
+    epkHeading:           bil,
+    epkDescription:       bil,
+    factFileLabel:        bil,
+    downloadBio:          bil,
+  }),
+});
+
+const eventsText = defineCollection({
+  type: "content",
+  schema: z.object({
+    titleLine1:       bil,
+    titleLine2:       bil,
+    upcomingHeading:  bil,
+    upcomingSubtitle: bil,
+    mapHeading:       bil,
+    archiveHeading:   bil,
+    archiveSubtitle:  bil,
+  }),
+});
+
+const mediaText = defineCollection({
+  type: "content",
+  schema: z.object({
+    titleLine1:          bil,
+    titleLine2:          bil,
+    pressPhotosHeading:  bil,
+    pressPhotosSubtitle: bil,
+    liveHeading:         bil,
+    videoHeading:        bil,
+  }),
+});
+
+const contactText = defineCollection({
+  type: "content",
+  schema: z.object({
+    titleLine1:           bil,
+    titleLine2:           bil,
+    bookingEyebrow:       bil,
+    bookingHeading:       bil,
+    bookingSubtitle:      bil,
+    directContactHeading: bil,
+    generalInquiryLine:   bil,
+    generalInquiryNote:   bil,
+    receiptTitle:         bil,
+    receiptConfirm:       bil,
   }),
 });
 
@@ -382,7 +422,9 @@ export const collections = {
   events, press, about,
   achievements, residencies, partnerships,
   releases, mixes, videos, photos,
-  siteConfig, ui, pageContent,
+  siteConfig, ui,
   musicStreaming, musicText,
   latestRelease,
+  homeHero, homeAbout, homeMix, homeEvents, homePress,
+  aboutText, eventsText, mediaText, contactText,
 };

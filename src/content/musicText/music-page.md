@@ -1,4 +1,10 @@
 ---
+titleLine1:
+  en: "THE SOUND"
+  it: "IL SUONO"
+titleLine2:
+  en: "ON RECORD."
+  it: "SU DISCO."
 latestReleaseEyebrow:
   en: "A — latest release"
   it: "A — ultima uscita"
