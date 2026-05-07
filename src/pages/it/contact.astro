@@ -31,7 +31,7 @@ const contacts = siteEntry!.data.contacts;
       <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
         <SkullScene client:visible />
       </div>
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;pointer-events:none;" aria-hidden="true"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);z-index:1;pointer-events:none;" aria-hidden="true"></div>
 
       <div class="contact-inner" style="position:relative;z-index:2;text-align:center;">
 
@@ -88,6 +88,10 @@ const contacts = siteEntry!.data.contacts;
         )}
 
       </div>
+
+      <p style="position:absolute;bottom:12px;right:16px;z-index:3;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(107,107,107,0.5);letter-spacing:0.12em;pointer-events:none;">
+        shader by KΛTUR · CC BY-NC 4.0
+      </p>
     </section>
   </main>
   <Footer />
@@ -95,7 +99,9 @@ const contacts = siteEntry!.data.contacts;
 
 <style>
   .contact-section {
-    background: #000;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(200,16,46,0.18) 0%, rgba(0,0,0,1) 68%),
+      #000;
     position: relative;
     overflow: hidden;
     min-height: 80vh;
