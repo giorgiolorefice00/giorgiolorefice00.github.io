@@ -39,20 +39,19 @@ const press = defineCollection({
     publication: z.string(),
     author:      z.string(),
     date:        dateStr,
-    bodyIt:      z.string().optional(), // Italian quote; body = English quote
+    bodyIt:      z.string().optional(), // Italian quote; markdown body = English quote
+    sourceUrl:   z.string().optional(),
+    featured:    z.boolean().default(true),
   }),
 });
 
 const about = defineCollection({
   type: "content",
   schema: z.object({
-    headlineLines: z.tuple([bil, bil, bil]),
-    paragraphs:    z.array(bil),
-    stats:         z.array(z.object({ num: z.string(), label: bil })),
-    fullBio:       z.array(bil).optional(),
-    factFile:      z.array(z.object({ label: bil, value: bil })).optional(),
-    bornIn:      z.string().optional(),
-    basedIn:     z.string().optional(),
+    fullBio:   z.array(bil).optional(),
+    factFile:  z.array(z.object({ label: bil, value: bil })).optional(),
+    bornIn:    z.string().optional(),
+    basedIn:   z.string().optional(),
     activeSince: z.string().optional(),
   }),
 });
@@ -107,8 +106,11 @@ const mixes = defineCollection({
     date:         dateStr,
     category:     z.enum(["single", "live", "collab"]),
     coverArt:     z.string().optional(),
-    soundcloudUrl: z.string().optional(),
-    featured:     z.boolean().default(false),
+    soundcloudUrl:    z.string().optional(),
+    spotifyUrl:       z.string().optional(),
+    youtubeMusicUrl:  z.string().optional(),
+    tracklistUrl:     z.string().optional(),
+    featured:         z.boolean().default(false),
   }),
 });
 
@@ -258,8 +260,13 @@ const homeHero = defineCollection({
 const homeAbout = defineCollection({
   type: "content",
   schema: z.object({
-    aboutEyebrow:  bil,
-    aboutLinkText: bil,
+    aboutEyebrow:    bil,
+    aboutLinkText:   bil,
+    headlineLine1:   bil,
+    headlineLine2:   bil,
+    headlineLine3:   bil,
+    paragraphs:      z.array(bil),
+    stats:           z.array(z.object({ num: z.string(), label: bil })),
   }),
 });
 
@@ -270,19 +277,17 @@ const homeMix = defineCollection({
     mixLatestDropLabel: bil,
     listenSpotify:      bil,
     listenSoundcloud:   bil,
-    listenBandcamp:     bil,
+    listenYoutubeMusic: bil,
   }),
 });
 
 const homeEvents = defineCollection({
   type: "content",
   schema: z.object({
-    eventsHeading:  bil,
-    eventsSubtitle: bil,
-    allTourDates:   bilBtn,
-    tickets:        bil,
-    soldOut:        bil,
-    fewLeft:        bil,
+    eventsHeading:       bil,
+    eventsSubtitle:      bil,
+    allTourDates:        bilBtn,
+    eventsCardCtaLabel:  bil,
   }),
 });
 

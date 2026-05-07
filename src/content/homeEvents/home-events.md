@@ -9,13 +9,7 @@ allTourDates:
   en: "→ all tour dates"
   it: "→ tutte le date"
   url: "/events"
-tickets:
-  en: "→ tickets"
-  it: "→ biglietti"
-soldOut:
-  en: "SOLD OUT"
-  it: "ESAURITO"
-fewLeft:
-  en: "FEW TICKETS LEFT"
-  it: "POCHI BIGLIETTI"
+eventsCardCtaLabel:
+  en: "reservation →"
+  it: "prenotazione →"
 ---

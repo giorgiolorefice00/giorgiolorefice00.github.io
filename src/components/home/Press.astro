@@ -7,11 +7,11 @@ const locale = (Astro.currentLocale ?? "en") as Locale;
 const pcEntry = await getEntry("homePress", "home-press");
 const pc = pcEntry!.data;
 
-const rawPress = await getCollection("press");
+const rawPress = await getCollection("press", ({ data }) => data.featured !== false);
 const quotes = rawPress
   .sort((a, b) => a.id.localeCompare(b.id))
   .map((e) => ({
-    text: e.body!.trim(),
+    text: (locale === "it" && e.data.bodyIt ? e.data.bodyIt : e.body!.trim()),
     pub: e.data.publication,
     attr: `${e.data.author} · ${e.data.date}`,
   }));

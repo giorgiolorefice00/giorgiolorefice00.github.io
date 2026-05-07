@@ -5,9 +5,7 @@ import djPhoto from "../../assets/dj-photo.jpg";
 import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const entry = await getEntry("about", "about");
 const pcEntry = await getEntry("homeAbout", "home-about");
-const { headlineLines, paragraphs, stats } = entry!.data;
 const pc = pcEntry!.data;
 const aboutHref = locale === "it" ? "/it/about" : "/about";
 ---
@@ -23,17 +21,17 @@ const aboutHref = locale === "it" ? "/it/about" : "/about";
         {t(pc.aboutEyebrow, locale)}
       </div>
 
-      <!-- HEADLINE — index 0: off-white large, index 1: blood-red oversized, index 2: off-white small tracked -->
+      <!-- HEADLINE — line 1: off-white large, line 2: blood-red oversized, line 3: off-white small tracked -->
       <div style="margin-bottom:40px;line-height:1.0;">
-        <div style="font-family:'Anton',sans-serif;font-size:clamp(40px,4.5vw,72px);color:#e8e8e8;letter-spacing:0.01em;">{headlineLines[0][locale]}</div>
-        <div style="font-family:'Anton',sans-serif;font-size:clamp(56px,6.5vw,104px);color:#c8102e;letter-spacing:0.01em;line-height:0.92;">{headlineLines[1][locale]}</div>
-        <div style="font-family:'Anton',sans-serif;font-size:clamp(18px,2vw,28px);color:#e8e8e8;letter-spacing:0.12em;margin-top:12px;">{headlineLines[2][locale]}</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(40px,4.5vw,72px);color:#e8e8e8;letter-spacing:0.01em;">{t(pc.headlineLine1, locale)}</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(56px,6.5vw,104px);color:#c8102e;letter-spacing:0.01em;line-height:0.92;">{t(pc.headlineLine2, locale)}</div>
+        <div style="font-family:'Anton',sans-serif;font-size:clamp(18px,2vw,28px);color:#e8e8e8;letter-spacing:0.12em;margin-top:12px;">{t(pc.headlineLine3, locale)}</div>
       </div>
 
       <!-- BODY -->
       <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:48px;">
-        {paragraphs.map((p) => (
-          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;line-height:1.8;letter-spacing:0.04em;">{p[locale]}</p>
+        {pc.paragraphs.map((p) => (
+          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;line-height:1.8;letter-spacing:0.04em;">{t(p, locale)}</p>
         ))}
       </div>
 
@@ -56,10 +54,10 @@ const aboutHref = locale === "it" ? "/it/about" : "/about";
 
       <!-- STATS -->
       <div class="about-stats" style="display:flex;flex-direction:column;gap:0;border-left:1px solid #1a1a1a;">
-        {stats.map((s, i) => (
-          <div class="stat-block" style={`padding:24px 28px;${i < stats.length - 1 ? "border-bottom:1px solid #111;" : ""}`}>
+        {pc.stats.map((s, i) => (
+          <div class="stat-block" style={`padding:24px 28px;${i < pc.stats.length - 1 ? "border-bottom:1px solid #111;" : ""}`}>
             <div class="stat-num">{s.num}</div>
-            <div class="stat-label">{s.label[locale]}</div>
+            <div class="stat-label">{t(s.label, locale)}</div>
           </div>
         ))}
       </div>

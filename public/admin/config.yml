@@ -255,6 +255,52 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
+          - label: Headline — Line 1
+            name: headlineLine1
+            widget: object
+            hint: "First display line (e.g. BORN IN THE)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Headline — Line 2 (blood red)
+            name: headlineLine2
+            widget: object
+            hint: "Second line — renders in blood red (e.g. BASEMENT)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Headline — Line 3
+            name: headlineLine3
+            widget: object
+            hint: "Third smaller line (e.g. OF A CITY THAT NEVER SLEEPS.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Bio Paragraphs
+            name: paragraphs
+            widget: list
+            hint: "Short bio shown on the homepage snippet (2–3 lines)"
+            field:
+              label: Paragraph
+              name: paragraph
+              widget: object
+              fields:
+                - { label: English, name: en, widget: text }
+                - { label: Italiano, name: it, widget: text }
+          - label: Stats (3 blocks)
+            name: stats
+            widget: list
+            min: 3
+            max: 3
+            hint: "Three stat blocks shown to the right of the bio"
+            fields:
+              - { label: "Value (e.g. 10+, 48, ∞)", name: num, widget: string }
+              - label: Label
+                name: label
+                widget: object
+                fields:
+                  - { label: English, name: en, widget: string }
+                  - { label: Italiano, name: it, widget: string }
 
   # ── 🏠 HOME — FEATURED MIX ───────────────────────────────────────────────────
   - name: homeMix
@@ -294,10 +340,10 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Bandcamp link label
-            name: listenBandcamp
+          - label: YouTube Music link label
+            name: listenYoutubeMusic
             widget: object
-            hint: "Label on the Bandcamp streaming link in the mix player sidebar (leave text empty to hide)"
+            hint: "Label on the YouTube Music streaming link in the mix player sidebar"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -334,24 +380,10 @@ collections:
               - { label: English text, name: en, widget: string }
               - { label: Italiano text, name: it, widget: string }
               - { label: URL (destination), name: url, widget: string, required: false, hint: "e.g. /events" }
-          - label: Tickets button label
-            name: tickets
+          - label: Card CTA label
+            name: eventsCardCtaLabel
             widget: object
-            hint: "Text on the ticket link for each event card"
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Sold Out label
-            name: soldOut
-            widget: object
-            hint: "Shown on event cards when tickets are sold out"
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: Few Tickets Left label
-            name: fewLeft
-            widget: object
-            hint: "Shown on event cards when only a few tickets remain"
+            hint: "Button on each event card linking to the contact page (e.g. 'reservation →')"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -399,23 +431,6 @@ collections:
         file: src/content/about/about.md
         format: frontmatter
         fields:
-          - label: Headline Lines
-            name: headlineLines
-            widget: list
-            min: 3
-            max: 3
-            hint: "Exactly 3 lines. Line 2 renders in blood red."
-            field: { label: Line, name: line, widget: string }
-          - label: Short Paragraphs (homepage snippet)
-            name: paragraphs
-            widget: list
-            field: { label: Paragraph, name: paragraph, widget: text }
-          - label: Stats
-            name: stats
-            widget: list
-            fields:
-              - { label: Number, name: num, widget: string, hint: "e.g. 10+ or ∞" }
-              - { label: Label, name: label, widget: string }
           - label: Full Bio (about page)
             name: fullBio
             widget: list
@@ -698,6 +713,9 @@ collections:
           - { label: Collab, value: collab }
       - { label: Cover Art, name: coverArt, widget: image, required: false }
       - { label: SoundCloud URL, name: soundcloudUrl, widget: string, required: false }
+      - { label: Spotify URL, name: spotifyUrl, widget: string, required: false }
+      - { label: YouTube Music URL, name: youtubeMusicUrl, widget: string, required: false }
+      - { label: Tracklist URL (view → link), name: tracklistUrl, widget: string, required: false, hint: "Link for the 'view →' tracklist button. Leave empty to hide the button." }
       - { label: Featured (shows on homepage), name: featured, widget: boolean, default: false }
 
   # ── ♫ MUSIC — ALBUMS ─────────────────────────────────────────────────────────
@@ -1188,7 +1206,10 @@ collections:
     slug: "{{slug}}"
     format: frontmatter
     fields:
+      - { label: Quote Text (English), name: body, widget: text, hint: "The pull quote in English" }
+      - { label: Quote Text (Italiano), name: bodyIt, widget: text, required: false, hint: "Italian translation of the quote (leave empty to use English)" }
       - { label: Publication, name: publication, widget: string, hint: "e.g. RESIDENT ADVISOR" }
       - { label: Author, name: author, widget: string, hint: "e.g. — c. hayes" }
       - { label: Date, name: date, widget: string, hint: "e.g. 03.2026" }
-      - { label: Quote Text, name: body, widget: text }
+      - { label: Source URL, name: sourceUrl, widget: string, required: false, hint: "Link to the original article (optional)" }
+      - { label: Show on Homepage Slider, name: featured, widget: boolean, default: true, hint: "If enabled, this quote appears in the homepage press slider" }

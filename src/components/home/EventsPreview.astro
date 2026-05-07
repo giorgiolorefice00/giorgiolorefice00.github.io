@@ -24,43 +24,32 @@ const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
   <!-- CARDS -->
   <div class="events-row" data-reveal-stagger style="display:flex;gap:16px;">
     {events.map((ev) => {
-      const { venue, city, day, month, year, eventTitle: eventTitleObj, setTime, serial, status } = ev.data;
-      const eventTitle = eventTitleObj[locale];
-      const soldOut = status === "sold-out";
-      const fewLeft = status === "few-left";
+      const { venue, city, day, month, year, setTime } = ev.data;
+      const base = import.meta.env.BASE_URL;
+      const contactHref = base.endsWith("/") ? `${base}contact` : `${base}/contact`;
       return (
-        <div class={`event-card${soldOut ? " sold-out" : ""}`}>
-
-          <!-- SERIAL / TAG -->
-          {fewLeft
-            ? <span class="event-tag few-left">{t(pc.fewLeft, locale)}</span>
-            : <span class="event-tag">{serial}</span>
-          }
+        <div class="event-card">
 
           <!-- DATE -->
-          <div style={fewLeft ? "margin-top:20px;" : ""}>
+          <div>
             <div class="event-date-num">{day}</div>
             <div class="event-date-sub">{month} / {year}</div>
           </div>
 
-          <!-- DIVIDER -->
-          <div class="event-divider"></div>
+          <!-- DIVIDER — straight full-width red line -->
+          <div style="width:100%;height:1px;background:#c8102e;margin:16px 0;flex-shrink:0;"></div>
 
-          <!-- VENUE -->
+          <!-- LOCATION -->
           <div class="event-venue">{venue}</div>
           <div class="event-city">{city}</div>
 
-          <!-- DETAILS -->
-          <div style="margin-top:20px;">
-            <div class="event-title">{eventTitle}</div>
+          <!-- TIME -->
+          <div style="margin-top:12px;">
             <div class="event-time">{setTime}</div>
           </div>
 
           <!-- CTA -->
-          {soldOut
-            ? <div class="event-ticket sold-out-label">{t(pc.soldOut, locale)}</div>
-            : <a href="#" class="event-ticket">{t(pc.tickets, locale)}</a>
-          }
+          <a href={contactHref} class="event-ticket">{t(pc.eventsCardCtaLabel, locale)}</a>
 
         </div>
       );

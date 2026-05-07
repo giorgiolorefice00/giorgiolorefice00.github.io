@@ -11,7 +11,7 @@ listenSpotify:
 listenSoundcloud:
   en: "listen on soundcloud"
   it: "ascolta su soundcloud"
-listenBandcamp:
-  en: "listen on bandcamp"
-  it: "ascolta su bandcamp"
+listenYoutubeMusic:
+  en: "listen on youtube music"
+  it: "ascolta su youtube music"
 ---
