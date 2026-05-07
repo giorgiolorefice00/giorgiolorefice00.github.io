@@ -12,14 +12,14 @@ heroPhotoCaption:
   en: "[ 2026 — Bologna ]"
   it: "[ 2026 — Bologna ]"
 heroCtaPrimary:
-  en: "▶ LISTEN TO LATEST MIX"
-  it: "▶ ASCOLTA L'ULTIMO MIX"
-  url: ""
+  en: ▶ LISTEN TO LATEST MIX
+  it: ▶ ASCOLTA L'ULTIMO MIX
+  url: https://giorgiolorefice.com/music/
 heroCtaSecondary:
-  en: "→ VIEW TOUR DATES"
-  it: "→ VEDI LE DATE DEL TOUR"
-  url: ""
+  en: → VIEW TOUR DATES
+  it: → VEDI LE DATE DEL TOUR
+  url: https://giorgiolorefice.com/events/
 heroScroll:
-  en: "↓ scroll"
-  it: "↓ scorri"
+  en: ↓ scroll
+  it: ↓ scorri
 ---
