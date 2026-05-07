@@ -3,7 +3,8 @@ import Base from "../../layouts/Base.astro";
 import Header from "../../components/layout/Header.astro";
 import PageHeader from "../../components/layout/PageHeader.astro";
 import Footer from "../../components/layout/Footer.astro";
-import SkullScene from "../../components/contact/SkullScene";
+import { SmokeBackground } from "../../components/home/SmokeBackground";
+import FireTrailFrame from "../../components/contact/FireTrailFrame";
 import { getEntry } from "astro:content";
 import { useTranslations } from "../../i18n";
 
@@ -28,10 +29,10 @@ const contacts = siteEntry!.data.contacts;
     />
 
     <section class="contact-section">
-      <div style="position:absolute;inset:0;z-index:0;pointer-events:none;">
-        <SkullScene client:visible />
+      <div class="contact-smoke" aria-hidden="true">
+        <SmokeBackground client:visible smokeColor="#C8102E" />
       </div>
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.3);z-index:1;pointer-events:none;" aria-hidden="true"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:1;pointer-events:none;" aria-hidden="true"></div>
 
       <div class="contact-inner" style="position:relative;z-index:2;text-align:center;">
 
@@ -47,24 +48,29 @@ const contacts = siteEntry!.data.contacts;
           </p>
         )}
 
-        <div style="margin-bottom:40px;">
-          {pc.emailLabel && (
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
-              {pc.emailLabel.it}
-            </div>
-          )}
-          <a
-            href={`mailto:${contacts.email}`}
-            style="font-family:'Anton',sans-serif;font-size:clamp(24px,3.5vw,52px);color:#c8102e;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
-            onmouseover="this.style.color='#ff1f1f'"
-            onmouseout="this.style.color='#c8102e'"
-          >
-            {contacts.email}
-          </a>
+        <!-- EMAIL — card with animated fire-trail border -->
+        <div class="email-card-wrapper">
+          <FireTrailFrame client:visible />
+          <div class="email-card-content">
+            {pc.emailLabel && (
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
+                {pc.emailLabel.it}
+              </div>
+            )}
+            <a
+              href={`mailto:${contacts.email}`}
+              style="font-family:'Anton',sans-serif;font-size:clamp(18px,2.8vw,42px);color:#c8102e;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;word-break:break-all;"
+              onmouseover="this.style.color='#ff1f1f'"
+              onmouseout="this.style.color='#c8102e'"
+            >
+              {contacts.email}
+            </a>
+          </div>
         </div>
 
+        <!-- PHONE — plain styled text, no shader -->
         {contacts.phone && (
-          <div style="margin-bottom:48px;">
+          <div style="margin-top:40px;margin-bottom:48px;">
             {pc.phoneLabel && (
               <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
                 {pc.phoneLabel.it}
@@ -72,7 +78,7 @@ const contacts = siteEntry!.data.contacts;
             )}
             <a
               href={`tel:${contacts.phone.replace(/\s/g, "")}`}
-              style="font-family:'Anton',sans-serif;font-size:clamp(24px,3.5vw,52px);color:#e8e8e8;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
+              style="font-family:'Anton',sans-serif;font-size:clamp(22px,3vw,48px);color:#e8e8e8;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
               onmouseover="this.style.color='#c8102e'"
               onmouseout="this.style.color='#e8e8e8'"
             >
@@ -88,10 +94,6 @@ const contacts = siteEntry!.data.contacts;
         )}
 
       </div>
-
-      <p style="position:absolute;bottom:12px;right:16px;z-index:3;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(107,107,107,0.5);letter-spacing:0.12em;pointer-events:none;">
-        shader by KΛTUR · CC BY-NC 4.0
-      </p>
     </section>
   </main>
   <Footer />
@@ -100,7 +102,7 @@ const contacts = siteEntry!.data.contacts;
 <style>
   .contact-section {
     background:
-      radial-gradient(ellipse at 50% 45%, rgba(200,16,46,0.18) 0%, rgba(0,0,0,1) 68%),
+      radial-gradient(ellipse at 50% 45%, rgba(200,16,46,0.15) 0%, rgba(0,0,0,1) 65%),
       #000;
     position: relative;
     overflow: hidden;
@@ -110,11 +112,52 @@ const contacts = siteEntry!.data.contacts;
     justify-content: center;
     padding: 100px 72px;
   }
+
+  .contact-smoke {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.45;
+  }
+
   .contact-inner {
-    max-width: 640px;
+    max-width: 700px;
     width: 100%;
   }
+
+  .email-card-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    aspect-ratio: 3 / 1;
+    border: 1px solid #c8102e;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .email-card-wrapper:has(canvas) {
+    border: none;
+    background: transparent;
+  }
+
+  .email-card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 32px;
+  }
+
   @media (max-width: 768px) {
     .contact-section { padding: 80px 24px; }
+    .email-card-wrapper { aspect-ratio: 5 / 2; }
+  }
+
+  @media (max-width: 480px) {
+    .email-card-wrapper { aspect-ratio: 2 / 1; }
   }
 </style>
