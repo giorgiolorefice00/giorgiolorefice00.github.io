@@ -7,7 +7,7 @@ socials:
   bandcamp: ""
   youtubeMusic: https://giorgiolorefice.com/
 contacts:
-  email: "info@giorgiolorefice.com"
+  email: giorgio.lorefice00@gmail.com
   phone: ""
 files:
   epk: ""
