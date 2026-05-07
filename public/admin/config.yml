@@ -326,7 +326,7 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: "All Tour Dates" link
+          - label: All Tour Dates link
             name: allTourDates
             widget: object
             hint: "Link that takes you to the full events page"
