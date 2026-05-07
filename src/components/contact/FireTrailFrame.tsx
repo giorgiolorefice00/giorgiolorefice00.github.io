@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-// Fire trail traveling around a rounded rectangle perimeter
-// Brand palette: blood red #C8102E core → #FF1F1F hot highlights
+// Animated fire trail orbiting the email card border
+// Brand palette: blood red #C8102E → hot red #FF1F1F
 
 const FRAG = `#version 300 es
 precision highp float;
@@ -12,8 +12,9 @@ uniform vec2  u_resolution;
 
 #define T u_time
 #define R u_resolution
+#define PI 3.14159265359
 
-// ── noise ────────────────────────────────────────────────────────────────────
+// ── noise ─────────────────────────────────────────────────────────────────────
 
 float rand(vec2 p) {
   p = fract(p * vec2(12.9898, 78.233));
@@ -25,8 +26,8 @@ float noise(vec2 p) {
   vec2 i = floor(p), f = fract(p);
   vec2 u = f * f * (3.0 - 2.0 * f);
   return mix(
-    mix(rand(i), rand(i + vec2(1,0)), u.x),
-    mix(rand(i + vec2(0,1)), rand(i + 1.0), u.x),
+    mix(rand(i),          rand(i + vec2(1,0)), u.x),
+    mix(rand(i+vec2(0,1)),rand(i + vec2(1,1)), u.x),
     u.y
   );
 }
@@ -34,161 +35,110 @@ float noise(vec2 p) {
 // ── brand color ramp ──────────────────────────────────────────────────────────
 
 vec3 ramp(float t) {
-  t = max(t, 1e-4);
-  vec3 core = vec3(0.04, 0.00, 0.00);   // near-black blood
-  vec3 mid  = vec3(0.78, 0.06, 0.18);   // blood  #C8102E
-  vec3 hot  = vec3(1.00, 0.12, 0.12);   // hot    #FF1F1F
-  vec3 col;
-  if      (t < 0.4) col = mix(core, mid, t / 0.4);
-  else if (t < 0.8) col = mix(mid, hot, (t - 0.4) / 0.4);
-  else               col = hot;
-  return col / t;
+  t = clamp(t, 0.0, 1.0);
+  vec3 dark = vec3(0.10, 0.00, 0.00);
+  vec3 mid  = vec3(0.78, 0.06, 0.18);  // #C8102E
+  vec3 hot  = vec3(1.00, 0.12, 0.12);  // #FF1F1F
+  if (t < 0.5) return mix(dark, mid, t * 2.0);
+  else          return mix(mid, hot, (t - 0.5) * 2.0);
 }
 
-// ── rounded-rect SDF ─────────────────────────────────────────────────────────
+// ── rounded-rect SDF ──────────────────────────────────────────────────────────
 
 float sdRoundBox(vec2 p, vec2 b, float r) {
   vec2 q = abs(p) - b + r;
   return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
 }
 
-// ── perimeter parameterization s∈[0,1] → position on rounded-rect boundary ──
+// ── perimeter parameterization: angle proxy mapped onto box ───────────────────
+//
+// Instead of an exact arc-length parameterization (which is complex and
+// bug-prone for rounded rects), we use a box-normalized angle:
+//   angle  = atan2(y/hy, x/hx)   — uniform in "box space"
+//   s      = angle / (2*PI)       — maps perimeter to [0, 1)
+//
+// This is NOT arc-length uniform (corners feel slightly faster) but it
+// is continuous, bijective, and visually convincing.
 
-vec2 perimeterPos(float s, vec2 half, float r) {
-  // total perimeter: 4 straight edges + 4 quarter-circle corners
-  float straight = 2.0 * (half.x - r) + 2.0 * (half.y - r);
-  float curved   = 2.0 * 3.14159265 * r;
-  float total    = 2.0 * straight + curved;
-
-  // edge lengths in order: top, right, bottom, left (each half minus corner)
-  float eTop   = (half.x - r) / total;
-  float eRight = (half.y - r) / total;
-  float eCrn   = (0.5 * 3.14159265 * r) / total;
-
-  // map s → (edge, localT)
-  // walk: top → top-right corner → right → bottom-right corner → bottom → bottom-left corner → left → top-left corner
-  s = fract(s);
-
-  vec2 pos;
-  float acc = 0.0;
-
-  // top edge: left→right at y=+half.y
-  if (s < acc + eTop) {
-    float lt = (s - acc) / eTop;
-    pos = vec2(mix(-half.x + r, half.x - r, lt), half.y);
-    return pos;
-  } acc += eTop;
-
-  // top-right corner
-  if (s < acc + eCrn) {
-    float lt = (s - acc) / eCrn;
-    float a = mix(0.5 * 3.14159265, 0.0, lt);
-    pos = vec2(half.x - r + cos(a) * r, half.y - r + sin(a) * r);
-    return pos;
-  } acc += eCrn;
-
-  // right edge: top→bottom at x=+half.x
-  if (s < acc + eRight) {
-    float lt = (s - acc) / eRight;
-    pos = vec2(half.x, mix(half.y - r, -half.y + r, lt));
-    return pos;
-  } acc += eRight;
-
-  // bottom-right corner
-  if (s < acc + eCrn) {
-    float lt = (s - acc) / eCrn;
-    float a = mix(0.0, -0.5 * 3.14159265, lt);
-    pos = vec2(half.x - r + cos(a) * r, -half.y + r + sin(a) * r);
-    return pos;
-  } acc += eCrn;
-
-  // bottom edge: right→left at y=-half.y
-  if (s < acc + eTop) {
-    float lt = (s - acc) / eTop;
-    pos = vec2(mix(half.x - r, -half.x + r, lt), -half.y);
-    return pos;
-  } acc += eTop;
-
-  // bottom-left corner
-  if (s < acc + eCrn) {
-    float lt = (s - acc) / eCrn;
-    float a = mix(-0.5 * 3.14159265, -3.14159265, lt);
-    pos = vec2(-half.x + r + cos(a) * r, -half.y + r + sin(a) * r);
-    return pos;
-  } acc += eCrn;
-
-  // left edge: bottom→top at x=-half.x
-  if (s < acc + eRight) {
-    float lt = (s - acc) / eRight;
-    pos = vec2(-half.x, mix(-half.y + r, half.y - r, lt));
-    return pos;
-  } acc += eRight;
-
-  // top-left corner (remainder)
-  {
-    float lt = (s - acc) / eCrn;
-    float a = mix(3.14159265, 0.5 * 3.14159265, lt);
-    pos = vec2(-half.x + r + cos(a) * r, half.y - r + sin(a) * r);
-    return pos;
-  }
+float toS(vec2 p, vec2 half) {
+  return fract(atan(p.y / half.y, p.x / half.x) / (2.0 * PI) + 1.0);
 }
 
-// ── main ─────────────────────────────────────────────────────────────────────
+// Head position: given s∈[0,1], find the matching point on the box border.
+// We reverse the angle proxy: compute angle from s, then project the unit
+// direction onto the nearest border face.
+vec2 sToPos(float s, vec2 half) {
+  float angle = (s - 0.5) * 2.0 * PI;  // s=0 → right, s=0.5 → left
+  vec2 d = vec2(cos(angle), sin(angle));
+  // Project onto rounded-rect: scale so the direction hits the border
+  // Use the box projection: divide by the largest normalized component
+  float scale = min(half.x / abs(d.x + 1e-6), half.y / abs(d.y + 1e-6));
+  return d * scale;
+}
+
+// ── main ──────────────────────────────────────────────────────────────────────
 
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * R) / R.y;
 
-  // Card geometry in UV space
   float aspect = R.x / R.y;
-  vec2  half   = vec2(aspect * 0.48, 0.46);  // fills most of the canvas
+  vec2  half   = vec2(aspect * 0.46, 0.44);
   float radius = 0.04;
 
-  // Distance to the rounded rect border
+  // Signed distance to the rounded rect border
   float d = sdRoundBox(uv, half, radius);
 
-  // Trail parameters
-  float speed       = 0.28;           // full loop every ~3.5 s
-  float trailLen    = 0.38;           // fraction of perimeter lit
-  float thickness   = 0.018;          // border glow width
-  float headGlow    = 0.055;          // extra glow at the trail head
+  // Clip pixels far from the border (outside glow range AND far inside)
+  if (d > 0.14 || d < -0.12) {
+    O = vec4(0.0);
+    return;
+  }
 
-  float headS = fract(T * speed);     // head position [0,1]
+  // ── perimeter parameters ──
+  float speed    = 0.22;   // orbits/sec
+  float trailLen = 0.42;   // fraction of perimeter behind head
+  float thick    = 0.016;  // border glow half-width in UV units
 
-  // How far along the perimeter is this pixel? — approximate via atan2 around center
-  // Exact parameterization is complex; use angular proxy + distance weighting
-  vec2 dir = normalize(uv);
-  float pixelAngle = atan(uv.y / half.y, uv.x / half.x); // normalized to box
-  float pixelS = fract(pixelAngle / (2.0 * 3.14159265) + 0.5);
+  float headS  = fract(T * speed);
+  float pixelS = toS(uv, half);
 
-  // Distance in perimeter-parameter space (wrap-around)
-  float ds = fract(headS - pixelS + 0.5) - 0.5; // signed, trail is behind head
-  float trail = smoothstep(0.0, trailLen, ds + trailLen) *
-                smoothstep(0.0, 0.02, -ds);       // sharp front
+  // Signed distance along perimeter: positive = pixel is behind the head
+  float ds = fract(headS - pixelS + 1.0) - 0.5;
+  // ds > 0: behind head (trail)  |  ds < 0: ahead of head (no trail)
+  // ds == 0: at head position
 
-  // Only near the border
-  float borderMask = smoothstep(thickness, 0.0, abs(d));
+  // Trail mask — bright behind head, fades toward tail, sharp front cutoff
+  float trailMask = smoothstep(trailLen, 0.0, ds)   // fade tail → 0
+                  * smoothstep(-0.01, 0.02, ds);      // sharp front cutoff
 
-  // Head glow: bright spot at head position
-  vec2  headPos    = perimeterPos(headS, half, radius);
-  float headDist   = length(uv - headPos);
-  float headFire   = exp(-headDist * headDist / (headGlow * headGlow));
+  // Only show trail on the border band
+  float borderMask = smoothstep(thick, 0.0, abs(d));
 
-  // Noise for organic flicker
-  float flicker = 0.8 + 0.2 * noise(vec2(pixelS * 12.0, T * 3.0));
+  float trail = trailMask * borderMask;
 
-  // Combine
-  float intensity = (trail * borderMask + headFire * 0.9) * flicker;
+  // ── head glow: bright dot at the head position ──
+  vec2  headPos  = sToPos(headS, half);
+  float headDist = length(uv - headPos);
+  float glow     = 0.06;
+  float headFire = exp(-headDist * headDist / (glow * glow));
 
-  // Faint inner glow inside the box
-  float innerGlow = smoothstep(0.0, -0.08, d) * 0.06;
-  intensity += innerGlow;
+  // Organic flicker along the trail
+  float flicker = 0.75 + 0.25 * noise(vec2(pixelS * 10.0 + T * 0.3, T * 2.5));
 
-  vec3 col = ramp(clamp(intensity, 0.0, 1.0)) * intensity;
+  // Combine trail + head glow
+  float intensity = (trail * 0.85 + headFire * 1.1) * flicker;
 
-  // Gamma
-  col = pow(max(col, 0.0), vec3(0.4545));
+  // Subtle inner glow fills the card interior with a faint hue
+  float innerGlow = smoothstep(-0.01, -0.10, d) * 0.05;
+  intensity = max(intensity, innerGlow);
 
-  O = vec4(col, intensity * 0.95 + innerGlow);
+  vec3 col = ramp(clamp(intensity * 1.3, 0.0, 1.0));
+  col = pow(max(col, 0.0), vec3(0.4545));  // gamma
+
+  // Alpha: fire pixels are opaque, background transparent
+  float alpha = clamp(intensity * 1.1, 0.0, 1.0);
+
+  O = vec4(col, alpha);
 }
 `;
 
@@ -216,7 +166,7 @@ export default function FireTrailFrame() {
       gl.shaderSource(sh, src);
       gl.compileShader(sh);
       if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-        console.error("FireTrailFrame shader error:", gl.getShaderInfoLog(sh));
+        console.error("FireTrailFrame:", gl.getShaderInfoLog(sh));
         return null;
       }
       return sh;
@@ -231,11 +181,10 @@ export default function FireTrailFrame() {
     gl.attachShader(prog, fs);
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      console.error("FireTrailFrame link error:", gl.getProgramInfoLog(prog));
+      console.error("FireTrailFrame link:", gl.getProgramInfoLog(prog));
       return;
     }
 
-    // Enable alpha blending so the canvas is transparent where there's no fire
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
@@ -251,14 +200,21 @@ export default function FireTrailFrame() {
 
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
+    // Fix bug 3: use ResizeObserver so canvas always has real dimensions,
+    // even if clientWidth is 0 at the moment useEffect first runs.
     const resize = () => {
       const w = Math.floor(canvas.clientWidth  * dpr);
       const h = Math.floor(canvas.clientHeight * dpr);
-      if (canvas.width !== w || canvas.height !== h) {
+      if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
         canvas.width = w; canvas.height = h;
         gl.viewport(0, 0, w, h);
       }
     };
+
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    window.addEventListener("resize", resize);
+    resize(); // attempt immediately; ResizeObserver fires again when layout settles
 
     let visible = true;
     const io = new IntersectionObserver(([e]) => { visible = e!.isIntersecting; }, { threshold: 0 });
@@ -269,14 +225,12 @@ export default function FireTrailFrame() {
       else { t0Ref.current = performance.now(); rafRef.current = requestAnimationFrame(loop); }
     };
     document.addEventListener("visibilitychange", onVis);
-    window.addEventListener("resize", resize);
 
     t0Ref.current = performance.now();
 
     const loop = (now: number) => {
       rafRef.current = requestAnimationFrame(loop);
-      if (!visible || document.hidden) return;
-      resize();
+      if (!visible || document.hidden || canvas.width === 0 || canvas.height === 0) return;
       gl.useProgram(prog);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -289,6 +243,7 @@ export default function FireTrailFrame() {
 
     return () => {
       cancelAnimationFrame(rafRef.current);
+      ro.disconnect();
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", onVis);
       io.disconnect();
@@ -302,7 +257,14 @@ export default function FireTrailFrame() {
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        display: "block",
+        pointerEvents: "none",
+      }}
       aria-hidden="true"
     />
   );
