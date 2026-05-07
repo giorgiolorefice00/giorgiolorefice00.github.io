@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "../styles/responsive.css";
 import SEOHead from "../components/layout/SEOHead.astro";
+import SmoothScroll from "../components/SmoothScroll";
 
 interface Props {
   title?: string;
@@ -59,5 +60,9 @@ const { title, description, image, type, noindex, jsonLd } = Astro.props;
     <div class="scanlines"></div>
     <div class="grain"></div>
     <slot />
+    <SmoothScroll client:load />
+    <script>
+      import "../scripts/reveal.ts";
+    </script>
   </body>
 </html>

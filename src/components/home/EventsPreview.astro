@@ -10,7 +10,7 @@ const rawEvents = await getCollection("events");
 const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
 ---
 
-<section style="background:#000;padding:120px 72px;border-top:1px solid #c8102e;">
+<section data-reveal="slide-up" style="background:#000;padding:120px 72px;border-top:1px solid #c8102e;">
 
   <!-- SECTION HEADER -->
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
@@ -22,7 +22,7 @@ const events = rawEvents.sort((a, b) => a.id.localeCompare(b.id));
   </div>
 
   <!-- CARDS -->
-  <div class="events-row" style="display:flex;gap:16px;">
+  <div class="events-row" data-reveal-stagger style="display:flex;gap:16px;">
     {events.map((ev) => {
       const { venue, city, day, month, year, eventTitle: eventTitleObj, setTime, serial, status } = ev.data;
       const eventTitle = eventTitleObj[locale];

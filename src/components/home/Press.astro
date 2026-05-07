@@ -17,12 +17,14 @@ const quotes = rawPress
   }));
 ---
 
-<PressSlider
-  client:visible
-  quotes={quotes}
-  eyebrow={t(pc.pressEyebrow, locale)}
-  heading1={t(pc.pressHeading1, locale)}
-  heading2={t(pc.pressHeading2, locale)}
-  prevLabel={locale === "it" ? "← prec" : "← prev"}
-  nextLabel={locale === "it" ? "succ →" : "next →"}
-/>
+<div data-reveal="fade">
+  <PressSlider
+    client:visible
+    quotes={quotes}
+    eyebrow={t(pc.pressEyebrow, locale)}
+    heading1={t(pc.pressHeading1, locale)}
+    heading2={t(pc.pressHeading2, locale)}
+    prevLabel={locale === "it" ? "← prec" : "← prev"}
+    nextLabel={locale === "it" ? "succ →" : "next →"}
+  />
+</div>
