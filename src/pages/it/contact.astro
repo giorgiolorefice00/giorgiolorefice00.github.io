@@ -4,7 +4,6 @@ import Header from "../../components/layout/Header.astro";
 import PageHeader from "../../components/layout/PageHeader.astro";
 import Footer from "../../components/layout/Footer.astro";
 import { SmokeBackground } from "../../components/home/SmokeBackground";
-import FireTrailFrame from "../../components/contact/FireTrailFrame";
 import { getEntry } from "astro:content";
 import { useTranslations } from "../../i18n";
 
@@ -48,29 +47,26 @@ const contacts = siteEntry!.data.contacts;
           </p>
         )}
 
-        <!-- EMAIL — card with animated fire-trail border -->
-        <div class="email-card-wrapper">
-          <FireTrailFrame client:visible />
-          <div class="email-card-content">
-            {pc.emailLabel && (
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
-                {pc.emailLabel.it}
-              </div>
-            )}
-            <a
-              href={`mailto:${contacts.email}`}
-              style="font-family:'Anton',sans-serif;font-size:clamp(18px,2.8vw,42px);color:#c8102e;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;word-break:break-all;"
-              onmouseover="this.style.color='#ff1f1f'"
-              onmouseout="this.style.color='#c8102e'"
-            >
-              {contacts.email}
-            </a>
-          </div>
+        <!-- EMAIL -->
+        <div style="margin-bottom:40px;">
+          {pc.emailLabel && (
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
+              {pc.emailLabel.it}
+            </div>
+          )}
+          <a
+            href={`mailto:${contacts.email}`}
+            style="font-family:'Anton',sans-serif;font-size:clamp(24px,3.5vw,52px);color:#c8102e;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
+            onmouseover="this.style.color='#ff1f1f'"
+            onmouseout="this.style.color='#c8102e'"
+          >
+            {contacts.email}
+          </a>
         </div>
 
-        <!-- PHONE — plain styled text, no shader -->
+        <!-- PHONE -->
         {contacts.phone && (
-          <div style="margin-top:40px;margin-bottom:48px;">
+          <div style="margin-bottom:48px;">
             {pc.phoneLabel && (
               <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:10px;">
                 {pc.phoneLabel.it}
@@ -78,7 +74,7 @@ const contacts = siteEntry!.data.contacts;
             )}
             <a
               href={`tel:${contacts.phone.replace(/\s/g, "")}`}
-              style="font-family:'Anton',sans-serif;font-size:clamp(22px,3vw,48px);color:#e8e8e8;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
+              style="font-family:'Anton',sans-serif;font-size:clamp(24px,3.5vw,52px);color:#e8e8e8;letter-spacing:0.02em;text-decoration:none;line-height:1;transition:color 0.15s;display:block;"
               onmouseover="this.style.color='#c8102e'"
               onmouseout="this.style.color='#e8e8e8'"
             >
@@ -122,42 +118,11 @@ const contacts = siteEntry!.data.contacts;
   }
 
   .contact-inner {
-    max-width: 700px;
-    width: 100%;
-  }
-
-  .email-card-wrapper {
-    position: relative;
-    width: 100%;
     max-width: 640px;
-    margin: 0 auto;
-    aspect-ratio: 3 / 1;
-    border: 1px solid #c8102e;
-    border-radius: 2px;
-    background: rgba(0, 0, 0, 0.35);
-  }
-
-  .email-card-wrapper:has(canvas) {
-    border: none;
-    background: transparent;
-  }
-
-  .email-card-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 32px;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
     .contact-section { padding: 80px 24px; }
-    .email-card-wrapper { aspect-ratio: 5 / 2; }
-  }
-
-  @media (max-width: 480px) {
-    .email-card-wrapper { aspect-ratio: 2 / 1; }
   }
 </style>
