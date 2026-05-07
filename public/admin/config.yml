@@ -922,8 +922,8 @@ collections:
         default: available
       - { label: Is Past?, name: isPast, widget: boolean, default: false }
       - { label: Archive Tag, name: tag, widget: string, required: false, hint: "e.g. peak time — 6h set" }
-      - { label: Latitude, name: latitude, widget: number, required: false, hint: "For map dot" }
-      - { label: Longitude, name: longitude, widget: number, required: false, hint: "For map dot" }
+      - { label: Latitude, name: latitude, widget: number, value_type: float, required: false, hint: "First coordinate from Google Maps right-click (e.g. 52.5111 for Berlin). Leave empty to hide from map." }
+      - { label: Longitude, name: longitude, widget: number, value_type: float, required: false, hint: "Second coordinate from Google Maps right-click (e.g. 13.4429 for Berlin). Range -180 to 180." }
 
   # ── 📅 EVENTS — PAGE TEXT ────────────────────────────────────────────────────
   - name: eventsText

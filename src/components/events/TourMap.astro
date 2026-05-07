@@ -1,0 +1,136 @@
+---
+import { getCollection } from "astro:content";
+import { projectLatLng, isVisible } from "./projection";
+import worldMapRaw from "./world-map.svg?raw";
+
+const allEvents = await getCollection("events");
+
+const dots = allEvents
+  .filter(e => typeof e.data.latitude === "number" && typeof e.data.longitude === "number")
+  .map(e => {
+    const pt = projectLatLng(e.data.latitude!, e.data.longitude!);
+    return { ...e, x: pt.x, y: pt.y, visible: isVisible(pt) };
+  })
+  .filter(e => e.visible);
+---
+
+<div class="tour-map-container">
+  <!-- World map SVG (land + borders) -->
+  <div class="tour-map-bg" set:html={worldMapRaw} />
+
+  <!-- Dots overlay — separate SVG with same viewBox so coords align -->
+  <svg
+    class="tour-map-dots"
+    viewBox="0 0 800 480"
+    preserveAspectRatio="xMidYMid meet"
+    aria-label="Tour locations map"
+    role="img"
+  >
+    {dots.map(ev => (
+      <g class="dot-group" tabindex="0" role="button" aria-label={`${ev.data.venue}, ${ev.data.city}`}>
+        <!-- Pulse ring -->
+        <circle class="dot-pulse" cx={ev.x} cy={ev.y} r="7" />
+        <!-- Core dot -->
+        <circle class="dot-core" cx={ev.x} cy={ev.y} r="3.5" />
+        <!-- Tooltip label -->
+        <g class="dot-tip" transform={`translate(${ev.x + 9},${ev.y - 9})`}>
+          <rect x="-2" y="-11" width="1" height="1" class="tip-bg" rx="1" />
+          <text class="tip-text" dy="0">{ev.data.venue}</text>
+          <text class="tip-city" dy="13">{ev.data.city}</text>
+        </g>
+      </g>
+    ))}
+  </svg>
+</div>
+
+<style>
+  .tour-map-container {
+    background: #000;
+    width: 100%;
+    aspect-ratio: 800 / 480;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  /* World map background */
+  .tour-map-bg,
+  .tour-map-dots {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .tour-map-bg :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Land fill */
+  .tour-map-bg :global(.land) {
+    fill: #0e0e0e;
+    stroke: none;
+  }
+
+  /* Country borders */
+  .tour-map-bg :global(.borders) {
+    fill: none;
+    stroke: rgba(200, 16, 46, 0.22);
+    stroke-width: 0.4;
+  }
+
+  /* Dots */
+  .dot-core {
+    fill: #c8102e;
+    transition: r 180ms ease;
+  }
+  .dot-group:hover .dot-core,
+  .dot-group:focus .dot-core {
+    r: 5.5;
+  }
+
+  .dot-pulse {
+    fill: none;
+    stroke: #ff1f1f;
+    stroke-width: 1;
+    opacity: 0.5;
+    animation: pulse 2.4s ease-out infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes pulse {
+    0%   { opacity: 0.5; transform: scale(1); }
+    80%  { opacity: 0;   transform: scale(2.8); }
+    100% { opacity: 0;   transform: scale(2.8); }
+  }
+
+  /* Tooltip */
+  .dot-tip {
+    opacity: 0;
+    transition: opacity 120ms;
+    pointer-events: none;
+  }
+  .dot-group:hover .dot-tip,
+  .dot-group:focus .dot-tip {
+    opacity: 1;
+  }
+
+  .tip-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    fill: #e8e8e8;
+    letter-spacing: 0.08em;
+  }
+  .tip-city {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    fill: #6b6b6b;
+    letter-spacing: 0.06em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot-pulse { animation: none; }
+  }
+</style>

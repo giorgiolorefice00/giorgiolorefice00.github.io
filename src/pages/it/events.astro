@@ -4,7 +4,7 @@ import Header from "../../components/layout/Header.astro";
 import PageHeader from "../../components/layout/PageHeader.astro";
 import Footer from "../../components/layout/Footer.astro";
 import TourList from "../../components/events/TourList.astro";
-import TourMap from "../../components/events/TourMap";
+import TourMap from "../../components/events/TourMap.astro";
 import PastArchive from "../../components/events/PastArchive.astro";
 import { useTranslations } from "../../i18n";
 
@@ -24,7 +24,7 @@ const t = useTranslations("it");
       titleLine2={t.pageHeaders.events.line2}
     />
     <TourList />
-    <TourMap client:visible />
+    <TourMap />
     <PastArchive />
   </main>
   <Footer />

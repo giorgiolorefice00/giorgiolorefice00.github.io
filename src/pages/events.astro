@@ -4,7 +4,7 @@ import Header from "../components/layout/Header.astro";
 import PageHeader from "../components/layout/PageHeader.astro";
 import Footer from "../components/layout/Footer.astro";
 import TourList from "../components/events/TourList.astro";
-import TourMap from "../components/events/TourMap";
+import TourMap from "../components/events/TourMap.astro";
 import PastArchive from "../components/events/PastArchive.astro";
 import { getEntry } from "astro:content";
 import { t, type Locale } from "../lib/i18n";
@@ -27,7 +27,7 @@ const pc = pcEntry!.data;
       titleLine2={t(pc.titleLine2, locale)}
     />
     <TourList />
-    <TourMap client:visible />
+    <TourMap />
     <PastArchive />
   </main>
   <Footer />
