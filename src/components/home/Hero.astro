@@ -6,9 +6,7 @@ import { getEntry } from "astro:content";
 import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const uiEntry = await getEntry("ui", "ui");
 const pcEntry = await getEntry("homeHero", "home-hero");
-const u = uiEntry!.data;
 const pc = pcEntry!.data;
 
 const giorgioChars = "GIORGIO".split("");
@@ -69,8 +67,14 @@ const loreficeChars = "LOREFICE".split("");
 
       <!-- CTAs -->
       <div class="hero-ctas" style="display:flex;gap:16px;margin-bottom:64px;flex-wrap:wrap;">
-        <button class="btn-primary"><span>{t(u.cta.listenLatest, locale)}</span></button>
-        <button class="btn-secondary"><span>{t(u.cta.viewTour, locale)}</span></button>
+        {pc.heroCtaPrimary.url
+          ? <a href={pc.heroCtaPrimary.url} class="btn-primary"><span>{t(pc.heroCtaPrimary, locale)}</span></a>
+          : <a class="btn-primary" style="pointer-events:none;opacity:0.5;"><span>{t(pc.heroCtaPrimary, locale)}</span></a>
+        }
+        {pc.heroCtaSecondary.url
+          ? <a href={pc.heroCtaSecondary.url} class="btn-secondary"><span>{t(pc.heroCtaSecondary, locale)}</span></a>
+          : <a class="btn-secondary" style="pointer-events:none;opacity:0.5;"><span>{t(pc.heroCtaSecondary, locale)}</span></a>
+        }
       </div>
 
       <!-- SCROLL INDICATOR -->
@@ -78,7 +82,7 @@ const loreficeChars = "LOREFICE".split("");
         <div class="scroll-line-wrap">
           <div class="scroll-line-inner"></div>
         </div>
-        <span>{t(u.misc.scroll, locale)}</span>
+        <span>{t(pc.heroScroll, locale)}</span>
       </div>
     </div>
 

@@ -49,19 +49,20 @@ collections:
               - { label: Stage Plot, name: stagePlot, widget: string, required: false }
               - { label: Press Photos (.zip), name: pressPhotosZip, widget: string, required: false }
 
-  # ── 🌐 GLOBAL — UI TEXT & LABELS ────────────────────────────────────────────
-  - name: ui
-    label: "🌐 UI Text & Labels"
+  # ── 🌐 HEADER ────────────────────────────────────────────────────────────────
+  - name: headerText
+    label: "🌐 Header"
     delete: false
     editor: { preview: false }
     files:
-      - file: src/content/ui/ui.md
-        label: "UI Text"
-        name: ui
+      - file: src/content/headerText/header-text.md
+        label: "Header"
+        name: header-text
         fields:
           - label: Navigation Links
             name: nav
             widget: object
+            hint: "Labels for the main nav menu — desktop and mobile"
             fields:
               - label: Home
                 name: home
@@ -99,318 +100,74 @@ collections:
                 fields:
                   - { label: English, name: en, widget: string }
                   - { label: Italiano, name: it, widget: string }
-          - label: CTA Buttons & Links
-            name: cta
+
+  # ── 🦶 FOOTER ────────────────────────────────────────────────────────────────
+  - name: footerText
+    label: "🦶 Footer"
+    delete: false
+    editor: { preview: false }
+    files:
+      - file: src/content/footerText/footer-text.md
+        label: "Footer"
+        name: footer-text
+        fields:
+          - label: Brand phrase — line 1
+            name: brandPhrase1
+            widget: object
+            hint: "Large display text top-right of footer (e.g. BOOK. PLAY.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Brand phrase — line 2
+            name: brandPhrase2
+            widget: object
+            hint: "Second line (e.g. DISAPPEAR.)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Sitemap column heading
+            name: sitemap
             widget: object
             fields:
-              - label: Listen to Latest Mix (hero CTA)
-                name: listenLatest
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: View Tour Dates (hero CTA)
-                name: viewTour
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Read Full Story (about snippet link)
-                name: readFullStory
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Download EPK
-                name: downloadEpk
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Send Inquiry (contact form submit)
-                name: sendInquiry
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Load More
-                name: loadMore
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: All Tour Dates (events preview link)
-                name: allTourDates
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Tickets (event card CTA)
-                name: tickets
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Sold Out label
-                name: soldOut
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Few Tickets Left label
-                name: fewLeft
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Coming Soon label
-                name: comingSoon
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Listen on Spotify
-                name: listenSpotify
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Listen on SoundCloud
-                name: listenSoundcloud
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Listen on Bandcamp
-                name: listenBandcamp
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Listen on Apple Music
-                name: listenApple
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: "▶ SPOTIFY (short label)"
-                name: listenSpotifyShort
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: "▶ BANDCAMP (short label)"
-                name: listenBandcampShort
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Listen (generic)
-                name: listen
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Streams (albums column header)
-                name: streams
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Download All (media page)
-                name: downloadAll
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: Footer
-            name: footer
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Listen column heading
+            name: listen
             widget: object
             fields:
-              - label: Sitemap column label
-                name: sitemap
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Listen column label
-                name: listen
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Follow column label
-                name: follow
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Rights line (copyright)
-                name: rights
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Brand phrase line 1
-                name: brandPhrase1
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Brand phrase line 2
-                name: brandPhrase2
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Privacy link label
-                name: privacy
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Terms link label
-                name: terms
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press Kit link label
-                name: pressKit
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: Miscellaneous Labels
-            name: misc
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Follow column heading
+            name: follow
             widget: object
             fields:
-              - label: Scroll indicator
-                name: scroll
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Read More
-                name: readMore
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Close
-                name: close
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Recorded live at (mix section)
-                name: recorded
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: For bookings eyebrow
-                name: forBookings
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: For press eyebrow
-                name: forPress
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Latest Drop label (mix section)
-                name: latestDrop
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: Contact Role Labels
-            name: management
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Copyright line
+            name: rights
+            widget: object
+            hint: "Text after the year and name (e.g. all rights reserved)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Privacy link label
+            name: privacy
             widget: object
             fields:
-              - label: Management role label
-                name: managementRole
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Booking agency role label
-                name: bookingRole
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-              - label: Press role label
-                name: pressRole
-                widget: object
-                fields:
-                  - { label: English, name: en, widget: string }
-                  - { label: Italiano, name: it, widget: string }
-          - label: Booking Form Labels
-            name: forms
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Terms link label
+            name: terms
             widget: object
             fields:
-              - label: Booking form fields
-                name: booking
-                widget: object
-                fields:
-                  - label: Name field label
-                    name: name
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Email field label
-                    name: email
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Event type field label
-                    name: eventType
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Event date field label
-                    name: eventDate
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Venue field label
-                    name: venue
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Budget field label
-                    name: budget
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Message field label
-                    name: message
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Rider consent checkbox label
-                    name: riderConsent
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
-                  - label: Privacy note
-                    name: privacyNote
-                    widget: object
-                    fields:
-                      - { label: English, name: en, widget: string }
-                      - { label: Italiano, name: it, widget: string }
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Press Kit link label
+            name: pressKit
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
 
   # ── 🏠 HOME — HERO ───────────────────────────────────────────────────────────
   - name: homeHero
@@ -447,6 +204,29 @@ collections:
             name: heroPhotoCaption
             widget: object
             hint: "Small mono tag bottom-right of the DJ photo"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Primary CTA button (Listen to Latest Mix)
+            name: heroCtaPrimary
+            widget: object
+            hint: "Main button on the hero. URL field sets where it goes when clicked."
+            fields:
+              - { label: English text, name: en, widget: string }
+              - { label: Italiano text, name: it, widget: string }
+              - { label: URL (destination), name: url, widget: string, required: false, hint: "e.g. /music or https://soundcloud.com/... — leave empty to disable the button" }
+          - label: Secondary CTA button (View Tour Dates)
+            name: heroCtaSecondary
+            widget: object
+            hint: "Second button on the hero."
+            fields:
+              - { label: English text, name: en, widget: string }
+              - { label: Italiano text, name: it, widget: string }
+              - { label: URL (destination), name: url, widget: string, required: false, hint: "e.g. /events — leave empty to disable the button" }
+          - label: Scroll indicator label
+            name: heroScroll
+            widget: object
+            hint: "Small text next to the scroll arrow (e.g. ↓ scroll)"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -500,6 +280,27 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
+          - label: Spotify link label
+            name: listenSpotify
+            widget: object
+            hint: "Label on the Spotify streaming link in the mix player sidebar"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: SoundCloud link label
+            name: listenSoundcloud
+            widget: object
+            hint: "Label on the SoundCloud streaming link in the mix player sidebar"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Bandcamp link label
+            name: listenBandcamp
+            widget: object
+            hint: "Label on the Bandcamp streaming link in the mix player sidebar (leave text empty to hide)"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
 
   # ── 🏠 HOME — EVENTS PREVIEW ─────────────────────────────────────────────────
   - name: homeEvents
@@ -522,6 +323,35 @@ collections:
             name: eventsSubtitle
             widget: object
             hint: "Small mono line below the heading"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: "All Tour Dates" link
+            name: allTourDates
+            widget: object
+            hint: "Link that takes you to the full events page"
+            fields:
+              - { label: English text, name: en, widget: string }
+              - { label: Italiano text, name: it, widget: string }
+              - { label: URL (destination), name: url, widget: string, required: false, hint: "e.g. /events" }
+          - label: Tickets button label
+            name: tickets
+            widget: object
+            hint: "Text on the ticket link for each event card"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Sold Out label
+            name: soldOut
+            widget: object
+            hint: "Shown on event cards when tickets are sold out"
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Few Tickets Left label
+            name: fewLeft
+            widget: object
+            hint: "Shown on event cards when only a few tickets remain"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
@@ -1035,6 +865,13 @@ collections:
           - label: Albums table — Streams header
             name: albumsStreamsHeader
             widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Italiano, name: it, widget: string }
+          - label: Mixes — "Listen" button label
+            name: listen
+            widget: object
+            hint: "Disabled button shown on mix cards that have no SoundCloud URL (e.g. ▶ LISTEN)"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }

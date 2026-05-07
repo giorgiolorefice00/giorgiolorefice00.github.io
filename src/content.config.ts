@@ -3,6 +3,9 @@ import { defineCollection, z } from "astro:content";
 // Helper for bilingual string fields
 const bil = z.object({ en: z.string(), it: z.string() });
 
+// Bilingual button: text (en/it) + optional destination URL
+const bilBtn = z.object({ en: z.string(), it: z.string(), url: z.string().optional() });
+
 // Accepts both YAML native dates (what Decap writes) and quoted strings, always outputs YYYY-MM-DD string
 const dateStr = z.preprocess(
   (v) => v instanceof Date ? v.toISOString().split('T')[0] : v,
@@ -180,6 +183,7 @@ const musicText = defineCollection({
     albumsFormatHeader:     bil,
     albumsLabelHeader:      bil,
     albumsStreamsHeader:     bil,
+    listen:                  bil,
   }),
 });
 
@@ -207,7 +211,7 @@ const siteConfig = defineCollection({
   }),
 });
 
-const ui = defineCollection({
+const headerText = defineCollection({
   type: "content",
   schema: z.object({
     nav: z.object({
@@ -218,66 +222,21 @@ const ui = defineCollection({
       media:   bil,
       contact: bil,
     }),
-    cta: z.object({
-      listenLatest:     bil,
-      viewTour:         bil,
-      readFullStory:    bil,
-      downloadEpk:      bil,
-      sendInquiry:      bil,
-      loadMore:         bil,
-      allTourDates:     bil,
-      tickets:          bil,
-      soldOut:          bil,
-      fewLeft:          bil,
-      comingSoon:       bil,
-      listenSpotify:    bil,
-      listenSoundcloud: bil,
-      listenBandcamp:   bil,
-      listenApple:          bil,
-      listenSpotifyShort:   bil,
-      listenBandcampShort:  bil,
-      listen:               bil,
-      streams:              bil,
-      downloadAll:      bil,
-    }),
-    footer: z.object({
-      sitemap:      bil,
-      listen:       bil,
-      follow:       bil,
-      rights:       bil,
-      brandPhrase1: bil,
-      brandPhrase2: bil,
-      privacy:      bil,
-      terms:        bil,
-      pressKit:     bil,
-    }),
-    misc: z.object({
-      scroll:      bil,
-      readMore:    bil,
-      close:       bil,
-      recorded:    bil,
-      forBookings: bil,
-      forPress:    bil,
-      latestDrop:  bil,
-    }),
-    management: z.object({
-      managementRole: bil,
-      bookingRole:    bil,
-      pressRole:      bil,
-    }),
-    forms: z.object({
-      booking: z.object({
-        name:         bil,
-        email:        bil,
-        eventType:    bil,
-        eventDate:    bil,
-        venue:        bil,
-        budget:       bil,
-        message:      bil,
-        riderConsent: bil,
-        privacyNote:  bil,
-      }),
-    }),
+  }),
+});
+
+const footerText = defineCollection({
+  type: "content",
+  schema: z.object({
+    brandPhrase1: bil,
+    brandPhrase2: bil,
+    sitemap:      bil,
+    listen:       bil,
+    follow:       bil,
+    rights:       bil,
+    privacy:      bil,
+    terms:        bil,
+    pressKit:     bil,
   }),
 });
 
@@ -286,10 +245,13 @@ const ui = defineCollection({
 const homeHero = defineCollection({
   type: "content",
   schema: z.object({
-    heroEyebrow:      bil,
-    heroTaglineLeft:  bil,
-    heroTaglineRight: bil,
-    heroPhotoCaption: bil,
+    heroEyebrow:       bil,
+    heroTaglineLeft:   bil,
+    heroTaglineRight:  bil,
+    heroPhotoCaption:  bil,
+    heroCtaPrimary:    bilBtn,
+    heroCtaSecondary:  bilBtn,
+    heroScroll:        bil,
   }),
 });
 
@@ -306,6 +268,9 @@ const homeMix = defineCollection({
   schema: z.object({
     mixEyebrow:         bil,
     mixLatestDropLabel: bil,
+    listenSpotify:      bil,
+    listenSoundcloud:   bil,
+    listenBandcamp:     bil,
   }),
 });
 
@@ -314,6 +279,10 @@ const homeEvents = defineCollection({
   schema: z.object({
     eventsHeading:  bil,
     eventsSubtitle: bil,
+    allTourDates:   bilBtn,
+    tickets:        bil,
+    soldOut:        bil,
+    fewLeft:        bil,
   }),
 });
 
@@ -404,7 +373,7 @@ export const collections = {
   events, press, about,
   achievements, residencies, partnerships,
   releases, mixes, videos, photos,
-  siteConfig, ui,
+  siteConfig, headerText, footerText,
   musicStreaming, musicText,
   latestRelease,
   homeHero, homeAbout, homeMix, homeEvents, homePress,

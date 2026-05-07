@@ -5,4 +5,13 @@ mixEyebrow:
 mixLatestDropLabel:
   en: "LATEST DROP"
   it: "ULTIMA USCITA"
+listenSpotify:
+  en: "listen on spotify"
+  it: "ascolta su spotify"
+listenSoundcloud:
+  en: "listen on soundcloud"
+  it: "ascolta su soundcloud"
+listenBandcamp:
+  en: "listen on bandcamp"
+  it: "ascolta su bandcamp"
 ---

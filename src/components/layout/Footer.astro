@@ -5,8 +5,10 @@ import { getEntry } from "astro:content";
 import { t, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const uiEntry = await getEntry("ui", "ui");
-const u = uiEntry!.data;
+const ftEntry = await getEntry("footerText", "footer-text");
+const ft = ftEntry!.data;
+const htEntry = await getEntry("headerText", "header-text");
+const nav = htEntry!.data.nav;
 
 const siteEntry = await getEntry("siteConfig", "site-config");
 const site = siteEntry!.data;
@@ -42,7 +44,7 @@ const followLinks = [
       loading="lazy"
     />
     <div style="font-family:'Anton',sans-serif;font-size:clamp(28px,3vw,48px);color:#c8102e;letter-spacing:0.04em;text-align:right;line-height:1.1;">
-      {t(u.footer.brandPhrase1, locale)}<br />{t(u.footer.brandPhrase2, locale)}
+      {t(ft.brandPhrase1, locale)}<br />{t(ft.brandPhrase2, locale)}
     </div>
   </div>
 
@@ -51,17 +53,17 @@ const followLinks = [
 
     <!-- SITEMAP -->
     <div style="flex:1;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(u.footer.sitemap, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(ft.sitemap, locale)}</div>
       <div class="footer-link-col">
         {navLinks.map((k) => (
-          <a href={k === "home" ? base : `${base}${k}`} class="footer-link">{t(u.nav[k], locale)}</a>
+          <a href={k === "home" ? base : `${base}${k}`} class="footer-link">{t(nav[k], locale)}</a>
         ))}
       </div>
     </div>
 
     <!-- LISTEN -->
     <div style="flex:1;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(u.footer.listen, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(ft.listen, locale)}</div>
       <div class="footer-link-col">
         {listenLinks.map((l) => (
           <a href={l.href} class="footer-link" target="_blank" rel="noopener">{l.label}</a>
@@ -71,7 +73,7 @@ const followLinks = [
 
     <!-- FOLLOW -->
     <div style="flex:1;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(u.footer.follow, locale)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.2em;margin-bottom:20px;text-transform:uppercase;">{t(ft.follow, locale)}</div>
       <div class="footer-link-col">
         {followLinks.map((l) => (
           <a href={l.href} class="footer-link" target={l.href.startsWith("mailto") ? undefined : "_blank"} rel={l.href.startsWith("mailto") ? undefined : "noopener"}>{l.label}</a>
@@ -84,13 +86,13 @@ const followLinks = [
   <!-- BOTTOM META -->
   <div style="border-top:1px solid #1a1a1a;padding:16px 0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
     <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.06em;">
-      © 2026 giorgio lorefice — {t(u.footer.rights, locale)}
+      © 2026 giorgio lorefice — {t(ft.rights, locale)}
     </span>
     <div style="display:flex;gap:24px;">
       {[
-        { label: t(u.footer.privacy, locale),  href: "#" },
-        { label: t(u.footer.terms, locale),    href: "#" },
-        { label: t(u.footer.pressKit, locale), href: site.files.epk || "#" },
+        { label: t(ft.privacy, locale),  href: "#" },
+        { label: t(ft.terms, locale),    href: "#" },
+        { label: t(ft.pressKit, locale), href: site.files.epk || "#" },
       ].map((l) => (
         <a
           href={l.href}

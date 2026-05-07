@@ -5,7 +5,7 @@ import { getEntry } from "astro:content";
 import { t as tr, type Locale } from "../../lib/i18n";
 
 const locale = (Astro.currentLocale ?? "en") as Locale;
-const uiEntry = await getEntry("ui", "ui");
+const uiEntry = await getEntry("headerText", "header-text");
 const u = uiEntry!.data;
 
 const path = Astro.url.pathname;

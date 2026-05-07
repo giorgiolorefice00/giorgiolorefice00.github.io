@@ -59,4 +59,7 @@ albumsLabelHeader:
 albumsStreamsHeader:
   en: "STREAMS"
   it: "STREAM"
+listen:
+  en: "▶ LISTEN"
+  it: "▶ ASCOLTA"
 ---
