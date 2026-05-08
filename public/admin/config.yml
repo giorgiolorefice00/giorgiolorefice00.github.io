@@ -477,24 +477,6 @@ collections:
       - { label: Start Year, name: startYear, widget: string }
       - { label: End Year, name: endYear, widget: string, required: false, hint: "Leave blank for present" }
 
-  # ── 👤 ABOUT — PARTNERSHIPS & STAGES ────────────────────────────────────────
-  - name: partnerships
-    label: "👤 About — Partnerships & Stages"
-    label_singular: Partnership
-    folder: src/content/partnerships
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    format: frontmatter
-    fields:
-      - { label: Name, name: name, widget: string, hint: "e.g. TIME WARP" }
-      - label: Type
-        name: type
-        widget: select
-        options:
-          - { label: Festival, value: festival }
-          - { label: Brand, value: brand }
-      - { label: Year, name: year, widget: string, required: false }
 
   # ── 👤 ABOUT — PAGE TEXT ────────────────────────────────────────────────────
   - name: aboutText
@@ -532,36 +514,9 @@ collections:
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }
-          - label: Partnerships section heading
-            name: partnershipsHeading
-            widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
           - label: Press articles section heading
             name: pressArticlesHeading
             widget: object
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: EPK eyebrow
-            name: epkEyebrow
-            widget: object
-            hint: "Small label above the EPK download CTA"
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: EPK download heading
-            name: epkHeading
-            widget: object
-            hint: "Large CTA heading (e.g. ↓ DOWNLOAD EPK (.ZIP))"
-            fields:
-              - { label: English, name: en, widget: string }
-              - { label: Italiano, name: it, widget: string }
-          - label: EPK description
-            name: epkDescription
-            widget: object
-            hint: "What's inside the EPK archive"
             fields:
               - { label: English, name: en, widget: string }
               - { label: Italiano, name: it, widget: string }

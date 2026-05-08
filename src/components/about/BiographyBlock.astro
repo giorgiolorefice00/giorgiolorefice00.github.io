@@ -27,7 +27,7 @@ const pullQuotes = [
 
       <!-- PARAGRAPH 1 with drop cap -->
       <div style="margin-bottom:24px;line-height:1.9;">
-        <span style="float:left;font-family:'Anton',sans-serif;font-size:96px;color:#c8102e;line-height:0.75;margin-right:12px;margin-top:8px;">G</span>
+        <span aria-hidden="true" style="float:left;font-family:'Anton',sans-serif;font-size:96px;color:#c8102e;line-height:0.75;margin-right:12px;margin-top:8px;">{fullBio[0]?.[locale]?.charAt(0).toUpperCase()}</span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9a9a9a;letter-spacing:0.04em;">
           {fullBio[0]?.[locale]?.slice(1)}
         </span>

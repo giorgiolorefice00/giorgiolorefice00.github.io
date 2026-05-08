@@ -78,14 +78,6 @@ const residencies = defineCollection({
   }),
 });
 
-const partnerships = defineCollection({
-  type: "content",
-  schema: z.object({
-    name: z.string(),
-    type: z.enum(["brand", "festival"]),
-    year: z.string().optional(),
-  }),
-});
 
 const releases = defineCollection({
   type: "content",
@@ -309,11 +301,7 @@ const aboutText = defineCollection({
     titleLine2:           bil,
     achievementsHeading:  bil,
     residenciesHeading:   bil,
-    partnershipsHeading:  bil,
     pressArticlesHeading: bil,
-    epkEyebrow:           bil,
-    epkHeading:           bil,
-    epkDescription:       bil,
     factFileLabel:        bil,
     downloadBio:          bil,
   }),
@@ -376,7 +364,7 @@ const latestRelease = defineCollection({
 
 export const collections = {
   events, press, about,
-  achievements, residencies, partnerships,
+  achievements, residencies,
   releases, mixes, videos, photos,
   siteConfig, headerText, footerText,
   musicStreaming, musicText,

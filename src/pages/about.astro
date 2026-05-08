@@ -5,9 +5,7 @@ import PageHeader from "../components/layout/PageHeader.astro";
 import Footer from "../components/layout/Footer.astro";
 import BiographyBlock from "../components/about/BiographyBlock.astro";
 import AchievementsResidencies from "../components/about/AchievementsResidencies.astro";
-import PartnershipsMarquee from "../components/about/PartnershipsMarquee.astro";
 import PressArticlesGrid from "../components/about/PressArticlesGrid.astro";
-import EpkDownloadBand from "../components/about/EpkDownloadBand.astro";
 import { getEntry } from "astro:content";
 import { t, type Locale } from "../lib/i18n";
 
@@ -32,9 +30,7 @@ const pc = pcEntry!.data;
     />
     <BiographyBlock fullBio={fullBio ?? []} factFile={factFile ?? []} />
     <AchievementsResidencies />
-    <PartnershipsMarquee />
     <PressArticlesGrid />
-    <EpkDownloadBand />
   </main>
   <Footer />
 </Base>
