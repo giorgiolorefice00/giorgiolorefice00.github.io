@@ -101,6 +101,13 @@ body[data-menu-open] .mobile-nav {
     padding-top: 64px !important;
     padding-bottom: 64px !important;
   }
+  /* LivePhotoGrid manages padding internally via inner divs — keep section at zero */
+  .live-photo-section {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 
   /* page header band */
   .page-header-band { padding: 100px 24px 40px !important; }
@@ -246,6 +253,12 @@ body[data-menu-open] .mobile-nav {
     padding-right: 20px !important;
     padding-top: 48px !important;
     padding-bottom: 48px !important;
+  }
+  .live-photo-section {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   .page-header-band { padding: 96px 20px 36px !important; }
 
