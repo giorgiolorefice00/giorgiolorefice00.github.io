@@ -1,6 +1,6 @@
 ---
 spotifyEmbedUrl: https://soundcloud.com/giorgio-lorefice-828070878/psychostasia-5-liveset-extract
-appleMusicEmbedUrl: ""
+appleMusicEmbedUrl: https://soundcloud.com/giorgio-lorefice-828070878
 bandcampEmbedUrl: ""
 streamingHeading:
   en: B — streaming
