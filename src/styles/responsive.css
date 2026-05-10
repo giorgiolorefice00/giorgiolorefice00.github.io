@@ -94,8 +94,13 @@ body[data-menu-open] .mobile-nav {
   .header-socials { display: none !important; }
   .header-book-btn{ display: none !important; }
 
-  /* section horizontal padding */
-  section { padding-left: 24px !important; padding-right: 24px !important; }
+  /* section horizontal + vertical padding — collapse the large desktop values on mobile */
+  section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
 
   /* page header band */
   .page-header-band { padding: 100px 24px 40px !important; }
@@ -236,7 +241,12 @@ body[data-menu-open] .mobile-nav {
 
 /* ── ≤ 480px — small phones ─────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  section { padding-left: 20px !important; padding-right: 20px !important; }
+  section {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
   .page-header-band { padding: 96px 20px 36px !important; }
 
   .hero-photo-col { height: 52vw !important; min-height: 200px !important; }

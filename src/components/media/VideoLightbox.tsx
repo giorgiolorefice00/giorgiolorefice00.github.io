@@ -48,12 +48,12 @@ export default function VideoLightbox() {
             />
           </div>
         ) : (
-          <div style={{ padding: "48px", textAlign: "center", fontFamily: "'JetBrains Mono',monospace", color: "#6b6b6b", fontSize: 11, letterSpacing: "0.1em", border: "1px solid #c8102e" }}>
+          <div style={{ padding: "48px", textAlign: "center", fontFamily: "'JetBrains Mono',monospace", color: "#767676", fontSize: 11, letterSpacing: "0.1em", border: "1px solid #c8102e" }}>
             no embed available — placeholder content
           </div>
         )}
         {open.title && (
-          <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#6b6b6b", letterSpacing: "0.1em", marginTop: 12 }}>
+          <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#767676", letterSpacing: "0.1em", marginTop: 12 }}>
             {open.title}
           </div>
         )}

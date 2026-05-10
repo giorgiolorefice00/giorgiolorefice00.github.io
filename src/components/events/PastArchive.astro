@@ -48,11 +48,11 @@ const years = ["2026", "2025", "2024", "2023", "2022", "all"];
         style="border:1px solid #1a1a1a;padding:24px 20px;cursor:pointer;transition:border-color 0.2s;"
         onmouseover="this.style.borderColor='#c8102e'" onmouseout="this.style.borderColor='#1a1a1a'"
       >
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#c8102e;letter-spacing:0.18em;margin-bottom:12px;">{ev.data.month} {ev.data.year}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c8102e;letter-spacing:0.18em;margin-bottom:12px;">{ev.data.month} {ev.data.year}</div>
         <div style="font-family:'Anton',sans-serif;font-size:clamp(18px,2vw,26px);color:#e8e8e8;line-height:1;margin-bottom:8px;">{ev.data.venue}</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.12em;margin-bottom:10px;">{ev.data.city}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.12em;margin-bottom:10px;">{ev.data.city}</div>
         {ev.data.tag && (
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;line-height:1.5;">{ev.data.tag?.[locale] ?? ev.data.tag?.en}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.1em;line-height:1.5;">{ev.data.tag?.[locale] ?? ev.data.tag?.en}</div>
         )}
       </div>
     ))}

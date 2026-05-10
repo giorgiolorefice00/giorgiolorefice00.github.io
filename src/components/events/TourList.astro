@@ -34,7 +34,7 @@ const statusColor: Record<string, string> = {
     <!-- view toggle (decorative, list is default) -->
     <div style="display:flex;gap:16px;margin-bottom:6px;">
       {["list", "calendar"].map((v) => (
-        <span style={`font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:${v === 'list' ? '#c8102e' : '#6b6b6b'};cursor:pointer;border-bottom:${v === 'list' ? '1px solid #c8102e' : '1px solid transparent'};padding-bottom:2px;`}>{v}</span>
+        <span style={`font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:${v === 'list' ? '#c8102e' : '#767676'};cursor:pointer;border-bottom:${v === 'list' ? '1px solid #c8102e' : '1px solid transparent'};padding-bottom:2px;`}>{v}</span>
       ))}
     </div>
   </div>
@@ -54,14 +54,14 @@ const statusColor: Record<string, string> = {
           <!-- DATE BLOCK -->
           <div class="tour-date-block" style="flex-shrink:0;width:88px;">
             <div class="tour-date-num" style={`font-family:'Anton',sans-serif;font-size:clamp(40px,4vw,64px);color:${isSoldOut ? '#333' : '#c8102e'};line-height:1;${isSoldOut ? 'text-decoration:line-through;text-decoration-color:#c8102e;' : ''}`}>{day}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.18em;margin-top:2px;">{month} / {year}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.18em;margin-top:2px;">{month} / {year}</div>
           </div>
 
           <!-- VENUE / DETAILS -->
           <div style="flex:1;min-width:0;">
             <div style="font-family:'Anton',sans-serif;font-size:clamp(20px,2.2vw,32px);color:#e8e8e8;line-height:1;margin-bottom:6px;">{venue}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.14em;margin-bottom:4px;">{city}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.1em;">{eventTitle} · {setTime}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.14em;margin-bottom:4px;">{city}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.1em;">{eventTitle} · {setTime}</div>
           </div>
 
           <!-- CTA -->

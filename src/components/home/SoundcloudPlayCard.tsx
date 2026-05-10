@@ -120,7 +120,7 @@ export default function SoundcloudPlayCard({ trackUrl, trackTitle, duration, cov
             <div style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: '10px',
-              color: '#6b6b6b',
+              color: '#767676',
               letterSpacing: '0.14em',
             }}>
               {duration}

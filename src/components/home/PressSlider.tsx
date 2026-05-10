@@ -64,7 +64,7 @@ export default function PressSlider({ quotes, eyebrow, heading1, heading2, prevL
           <p className="quote-text">"{q.text}"</p>
           <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 20 }}>
             <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: "#e8e8e8", letterSpacing: "0.18em" }}>{q.pub}</span>
-            <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#6b6b6b", letterSpacing: "0.1em" }}>{q.attr}</span>
+            <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#767676", letterSpacing: "0.1em" }}>{q.attr}</span>
           </div>
         </div>
       </div>

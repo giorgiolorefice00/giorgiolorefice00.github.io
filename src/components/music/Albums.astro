@@ -17,12 +17,12 @@ const releases = (await getCollection("releases")).sort((a, b) =>
     <span style="width:20px;height:1px;background:#c8102e;display:inline-block;"></span>
     {t(mt.albumsHeading, locale)}
   </div>
-  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.18em;margin-bottom:32px;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.18em;margin-bottom:32px;">
     {t(mt.genreTagsLabel, locale)} {t(mt.genreTagsList, locale)}
   </div>
 
   {releases.length === 0
-    ? <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;letter-spacing:0.1em;padding:40px 0;">{t(mt.albumsEmptyStateMessage, locale)}</div>
+    ? <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#767676;letter-spacing:0.1em;padding:40px 0;">{t(mt.albumsEmptyStateMessage, locale)}</div>
     : <>
         <!-- TABLE HEADER -->
         <div style="display:flex;gap:24px;padding:0 0 12px;border-bottom:1px solid #c8102e;margin-bottom:0;">
@@ -42,8 +42,8 @@ const releases = (await getCollection("releases")).sort((a, b) =>
             <div style="flex:1;">
               <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#e8e8e8;letter-spacing:0.06em;">{t(r.data.title, locale)}</div>
             </div>
-            <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.1em;width:80px;text-align:center;">{r.data.format}</div>
-            <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:0.08em;width:120px;">{r.data.label}</div>
+            <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.1em;width:80px;text-align:center;">{r.data.format}</div>
+            <div class="disc-row-meta" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.08em;width:120px;">{r.data.label}</div>
             <div style="width:80px;text-align:right;display:flex;justify-content:flex-end;align-items:center;">
               {r.data.soundcloudUrl
                 ? (

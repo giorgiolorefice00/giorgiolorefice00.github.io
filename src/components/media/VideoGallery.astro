@@ -32,10 +32,10 @@ const catToTab: Record<string, string> = {
       <button
         class={`video-tab${i === 0 ? " active" : ""}`}
         data-tab={tab}
-        style={`font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:${i === 0 ? '#c8102e' : '#6b6b6b'};background:none;border:none;border-bottom:${i === 0 ? '1px solid #c8102e' : '1px solid transparent'};padding:0 0 14px;cursor:pointer;transition:color 0.15s;margin-bottom:-1px;`}
+        style={`font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:${i === 0 ? '#c8102e' : '#767676'};background:none;border:none;border-bottom:${i === 0 ? '1px solid #c8102e' : '1px solid transparent'};padding:0 0 14px;cursor:pointer;transition:color 0.15s;margin-bottom:-1px;`}
         onclick="
           document.querySelectorAll('.video-tab').forEach(b => {
-            b.style.color = '#6b6b6b';
+            b.style.color = '#767676';
             b.style.borderBottom = '1px solid transparent';
           });
           this.style.color = '#c8102e';
@@ -76,7 +76,7 @@ const catToTab: Record<string, string> = {
           <!-- META -->
           <div style="padding:16px;">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#e8e8e8;letter-spacing:0.06em;margin-bottom:6px;line-height:1.4;">{v.data.title[locale]}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6b6b6b;letter-spacing:0.1em;">{v.data.meta[locale]}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#767676;letter-spacing:0.1em;">{v.data.meta[locale]}</div>
           </div>
         </div>
       );
