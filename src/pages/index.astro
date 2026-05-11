@@ -7,16 +7,25 @@ import Mix from "../components/home/Mix.astro";
 import Events from "../components/home/EventsPreview.astro";
 import Press from "../components/home/Press.astro";
 import Footer from "../components/layout/Footer.astro";
+import { getEntry } from "astro:content";
+
+const siteEntry = await getEntry("siteConfig", "site-config");
+const socials = siteEntry!.data.socials;
+// Only include real social URLs — exclude empty strings and self-referential placeholders
+const sameAs = Object.values(socials).filter(
+  (url): url is string =>
+    typeof url === "string" && url.length > 0 && !url.includes("giorgiolorefice.com")
+);
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
+  "@type": ["Person", "MusicGroup"],
   "name": "Giorgio Lorefice",
   "jobTitle": "DJ",
   "description": "Giorgio Lorefice is a Milan-based underground techno DJ known for warehouse-scale sets and residencies at Berghain, Fabric, and Tresor.",
   "url": "https://giorgiolorefice.com",
   "image": "https://giorgiolorefice.com/og-image.jpg",
-  "sameAs": [],
+  "sameAs": sameAs,
   "genre": ["Techno", "Acid Techno", "Industrial Techno"],
   "knowsAbout": ["DJing", "Electronic Music", "Techno"],
   "homeLocation": {

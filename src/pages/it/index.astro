@@ -7,17 +7,26 @@ import Mix from "../../components/home/Mix.astro";
 import Events from "../../components/home/EventsPreview.astro";
 import Press from "../../components/home/Press.astro";
 import Footer from "../../components/layout/Footer.astro";
+import { getEntry } from "astro:content";
+
+const siteEntry = await getEntry("siteConfig", "site-config");
+const socials = siteEntry!.data.socials;
+const sameAs = Object.values(socials).filter(
+  (url): url is string =>
+    typeof url === "string" && url.length > 0 && !url.includes("giorgiolorefice.com")
+);
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
+  "@type": ["Person", "MusicGroup"],
   "name": "Giorgio Lorefice",
   "jobTitle": "DJ",
   "description": "Giorgio Lorefice è un DJ di techno underground di Milano, noto per i suoi set nei warehouse e le residenze a Berghain, Fabric e Tresor.",
   "url": "https://giorgiolorefice.com/it/",
   "image": "https://giorgiolorefice.com/og-image.jpg",
-  "sameAs": [],
+  "sameAs": sameAs,
   "genre": ["Techno", "Acid Techno", "Industrial Techno"],
+  "knowsAbout": ["DJing", "Electronic Music", "Techno"],
   "homeLocation": { "@type": "Place", "name": "Milano, Italia" },
 };
 ---
@@ -32,11 +41,6 @@ const jsonLd = {
     <Hero />
     <About />
     <Mix />
-    <div style="padding:0 72px;background:#000;">
-      <div class="section-divider">
-        <span class="section-divider-label">—— set 03 ——</span>
-      </div>
-    </div>
     <Events />
     <Press />
   </main>

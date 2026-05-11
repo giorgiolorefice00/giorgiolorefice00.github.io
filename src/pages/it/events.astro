@@ -7,13 +7,50 @@ import TourList from "../../components/events/TourList.astro";
 import TourMap from "../../components/events/TourMap.astro";
 import PastArchive from "../../components/events/PastArchive.astro";
 import { useTranslations } from "../../i18n";
+import { getCollection } from "astro:content";
 
 const t = useTranslations("it");
+
+const MONTH: Record<string, string> = {
+  JAN:"01",FEB:"02",MAR:"03",APR:"04",MAY:"05",JUN:"06",
+  JUL:"07",AUG:"08",SEP:"09",OCT:"10",NOV:"11",DEC:"12",
+};
+const allEvents = await getCollection("events");
+const upcomingEvents = allEvents.filter((ev) => !ev.data.isPast);
+const eventSchema = {
+  "@context": "https://schema.org",
+  "@graph": upcomingEvents.map((ev) => {
+    const mm = MONTH[ev.data.month.toUpperCase()] ?? "01";
+    const dd = ev.data.day.padStart(2, "0");
+    const startTime = ev.data.setTime.split(/[–\-]/)[0]?.trim() ?? "00:00";
+    return {
+      "@type": "Event",
+      "name": `${ev.data.venue} — ${ev.data.eventTitle.it}`,
+      "startDate": `${ev.data.year}-${mm}-${dd}T${startTime}:00`,
+      "eventStatus": ev.data.status === "sold-out"
+        ? "https://schema.org/EventSoldOut"
+        : "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": ev.data.venue,
+        "address": { "@type": "PostalAddress", "addressLocality": ev.data.city },
+      },
+      "performer": { "@type": "MusicGroup", "name": "Giorgio Lorefice" },
+      "organizer": {
+        "@type": "MusicGroup",
+        "name": "Giorgio Lorefice",
+        "url": "https://giorgiolorefice.com",
+      },
+    };
+  }),
+};
 ---
 
 <Base
   title="Date del Tour — Giorgio Lorefice"
   description="Date dei tour e performance passate di Giorgio Lorefice. Berghain, Fabric, Rex Club, Awakenings, Dekmantel e altro."
+  jsonLd={eventSchema}
 >
   <Header />
   <main>
